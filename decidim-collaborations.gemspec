@@ -18,7 +18,9 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib,vendor}/**/*', 'Rakefile', 'README.md']
 
-  s.add_dependency 'decidim-core', Decidim.version
+  s.add_dependency 'decidim-core', '>= 0.7.0', '<= 0.8.0'
+  s.add_dependency 'decidim-admin'
+  s.add_dependency 'rectify'
 
-  s.add_development_dependency 'decidim-dev', Decidim.version
+  s.add_development_dependency 'decidim-dev'
 end
