@@ -21,4 +21,3 @@ $ bundle exec rails db:migrate
 
 ## Contributing
 Contribution directions go here.
-
