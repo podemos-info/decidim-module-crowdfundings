@@ -52,9 +52,9 @@ Decidim.register_feature(:collaborations) do |feature|
       description: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
         Decidim::Faker::Localized.paragraph(3)
       end,
-      collaboration_maximum_authorized_amount: 1_000,
-      collaboration_target_amount: 100_000,
-      collaboration_default_amount: 100
+      maximum_authorized_amount: 1_000,
+      target_amount: 100_000,
+      default_amount: 100
     )
   end
 end
