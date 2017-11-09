@@ -45,7 +45,7 @@ module Decidim
 
         def destroy
           collaboration.destroy!
-          flash[:notice] = I18n.t('collaborations.destroy.success', scope: 'decidim.collaboration.admin')
+          flash[:notice] = I18n.t('collaborations.destroy.success', scope: 'decidim.collaborations.admin')
           redirect_to collaborations_path
         end
 

@@ -50,10 +50,10 @@ en:
             title: Edit collaboration campaign
             update: Update
           create:
-            invalid: Can't create the collaboration campaing. Check the form data and correct the errros.
+            invalid: Can't create the collaboration campaing. Check the form data and correct the errors.
             success: The collaboration campaign has been successfully created.
           update:
-            invalid: Can't update the collaboration campaing. Check the form data and correct the errros.
+            invalid: Can't update the collaboration campaing. Check the form data and correct the errors.
             success: The collaboration campaign has been successfully updated.
           destroy:
             success: The collaboration campaign has been successfully erased.
