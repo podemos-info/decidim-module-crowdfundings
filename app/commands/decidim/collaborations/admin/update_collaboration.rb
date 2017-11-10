@@ -34,7 +34,7 @@ module Decidim
             title: form.title,
             description: form.description,
             default_amount: @form.default_amount,
-            maximum_authorized_amount: @form.maximum_authorized_amount,
+            minimum_custom_amount: @form.minimum_custom_amount,
             target_amount: @form.target_amount,
             active_until: @form.active_until
           )

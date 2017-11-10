@@ -13,7 +13,7 @@ module Decidim
         translatable_attribute :description, String
 
         attribute :default_amount, Integer
-        attribute :maximum_authorized_amount, Integer
+        attribute :minimum_custom_amount, Integer
         attribute :target_amount, Integer
         attribute :active_until, Date
 
@@ -24,7 +24,7 @@ module Decidim
                   presence: true,
                   numericality: { only_integer: true, greater_than: 0 }
 
-        validates :maximum_authorized_amount,
+        validates :minimum_custom_amount,
                   presence: true,
                   numericality: { only_integer: true, greater_than: 0 }
 

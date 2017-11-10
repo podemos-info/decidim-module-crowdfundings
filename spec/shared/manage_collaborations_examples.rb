@@ -10,7 +10,7 @@ shared_examples 'manage collaborations' do
 
     it 'with invalid data' do
       within '.new_collaboration' do
-        fill_in :collaboration_maximum_authorized_amount, with: 1_000
+        fill_in :collaboration_minimum_custom_amount, with: 1_000
         select '100.00 €', from: :collaboration_default_amount
         find('*[type=submit]').click
       end
@@ -39,7 +39,7 @@ shared_examples 'manage collaborations' do
         ca: 'La descripció de la col·laboració'
       )
 
-      fill_in :collaboration_maximum_authorized_amount, with: 1_000
+      fill_in :collaboration_minimum_custom_amount, with: 1_000
       fill_in :collaboration_target_amount, with: 100_000
       select '100.00 €', from: :collaboration_default_amount
       find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set valid_until
@@ -96,7 +96,7 @@ shared_examples 'manage collaborations' do
           ca: 'La descripció de la col·laboració actualitzada'
         )
 
-        fill_in :collaboration_maximum_authorized_amount, with: 1_500
+        fill_in :collaboration_minimum_custom_amount, with: 1_500
         fill_in :collaboration_target_amount, with: 150_000
         select '50.00 €', from: :collaboration_default_amount
         find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set ''

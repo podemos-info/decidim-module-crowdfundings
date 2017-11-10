@@ -5,7 +5,7 @@ es:
         title: Título
         description: Descripción
         default_amount: Monto por defecto
-        maximum_authorized_amount: Máximo monto autorizado
+        minimum_custom_amount: Mínimo monto válido
         target_amount: Monto objetivo
         total_collected: Total recaudado
         active_until: Activa hasta

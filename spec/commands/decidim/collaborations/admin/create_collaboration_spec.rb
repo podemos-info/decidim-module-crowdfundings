@@ -20,7 +20,7 @@ module Decidim
         let(:title) { Decidim::Faker::Localized.sentence(3) }
         let(:description) { Decidim::Faker::Localized.sentence(3) }
         let(:default_amount) { ::Faker::Number.number(2).to_i }
-        let(:maximum_authorized_amount) { ::Faker::Number.number(3).to_i }
+        let(:minimum_custom_amount) { ::Faker::Number.number(3).to_i }
         let(:target_amount) { ::Faker::Number.number(5).to_i }
         let(:active_until) { (DateTime.now + 60.days).strftime('%Y-%m-%d') }
         let(:form) do
@@ -29,7 +29,7 @@ module Decidim
             title: title,
             description: description,
             default_amount: default_amount,
-            maximum_authorized_amount: maximum_authorized_amount,
+            minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: active_until,
             current_feature: current_feature
@@ -63,7 +63,7 @@ module Decidim
             expect(project.title).to eq title
             expect(project.description).to eq description
             expect(project.default_amount).to eq default_amount
-            expect(project.maximum_authorized_amount).to eq maximum_authorized_amount
+            expect(project.minimum_custom_amount).to eq minimum_custom_amount
             expect(project.target_amount).to eq target_amount
             expect(project.active_until.strftime('%Y-%m-%d')).to eq active_until
           end

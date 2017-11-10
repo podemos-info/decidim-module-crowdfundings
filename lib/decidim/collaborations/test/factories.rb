@@ -14,7 +14,7 @@ FactoryGirl.define do
     title { Decidim::Faker::Localized.sentence(3) }
     description { Decidim::Faker::Localized.wrapped('<p>', '</p>') { Decidim::Faker::Localized.sentence(4) } }
     default_amount 50
-    maximum_authorized_amount 500
+    minimum_custom_amount 500
     target_amount 10_000
     total_collected 5_534.33
     feature { create(:collaboration_feature) }

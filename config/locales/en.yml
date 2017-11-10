@@ -5,7 +5,7 @@ en:
         title: Title
         description: Description
         default_amount: Default amount
-        maximum_authorized_amount: Maximum authorized amount
+        minimum_custom_amount: Minimum valid amount
         target_amount: Target amount
         total_collected: Total collected
         active_until: Active until

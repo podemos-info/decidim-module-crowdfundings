@@ -5,7 +5,7 @@ ca:
         title: Títol
         description: Descripció
         default_amount: Import per defecte
-        maximum_authorized_amount: Màxim import autoritzat
+        minimum_custom_amount: Mínim import vàlid
         target_amount: Import objectiu
         total_collected: Total recaudat
         active_until: Activa fins

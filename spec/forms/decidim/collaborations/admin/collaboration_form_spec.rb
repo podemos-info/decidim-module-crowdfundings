@@ -20,7 +20,7 @@ module Decidim
         let(:title) { Decidim::Faker::Localized.sentence(3) }
         let(:description) { Decidim::Faker::Localized.sentence(3) }
         let(:default_amount) { ::Faker::Number.number(2) }
-        let(:maximum_authorized_amount) { ::Faker::Number.number(3) }
+        let(:minimum_custom_amount) { ::Faker::Number.number(3) }
         let(:target_amount) { ::Faker::Number.number(5) }
 
         let(:attributes) do
@@ -28,7 +28,7 @@ module Decidim
             title: title,
             description: description,
             default_amount: default_amount,
-            maximum_authorized_amount: maximum_authorized_amount,
+            minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: (DateTime.now + 60.days).strftime('%Y-%m-%d')
           }
@@ -60,14 +60,14 @@ module Decidim
           end
         end
 
-        context 'maximum_authorized_amount' do
+        context 'minimum_custom_amount' do
           context 'is missing' do
-            let(:maximum_authorized_amount) { nil }
+            let(:minimum_custom_amount) { nil }
             it { is_expected.not_to be_valid }
           end
 
           context 'is less or equal 0' do
-            let(:maximum_authorized_amount) { 0 }
+            let(:minimum_custom_amount) { 0 }
             it { is_expected.not_to be_valid }
           end
         end
