@@ -16,10 +16,16 @@ module Decidim
       10_000
     end
 
-    # Ammounts offered to the user for collaborating with a
+    # Amounts offered to the user for collaborating with a
     # participatory space.
     config_accessor :selectable_amounts do
       [25, 50, 100, 250, 500]
+    end
+
+    # Number of collaborations shown per page in administrator
+    # dashboard
+    config_accessor :collaborations_shown_per_page do
+      15
     end
   end
 end

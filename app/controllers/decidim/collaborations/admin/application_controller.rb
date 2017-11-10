@@ -15,7 +15,7 @@ module Decidim
           @collaborations ||= Collaboration
                               .for_feature(current_feature)
                               .page(params[:page])
-                              .per(15)
+                              .per(Decidim::Collaborations.collaborations_shown_per_page)
         end
 
         def collaboration
