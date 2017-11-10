@@ -45,4 +45,7 @@ bower.json
 
 .idea
 .rbenv-gemsets
-**/spec/*_dummy_app
+spec/decidim_dummy_app/log
+spec/decidim_dummy_app/tmp
+spec/decidim_dummy_app/public/uploads
+spec/shared/coverage/

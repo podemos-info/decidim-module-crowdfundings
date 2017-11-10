@@ -11,8 +11,13 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::Collaborations
 
+      routes do
+        resources :collaborations, only: %i[index show]
+        root to: 'collaborations#index'
+      end
+
       initializer 'decidim_collaborations.assets' do |app|
-        app.config.assets.precompile += %w(decidim_collaborations_manifest.js)
+        app.config.assets.precompile += %w[decidim_collaborations_manifest.js]
       end
     end
   end

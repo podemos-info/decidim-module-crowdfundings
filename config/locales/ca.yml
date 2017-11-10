@@ -1,0 +1,59 @@
+ca:
+  activemodel:
+    attributes:
+      collaboration:
+        title: Títol
+        description: Descripció
+        default_amount: Import per defecte
+        minimum_custom_amount: Mínim import vàlid
+        target_amount: Import objectiu
+        total_collected: Total recaudat
+        active_until: Activa fins
+  decidim:
+    features:
+      collaborations:
+        name: Aportacions
+        settings:
+          global:
+            maximum_annual_collaboration: Import màxim anual per persona
+          step:
+            collaborations_allowed: Aportacions permeses
+    collaborations:
+      labels:
+        other: Altres
+      actions:
+        title: Acciones
+        preview: Previsualitzar
+        edit: Editar
+        destroy: Esborrar
+        confirm_destroy: ¿Estas segur?
+      models:
+        collaboration:
+          fields:
+            title: Títol
+            target_amount: Quantitat objectiu
+            total_collected: Total recaudat
+            active_until: Activa fins
+      admin:
+        models:
+          collaboration:
+            name:
+              one: Aportació
+              other: Aportacions
+        collaborations:
+          index:
+            title: Aportacions
+          new:
+            title: Nova campanya de col·laboració
+            create: Crea
+          edit:
+            title: Editar campanya de col·laboració
+            update: Actualitzar
+          create:
+            invalid: No s'hi ha pogut crear la campanya de col·laboració. Comprova les dades inserides i corregeix els errors.
+            success: La campanya de col·laboració s'ha creat correctament.
+          update:
+            invalid: No s'hi ha pogut actualitzar la campanya de col·laboració. Comprova les dades inserides i corregeix els errors.
+            success: La campanya de col·laboració s'ha actualitzar correctament.
+          destroy:
+            success: La campanya de col·laboració s'ha esborrat correctament.

@@ -1,0 +1,59 @@
+es:
+  activemodel:
+    attributes:
+      collaboration:
+        title: Título
+        description: Descripción
+        default_amount: Monto por defecto
+        minimum_custom_amount: Mínimo monto válido
+        target_amount: Monto objetivo
+        total_collected: Total recaudado
+        active_until: Activa hasta
+  decidim:
+    features:
+      collaborations:
+        name: Aportaciones
+        settings:
+          global:
+            maximum_annual_collaboration: Monto máximo anual por persona
+          step:
+            collaborations_allowed: Aportaciones permitidas
+    collaborations:
+      labels:
+        other: Otro
+      actions:
+        title: Acciones
+        preview: Previsualizar
+        edit: Editar
+        destroy: Borrar
+        confirm_destroy: ¿Estás seguro?
+      models:
+        collaboration:
+          fields:
+            title: Título
+            target_amount: Monto objetivo
+            total_collected: Total recaudado
+            active_until: Activa hasta
+      admin:
+        models:
+          collaboration:
+            name:
+              one: Aportación
+              other: Aportaciones
+        collaborations:
+          index:
+            title: Aportaciones
+          new:
+            title: Nueva campaña de colaboración
+            create: Crear
+          edit:
+            title: Editar campaña de colaboración
+            update: Actualizar
+          create:
+            invalid: No se pudo crear la campaña de colaboración. Comprueba los datos y corrige los errores.
+            success: La campaña de colaboración ha sido correctamente creada.
+          update:
+            invalid: No se pudo actualizar la campaña de colaboración. Comprueba los datos y corrige los errores.
+            success: La campaña de colaboración ha sido correctamente actualizada.
+          destroy:
+            success: La campaña de colaboración ha sido correctamente borrada.

@@ -15,13 +15,9 @@ gem 'decidim-collaborations'
 And then execute:
 ```bash
 $ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install decidim-collaborations
+$ bundle exec rails decidim_collaborations:install:migrations
+$ bundle exec rails db:migrate
 ```
 
 ## Contributing
 Contribution directions go here.
-
