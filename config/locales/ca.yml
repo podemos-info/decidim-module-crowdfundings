@@ -9,6 +9,11 @@ ca:
         target_amount: Import objectiu
         total_collected: Total recaudat
         active_until: Activa fins
+      user_collaboration:
+        collaboration: Campanya de col·laboració
+        user: Usuari
+        state: Estat
+        amount: Quantitat
   decidim:
     features:
       collaborations:
@@ -34,12 +39,22 @@ ca:
             target_amount: Quantitat objectiu
             total_collected: Total recaudat
             active_until: Activa fins
+          user_collaboration:
+            fields:
+              collaboration: Campanya de col·laboració
+              user: Usuari
+              state: Estat
+              amount: Quantitat
       admin:
         models:
           collaboration:
             name:
               one: Aportació
               other: Aportacions
+          user_collaboration:
+            name:
+              one: Aportació d'usuari
+              other: Aportacions d'usuaris
         collaborations:
           index:
             title: Aportacions

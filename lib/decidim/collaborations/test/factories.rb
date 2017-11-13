@@ -19,4 +19,22 @@ FactoryGirl.define do
     total_collected 5_534.33
     feature { create(:collaboration_feature) }
   end
+
+  factory :user_collaboration, class: Decidim::Collaborations::UserCollaboration do
+    collaboration { create(:collaboration) }
+    user { create(:user, organization: collaboration.feature.organization) }
+    amount 50
+
+    trait :pending do
+      state 'pending'
+    end
+
+    trait :accepted do
+      state 'accepted'
+    end
+
+    trait :rejected do
+      state 'rejected'
+    end
+  end
 end

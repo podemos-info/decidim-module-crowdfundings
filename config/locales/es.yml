@@ -9,6 +9,11 @@ es:
         target_amount: Monto objetivo
         total_collected: Total recaudado
         active_until: Activa hasta
+      user_collaboration:
+        collaboration: Campaña de colaboración
+        user: Usuario
+        state: Estado
+        amount: Importe
   decidim:
     features:
       collaborations:
@@ -34,12 +39,22 @@ es:
             target_amount: Monto objetivo
             total_collected: Total recaudado
             active_until: Activa hasta
+        user_collaboration:
+          fields:
+            collaboration: Campaña de colaboración
+            user: Usuario
+            state: Estado
+            amount: Importe
       admin:
         models:
           collaboration:
             name:
               one: Aportación
               other: Aportaciones
+          user_collaboration:
+            name:
+              one: Aportación de usuario
+              other: Aportaciones de usuario
         collaborations:
           index:
             title: Aportaciones

@@ -9,6 +9,11 @@ en:
         target_amount: Target amount
         total_collected: Total collected
         active_until: Active until
+      user_collaboration:
+        collaboration: Collaboration campaign
+        user: User
+        state: State
+        amount: Amount
   decidim:
     features:
       collaborations:
@@ -34,12 +39,22 @@ en:
             target_amount: Target ammount
             total_collected: Total collected
             active_until: Active until
+        user_collaboration:
+          fields:
+            collaboration: Collaboration campaign
+            user: User
+            state: State
+            amount: Amount
       admin:
         models:
           collaboration:
             name:
               one: Collaboration
               other: Collaborations
+          user_collaboration:
+            name:
+              one: User collaboration
+              other: User collaborations
         collaborations:
           index:
             title: Collaborations
