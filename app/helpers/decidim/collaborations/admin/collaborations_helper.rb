@@ -29,7 +29,7 @@ module Decidim
         # Formats a number as a currencty following the convenions and
         # settings predefined in the platform.d
         def decidim_number_to_currency(number)
-          number_to_currency(number,
+          number_to_currency(number.nil? ? 0 : number,
                              unit: Decidim.currency_unit,
                              format: '%n %u')
         end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113105843) do
+ActiveRecord::Schema.define(version: 20171113173747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20171113105843) do
     t.integer "default_amount"
     t.integer "minimum_custom_amount"
     t.integer "target_amount"
-    t.decimal "total_collected", precision: 11, scale: 2
+    t.decimal "total_collected", precision: 11, scale: 2, default: "0.0", null: false
     t.date "active_until"
     t.bigint "decidim_feature_id"
     t.datetime "created_at", null: false

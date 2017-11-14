@@ -12,5 +12,12 @@ module Decidim::Collaborations
              dependent: :restrict_with_error
 
     scope :for_feature, ->(feature) { where(feature: feature) }
+
+    # PUBLIC Returns true if the collaboration campaign accepts donations.
+    def accepts_donations?
+      feature.participatory_space.published? &&
+        (active_until.nil? || active_until >= DateTime.now) &&
+        (target_amount > total_collected)
+    end
   end
 end

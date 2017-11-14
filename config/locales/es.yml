@@ -72,3 +72,17 @@ es:
             success: La campaña de colaboración ha sido correctamente actualizada.
           destroy:
             success: La campaña de colaboración ha sido correctamente borrada.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 campaña de colaboración
+            other: "%{count} campañas de colaboración"
+        filters_small_view:
+          close_modal: Cerrar ventana
+          filter: Filtrar
+          filter_by: Filtrar por
+          unfold: Desplegar
+        filters:
+          search: Buscar
+        collaboration:
+          donate: Donar

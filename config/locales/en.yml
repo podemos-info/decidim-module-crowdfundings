@@ -72,3 +72,18 @@ en:
             success: The collaboration campaign has been successfully updated.
           destroy:
             success: The collaboration campaign has been successfully erased.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 collaboration campaign
+            other: "%{count} collaboration campaigns"
+        filters_small_view:
+          close_modal: Close modal
+          filter: Filter
+          filter_by: Filter by
+          unfold: Unfold
+        filters:
+          search: Search
+        collaboration:
+          donate: Donate
+

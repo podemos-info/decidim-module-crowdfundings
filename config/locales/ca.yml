@@ -72,3 +72,17 @@ ca:
             success: La campanya de col·laboració s'ha actualitzar correctament.
           destroy:
             success: La campanya de col·laboració s'ha esborrat correctament.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 campanya de col·laboració
+            other: "%{count} campanyes de col·laboració"
+        filters_small_view:
+          close_modal: Tancar finestra
+          filter: Filtra
+          filter_by: Filtra per
+          unfold: Desplegar
+        filters:
+          search: Cerca
+        collaboration:
+          donate: Donar
