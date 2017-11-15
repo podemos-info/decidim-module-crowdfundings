@@ -8,7 +8,13 @@ module Decidim
 
       helper_method :collaboration, :collaborations, :random_seed
       helper Decidim::Collaborations::Admin::CollaborationsHelper
+      helper Decidim::Collaborations::TotalsHelper
       helper Decidim::PaginateHelper
+
+      def show
+        @form = user_collaboration_form.instance
+        @form.amount = collaboration.default_amount
+      end
 
       private
 
@@ -42,6 +48,9 @@ module Decidim
         { feature: current_feature, organization: current_organization }
       end
 
+      def user_collaboration_form
+        form(Decidim::Collaborations::UserCollaborationForm)
+      end
     end
   end
 end

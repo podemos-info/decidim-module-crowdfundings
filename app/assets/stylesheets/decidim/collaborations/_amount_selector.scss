@@ -1,0 +1,32 @@
+.amount-selector {
+  display: inline-block;
+
+
+  label {
+    cursor: pointer;
+    float: left;
+    display: inline-block;
+    margin-right: 10pt;
+    font-size: 22px;
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked+div {
+      background-color: transparent;
+      color: #ef604d;
+      border: 1px solid #ef604d;
+      font-weight: bold;
+    }
+
+    input[type="radio"]+div {
+      padding: 4pt 11pt;
+      background: #ef604d;
+      color: white;
+      border-radius: 5pt;
+      width: 80pt;
+      text-align: center;
+    }
+  }
+}

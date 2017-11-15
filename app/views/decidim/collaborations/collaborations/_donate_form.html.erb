@@ -1,0 +1,11 @@
+<%= decidim_form_for(@form,
+                     url: collaboration_user_collaborations_path(collaboration),
+                     html: { class: 'form new_user_collaboration' }) do |f| %>
+    <%= f.donate_tag :amount %>
+
+    <div class="button--double form-general-submit">
+      <%= f.submit t('.donate') %>
+    </div>
+<% end %>
+
+<%= javascript_include_tag 'decidim/collaborations/user_collaborations' %>

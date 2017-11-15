@@ -15,6 +15,9 @@ es:
         state: Estado
         amount: Importe
   decidim:
+    form_builder:
+      donate_tag:
+        other: Otros
     features:
       collaborations:
         name: Aportaciones
@@ -85,4 +88,11 @@ es:
         filters:
           search: Buscar
         collaboration:
+          donate: Donar
+        totals:
+          overall_totals: Acumulado
+          user_totals: Usuario
+          target_amount: "Objetivo: %{amount}"
+          overall_percentage: Porcentage total
+        donate_form:
           donate: Donar

@@ -15,6 +15,9 @@ ca:
         state: Estat
         amount: Quantitat
   decidim:
+    form_builder:
+      donate_tag:
+        other: Altres
     features:
       collaborations:
         name: Aportacions
@@ -85,4 +88,11 @@ ca:
         filters:
           search: Cerca
         collaboration:
+          donate: Donar
+        totals:
+          overall_totals: Acumulat
+          user_totals: Usuari
+          target_amount: "Objetiu: %{amount}"
+          overall_percentage: Percentatge total
+        donate_form:
           donate: Donar

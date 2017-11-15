@@ -12,7 +12,10 @@ module Decidim
       isolate_namespace Decidim::Collaborations
 
       routes do
-        resources :collaborations, only: %i[index show]
+        resources :collaborations, only: %i[index show] do
+          resources :user_collaborations, shallow: true
+        end
+
         root to: 'collaborations#index'
       end
 

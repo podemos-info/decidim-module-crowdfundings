@@ -1,0 +1,1 @@
+//= link decidim/collaborations/user_collaborations.js

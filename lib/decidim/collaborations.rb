@@ -4,6 +4,7 @@ require 'decidim/collaborations/engine'
 require 'decidim/collaborations/admin'
 require 'decidim/collaborations/admin_engine'
 require 'decidim/collaborations/feature'
+require 'decidim/collaborations/form_builder'
 
 module Decidim
   # Base module for this engine.

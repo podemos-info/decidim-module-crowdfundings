@@ -15,6 +15,9 @@ en:
         state: State
         amount: Amount
   decidim:
+    form_builder:
+      donate_tag:
+        other: Other
     features:
       collaborations:
         name: Collaborations
@@ -85,5 +88,12 @@ en:
         filters:
           search: Search
         collaboration:
+          donate: Donate
+        totals:
+          overall_totals: Overall totals
+          user_totals: User totals
+          target_amount: "Target amount: %{amount}"
+          overall_percentage: Overall percentage
+        donate_form:
           donate: Donate
 

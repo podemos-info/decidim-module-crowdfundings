@@ -2,7 +2,7 @@
 
 module Decidim
   module Collaborations
-    class UserCollaboration < ApplicationRecord
+    class UserCollaboration < Decidim::Collaborations::ApplicationRecord
       belongs_to :collaboration,
                  class_name: 'Decidim::Collaborations::Collaboration',
                  foreign_key: 'decidim_collaborations_collaboration_id',
@@ -18,6 +18,9 @@ module Decidim
       validates :amount, presence: true, numericality: {
         greater_than: 0
       }
+
+      scope :donated_by, ->(user) { where(user: user) }
+      scope :accepted, -> { where(state: 'accepted') }
     end
   end
 end

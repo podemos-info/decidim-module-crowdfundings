@@ -16,11 +16,12 @@ FactoryGirl.define do
     default_amount 50
     minimum_custom_amount 500
     target_amount 10_000
-    total_collected 5_534.33
+    total_collected 0
     feature { create(:collaboration_feature) }
   end
 
-  factory :user_collaboration, class: Decidim::Collaborations::UserCollaboration do
+  factory :user_collaboration,
+          class: Decidim::Collaborations::UserCollaboration do
     collaboration { create(:collaboration) }
     user { create(:user, organization: collaboration.feature.organization) }
     amount 50
