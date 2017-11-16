@@ -7,7 +7,7 @@ class CreateDecidimCollaborationsCollaborations < ActiveRecord::Migration[5.1]
       t.integer :default_amount
       t.integer :maximum_authorized_amount
       t.integer :target_amount
-      t.decimal :total_collected, :decimal, precision: 11, scale: 2
+      t.decimal :total_collected, precision: 11, scale: 2
       t.date :active_until
       t.references :decidim_feature, index: { name: 'decidim_colaborations_feature_index' }
 

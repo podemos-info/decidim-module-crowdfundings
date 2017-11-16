@@ -9,7 +9,15 @@ en:
         target_amount: Target amount
         total_collected: Total collected
         active_until: Active until
+      user_collaboration:
+        collaboration: Collaboration campaign
+        user: User
+        state: State
+        amount: Amount
   decidim:
+    form_builder:
+      donate_tag:
+        other: Other
     features:
       collaborations:
         name: Collaborations
@@ -34,12 +42,22 @@ en:
             target_amount: Target ammount
             total_collected: Total collected
             active_until: Active until
+        user_collaboration:
+          fields:
+            collaboration: Collaboration campaign
+            user: User
+            state: State
+            amount: Amount
       admin:
         models:
           collaboration:
             name:
               one: Collaboration
               other: Collaborations
+          user_collaboration:
+            name:
+              one: User collaboration
+              other: User collaborations
         collaborations:
           index:
             title: Collaborations
@@ -57,3 +75,25 @@ en:
             success: The collaboration campaign has been successfully updated.
           destroy:
             success: The collaboration campaign has been successfully erased.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 collaboration campaign
+            other: "%{count} collaboration campaigns"
+        filters_small_view:
+          close_modal: Close modal
+          filter: Filter
+          filter_by: Filter by
+          unfold: Unfold
+        filters:
+          search: Search
+        collaboration:
+          donate: Donate
+        totals:
+          overall_totals: Overall totals
+          user_totals: User totals
+          target_amount: "Target amount: %{amount}"
+          overall_percentage: Overall percentage
+        donate_form:
+          donate: Donate
+

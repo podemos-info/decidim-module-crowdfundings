@@ -46,7 +46,7 @@ Decidim.register_feature(:collaborations) do |feature|
       participatory_space: participatory_space
     )
 
-    Decidim::Collaborations::Collaboration.create!(
+    collaboration = Decidim::Collaborations::Collaboration.create!(
       feature: feature,
       title: Decidim::Faker::Localized.sentence(2),
       description: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
@@ -56,5 +56,16 @@ Decidim.register_feature(:collaborations) do |feature|
       target_amount: 100_000,
       default_amount: 100
     )
+
+    3.times do
+      author = Decidim::User.where(organization: feature.organization).all.sample
+
+      Decidim::Collaborations::UserCollaboration.create!(
+        user: author,
+        collaboration: collaboration,
+        amount: 50,
+        state: 'accepted'
+      )
+    end
   end
 end

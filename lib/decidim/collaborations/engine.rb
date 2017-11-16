@@ -12,8 +12,19 @@ module Decidim
       isolate_namespace Decidim::Collaborations
 
       routes do
-        resources :collaborations, only: %i[index show]
+        resources :collaborations, only: %i[index show] do
+          resources :user_collaborations, shallow: true
+        end
+
         root to: 'collaborations#index'
+      end
+
+      initializer 'decidim_collaborations.inject_abilities_to_user' do |_app|
+        Decidim.configure do |config|
+          config.abilities += %w[
+            Decidim::Collaborations::Abilities::CurrentUserAbility
+          ]
+        end
       end
 
       initializer 'decidim_collaborations.assets' do |app|

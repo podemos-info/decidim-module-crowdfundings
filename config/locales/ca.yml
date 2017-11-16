@@ -9,7 +9,15 @@ ca:
         target_amount: Import objectiu
         total_collected: Total recaudat
         active_until: Activa fins
+      user_collaboration:
+        collaboration: Campanya de col·laboració
+        user: Usuari
+        state: Estat
+        amount: Quantitat
   decidim:
+    form_builder:
+      donate_tag:
+        other: Altres
     features:
       collaborations:
         name: Aportacions
@@ -34,12 +42,22 @@ ca:
             target_amount: Quantitat objectiu
             total_collected: Total recaudat
             active_until: Activa fins
+          user_collaboration:
+            fields:
+              collaboration: Campanya de col·laboració
+              user: Usuari
+              state: Estat
+              amount: Quantitat
       admin:
         models:
           collaboration:
             name:
               one: Aportació
               other: Aportacions
+          user_collaboration:
+            name:
+              one: Aportació d'usuari
+              other: Aportacions d'usuaris
         collaborations:
           index:
             title: Aportacions
@@ -57,3 +75,24 @@ ca:
             success: La campanya de col·laboració s'ha actualitzar correctament.
           destroy:
             success: La campanya de col·laboració s'ha esborrat correctament.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 campanya de col·laboració
+            other: "%{count} campanyes de col·laboració"
+        filters_small_view:
+          close_modal: Tancar finestra
+          filter: Filtra
+          filter_by: Filtra per
+          unfold: Desplegar
+        filters:
+          search: Cerca
+        collaboration:
+          donate: Donar
+        totals:
+          overall_totals: Acumulat
+          user_totals: Usuari
+          target_amount: "Objetiu: %{amount}"
+          overall_percentage: Percentatge total
+        donate_form:
+          donate: Donar

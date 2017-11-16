@@ -9,7 +9,15 @@ es:
         target_amount: Monto objetivo
         total_collected: Total recaudado
         active_until: Activa hasta
+      user_collaboration:
+        collaboration: Campaña de colaboración
+        user: Usuario
+        state: Estado
+        amount: Importe
   decidim:
+    form_builder:
+      donate_tag:
+        other: Otros
     features:
       collaborations:
         name: Aportaciones
@@ -34,12 +42,22 @@ es:
             target_amount: Monto objetivo
             total_collected: Total recaudado
             active_until: Activa hasta
+        user_collaboration:
+          fields:
+            collaboration: Campaña de colaboración
+            user: Usuario
+            state: Estado
+            amount: Importe
       admin:
         models:
           collaboration:
             name:
               one: Aportación
               other: Aportaciones
+          user_collaboration:
+            name:
+              one: Aportación de usuario
+              other: Aportaciones de usuario
         collaborations:
           index:
             title: Aportaciones
@@ -57,3 +75,24 @@ es:
             success: La campaña de colaboración ha sido correctamente actualizada.
           destroy:
             success: La campaña de colaboración ha sido correctamente borrada.
+      collaborations:
+        count:
+          collaborations_count:
+            one: 1 campaña de colaboración
+            other: "%{count} campañas de colaboración"
+        filters_small_view:
+          close_modal: Cerrar ventana
+          filter: Filtrar
+          filter_by: Filtrar por
+          unfold: Desplegar
+        filters:
+          search: Buscar
+        collaboration:
+          donate: Donar
+        totals:
+          overall_totals: Acumulado
+          user_totals: Usuario
+          target_amount: "Objetivo: %{amount}"
+          overall_percentage: Porcentaje total
+        donate_form:
+          donate: Donar
