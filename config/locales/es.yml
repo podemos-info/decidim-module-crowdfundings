@@ -93,6 +93,6 @@ es:
           overall_totals: Acumulado
           user_totals: Usuario
           target_amount: "Objetivo: %{amount}"
-          overall_percentage: Porcentage total
+          overall_percentage: Porcentaje total
         donate_form:
           donate: Donar
