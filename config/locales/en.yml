@@ -1,5 +1,9 @@
 en:
   activemodel:
+    errors:
+      collaboration:
+        active_until:
+          outside_process_range: The date is outside the time range of the participatory process.
     attributes:
       collaboration:
         title: Title
@@ -75,6 +79,8 @@ en:
             success: The collaboration campaign has been successfully updated.
           destroy:
             success: The collaboration campaign has been successfully erased.
+          form:
+            active_until_help: This date must be inside the participatory process phases. In case a phase do not accepts donations it will be ignored and thus not applied.
       collaborations:
         count:
           collaborations_count:

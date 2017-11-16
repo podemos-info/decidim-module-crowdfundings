@@ -7,8 +7,15 @@ module Decidim
     module Admin
       describe CollaborationForm do
         let(:organization) { create(:organization) }
-        let(:participatory_process) { create :participatory_process, organization: organization }
-        let(:current_feature) { create :collaboration_feature, participatory_space: participatory_process }
+        let(:participatory_process) do
+          create :participatory_process, organization: organization
+        end
+        let(:step) do
+          create(:participatory_process_step, participatory_process: participatory_process)
+        end
+        let(:current_feature) do
+          create :collaboration_feature, participatory_space: participatory_process
+        end
 
         let(:context) do
           {
@@ -22,6 +29,7 @@ module Decidim
         let(:default_amount) { ::Faker::Number.number(2) }
         let(:minimum_custom_amount) { ::Faker::Number.number(3) }
         let(:target_amount) { ::Faker::Number.number(5) }
+        let(:active_until) { step.end_date.strftime('%Y-%m-%d') }
 
         let(:attributes) do
           {
@@ -30,7 +38,7 @@ module Decidim
             default_amount: default_amount,
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
-            active_until: (DateTime.now + 60.days).strftime('%Y-%m-%d')
+            active_until: active_until
           }
         end
 
@@ -80,6 +88,23 @@ module Decidim
 
           context 'is less or equal 0' do
             let(:target_amount) { 0 }
+            it { is_expected.not_to be_valid }
+          end
+        end
+
+        context 'active_until' do
+          context "is valid when it's blank" do
+            let(:active_until) { '' }
+            it { is_expected.to be_valid }
+          end
+
+          context 'is valid when it is inside step bounds' do
+            let(:active_until) { (step.end_date - 1.day).strftime('%Y-%m-%d') }
+            it { is_expected.to be_valid }
+          end
+
+          context 'is invalid when it is outside step bounds' do
+            let(:active_until) { (step.end_date + 1.day).strftime('%Y-%m-%d') }
             it { is_expected.not_to be_valid }
           end
         end

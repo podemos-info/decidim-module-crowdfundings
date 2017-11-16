@@ -1,5 +1,9 @@
 ca:
   activemodel:
+    errors:
+      collaboration:
+        active_until:
+          outside_process_range: La data està fora del rango del proceso participativo.
     attributes:
       collaboration:
         title: Títol
@@ -75,6 +79,8 @@ ca:
             success: La campanya de col·laboració s'ha actualitzar correctament.
           destroy:
             success: La campanya de col·laboració s'ha esborrat correctament.
+          form:
+            active_until_help: Aquesta data ha d'estar dins de les fases del procés participatiu. En cas que una fase no accepti donacions, s'ignorarà i, per tant, no s'aplicarà.
       collaborations:
         count:
           collaborations_count:
