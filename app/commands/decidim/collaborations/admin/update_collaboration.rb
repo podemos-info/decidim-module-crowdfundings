@@ -5,13 +5,13 @@ module Decidim
     module Admin
       # This command is executed when the user changes a Collaboration from
       # the admin panel.
-      class UpdateCollaboration < Rectify::Command
+      class UpdateCollaboration < CollaborationCommand
         # Initializes an UpdateProject Command.
         #
         # form - The form from which to get the data.
         # collaboration - The current instance of the collaboration to be updated.
         def initialize(form, collaboration)
-          @form = form
+          super(form)
           @collaboration = collaboration
         end
 
@@ -27,16 +27,17 @@ module Decidim
 
         private
 
-        attr_reader :collaboration, :form
+        attr_reader :collaboration
 
         def update_collaboration
           collaboration.update_attributes!(
             title: form.title,
             description: form.description,
-            default_amount: @form.default_amount,
-            minimum_custom_amount: @form.minimum_custom_amount,
-            target_amount: @form.target_amount,
-            active_until: @form.active_until
+            default_amount: form.default_amount,
+            minimum_custom_amount: form.minimum_custom_amount,
+            target_amount: form.target_amount,
+            active_until: form.active_until,
+            amounts: amounts
           )
         end
       end

@@ -5,27 +5,6 @@ module Decidim
     module Admin
       # Helper methods for collaborations controller
       module CollaborationsHelper
-        # Generates a list of options that can be used in a select control
-        # with all available selectable amounts defined for the platform.
-        def amount_options(include_others = false)
-          result = []
-          Decidim::Collaborations.selectable_amounts.each do |amount|
-            result << [
-              decidim_number_to_currency(amount),
-              amount
-            ]
-          end
-
-          if include_others
-            result << [
-              I18n.t('labels.other', scope: 'decidim.collaborations.'),
-              nil
-            ]
-          end
-
-          result
-        end
-
         # Formats a number as a currency following the conventions and
         # settings predefined in the platform.d
         def decidim_number_to_currency(number)

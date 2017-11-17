@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 shared_examples 'manage collaborations' do
-  let(:valid_until) { (DateTime.now + 2.months).strftime('%Y-%m-%d') }
+  let(:valid_until) { (Date.today + 2.months).strftime('%Y-%m-%d') }
 
   context 'creates a new collaboration' do
     before do
@@ -11,7 +11,8 @@ shared_examples 'manage collaborations' do
     it 'with invalid data' do
       within '.new_collaboration' do
         fill_in :collaboration_minimum_custom_amount, with: 1_000
-        select '100.00 €', from: :collaboration_default_amount
+        fill_in :collaboration_amounts, with: '50,100,200,500'
+        select '100', from: :collaboration_default_amount
         find('*[type=submit]').click
       end
 
@@ -41,7 +42,8 @@ shared_examples 'manage collaborations' do
 
       fill_in :collaboration_minimum_custom_amount, with: 1_000
       fill_in :collaboration_target_amount, with: 100_000
-      select '100.00 €', from: :collaboration_default_amount
+      fill_in :collaboration_amounts, with: '50,100,200,500'
+      select '100', from: :collaboration_default_amount
       find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set valid_until
 
       within '.new_collaboration' do
@@ -98,7 +100,7 @@ shared_examples 'manage collaborations' do
 
         fill_in :collaboration_minimum_custom_amount, with: 1_500
         fill_in :collaboration_target_amount, with: 150_000
-        select '50.00 €', from: :collaboration_default_amount
+        select '50', from: :collaboration_default_amount
         find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set ''
 
         find('*[type=submit]').click

@@ -1,5 +1,9 @@
 es:
   activemodel:
+    errors:
+      collaboration:
+        amounts:
+          invalid_format: Formáto inválido.
     attributes:
       collaboration:
         title: Título
@@ -9,6 +13,7 @@ es:
         target_amount: Monto objetivo
         total_collected: Total recaudado
         active_until: Activa hasta
+        amounts: Importes
       user_collaboration:
         collaboration: Campaña de colaboración
         user: Usuario
@@ -27,8 +32,6 @@ es:
           step:
             collaborations_allowed: Aportaciones permitidas
     collaborations:
-      labels:
-        other: Otro
       actions:
         title: Acciones
         preview: Previsualizar
@@ -75,6 +78,8 @@ es:
             success: La campaña de colaboración ha sido correctamente actualizada.
           destroy:
             success: La campaña de colaboración ha sido correctamente borrada.
+          form:
+            amounts_help: Introduce las cantidades válidas separadas por comas.
       collaborations:
         count:
           collaborations_count:

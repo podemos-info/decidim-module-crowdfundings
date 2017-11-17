@@ -21,13 +21,21 @@
     </div>
 
     <div class="row column">
-      <%= form.select :default_amount, amount_options %>
+      <%= form.text_field :amounts %>
+      <p class="help-text"><%=t '.amounts_help' %></p>
+    </div>
+
+    <div class="row column">
+      <%= form.select :default_amount,
+                      [],
+                      {},
+                      { data: { value: form.object.default_amount } } %>
     </div>
 
     <div class="row column">
       <%= form.date_field :active_until %>
     </div>
-
-
   </div>
 </div>
+
+<%= javascript_include_tag 'decidim/collaborations/admin/collaborations' %>

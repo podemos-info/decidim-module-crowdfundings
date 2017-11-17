@@ -1,5 +1,9 @@
 en:
   activemodel:
+    errors:
+      collaboration:
+        amounts:
+          invalid_format: Invalid format.
     attributes:
       collaboration:
         title: Title
@@ -9,6 +13,7 @@ en:
         target_amount: Target amount
         total_collected: Total collected
         active_until: Active until
+        amounts: Amounts
       user_collaboration:
         collaboration: Collaboration campaign
         user: User
@@ -27,8 +32,6 @@ en:
           step:
             collaborations_allowed: Collaborations allowed
     collaborations:
-      labels:
-        other: Other
       actions:
         title: Actions
         preview: Preview
@@ -75,6 +78,8 @@ en:
             success: The collaboration campaign has been successfully updated.
           destroy:
             success: The collaboration campaign has been successfully erased.
+          form:
+            amounts_help: Type the valid amounts. Separe the values with comas.
       collaborations:
         count:
           collaborations_count:

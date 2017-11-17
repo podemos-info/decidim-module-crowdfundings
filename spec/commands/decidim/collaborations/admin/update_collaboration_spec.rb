@@ -7,8 +7,12 @@ module Decidim
     module Admin
       describe UpdateCollaboration do
         let(:organization) { create(:organization) }
-        let(:participatory_process) { create :participatory_process, organization: organization }
-        let(:current_feature) { create :collaboration_feature, participatory_space: participatory_process }
+        let(:participatory_process) do
+          create :participatory_process, organization: organization
+        end
+        let(:current_feature) do
+          create :collaboration_feature, participatory_space: participatory_process
+        end
 
         let(:context) do
           {
@@ -24,7 +28,8 @@ module Decidim
         let(:default_amount) { ::Faker::Number.number(2).to_i }
         let(:minimum_custom_amount) { ::Faker::Number.number(3).to_i }
         let(:target_amount) { ::Faker::Number.number(5).to_i }
-        let(:active_until) { (DateTime.now + 60.days).strftime('%Y-%m-%d') }
+        let(:active_until) { (Date.today + 60.days).strftime('%Y-%m-%d') }
+        let(:amounts) { '5,10,20,50' }
         let(:form) do
           double(
             invalid?: invalid,
@@ -34,7 +39,8 @@ module Decidim
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: active_until,
-            current_feature: current_feature
+            current_feature: current_feature,
+            amounts: amounts
           )
         end
         let(:invalid) { false }
@@ -49,16 +55,17 @@ module Decidim
         end
 
         context 'when everything is ok' do
-          let(:project) { Decidim::Collaborations::Collaboration.last }
+          let(:updated_collaboration) { Decidim::Collaborations::Collaboration.last }
 
           it 'sets all attributes received from the form' do
             subject.call
-            expect(project.title).to eq title
-            expect(project.description).to eq description
-            expect(project.default_amount).to eq default_amount
-            expect(project.minimum_custom_amount).to eq minimum_custom_amount
-            expect(project.target_amount).to eq target_amount
-            expect(project.active_until.strftime('%Y-%m-%d')).to eq active_until
+            expect(updated_collaboration.title).to eq title
+            expect(updated_collaboration.description).to eq description
+            expect(updated_collaboration.default_amount).to eq default_amount
+            expect(updated_collaboration.minimum_custom_amount).to eq minimum_custom_amount
+            expect(updated_collaboration.target_amount).to eq target_amount
+            expect(updated_collaboration.active_until.strftime('%Y-%m-%d')).to eq active_until
+            expect(updated_collaboration.amounts).to eq(amounts.split(',').map(&:to_i))
           end
         end
       end

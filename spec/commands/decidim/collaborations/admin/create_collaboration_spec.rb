@@ -22,7 +22,8 @@ module Decidim
         let(:default_amount) { ::Faker::Number.number(2).to_i }
         let(:minimum_custom_amount) { ::Faker::Number.number(3).to_i }
         let(:target_amount) { ::Faker::Number.number(5).to_i }
-        let(:active_until) { (DateTime.now + 60.days).strftime('%Y-%m-%d') }
+        let(:active_until) { (Date.today + 60.days).strftime('%Y-%m-%d') }
+        let(:amounts) { Decidim::Collaborations.selectable_amounts.join(', ') }
         let(:form) do
           double(
             invalid?: invalid,
@@ -32,7 +33,8 @@ module Decidim
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: active_until,
-            current_feature: current_feature
+            current_feature: current_feature,
+            amounts: amounts
           )
         end
         let(:invalid) { false }
