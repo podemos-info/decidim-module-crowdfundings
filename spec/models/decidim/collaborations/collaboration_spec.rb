@@ -48,6 +48,7 @@ module Decidim
         let!(:pending_user_collaboration) do
           create :user_collaboration,
                  :pending,
+                 :punctual,
                  collaboration: collaboration,
                  amount: collaboration.target_amount / 2
         end
@@ -55,6 +56,7 @@ module Decidim
         let!(:rejected_user_collaboration) do
           create :user_collaboration,
                  :rejected,
+                 :punctual,
                  collaboration: collaboration,
                  amount: collaboration.target_amount / 2
         end
@@ -62,6 +64,7 @@ module Decidim
         let!(:accepted_user_collaboration) do
           create :user_collaboration,
                  :accepted,
+                 :punctual,
                  collaboration: collaboration,
                  amount: collaboration.target_amount / 2
         end
@@ -97,6 +100,24 @@ module Decidim
 
           it 'pending collaborations are not taken into consideration' do
             expect(collaboration.user_total_collected(pending_user_collaboration.user)).to eq(0)
+          end
+        end
+      end
+
+      context 'recurrent_donation_allowed?' do
+        let(:collaboration) { create :collaboration }
+
+        context 'assemblies' do
+          let(:collaboration) { create :collaboration, :assembly }
+
+          it 'accept recurrent donations' do
+            expect(subject).to  be_recurrent_donation_allowed
+          end
+        end
+
+        context 'participatory process' do
+          it "don't accept recurrent donations" do
+            expect(subject).not_to  be_recurrent_donation_allowed
           end
         end
       end

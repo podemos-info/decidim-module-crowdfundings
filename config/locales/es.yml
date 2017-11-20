@@ -6,6 +6,9 @@ es:
           invalid_format: Formáto inválido.
         active_until:
           outside_process_range: La fecha esta fuera del intervalo de tiempo del proceso participativo.
+        user_collaboration:
+          amount:
+            minimum_valid_amount: 'El importe mínimo válido es %{amount}'
     attributes:
       collaboration:
         title: Título
@@ -21,6 +24,7 @@ es:
         user: Usuario
         state: Estado
         amount: Importe
+        frequency: Frecuencia
   decidim:
     form_builder:
       donate_tag:
@@ -34,6 +38,13 @@ es:
           step:
             collaborations_allowed: Aportaciones permitidas
     collaborations:
+      labels:
+        other: Otro
+        frequencies:
+          punctual: Puntual
+          monthly: Mensual
+          quarterly: Trimestral
+          annual: Anual
       actions:
         title: Acciones
         preview: Previsualizar
@@ -53,6 +64,7 @@ es:
             user: Usuario
             state: Estado
             amount: Importe
+            frequency: Frecuencia
       admin:
         models:
           collaboration:
