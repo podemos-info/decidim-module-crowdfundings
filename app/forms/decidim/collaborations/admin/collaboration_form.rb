@@ -49,7 +49,10 @@ module Decidim
           unless value_list?(amounts)
             errors.add(
               :amounts,
-              I18n.t('collaboration.amounts.invalid_format', scope: 'activemodel.errors')
+              I18n.t(
+                'collaboration.amounts.invalid_format',
+                scope: 'activemodel.errors'
+              )
             )
           end
         end

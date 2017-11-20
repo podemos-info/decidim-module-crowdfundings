@@ -12,8 +12,9 @@ module Decidim
       helper Decidim::PaginateHelper
 
       def show
-        @form = user_collaboration_form.instance
+        @form = user_collaboration_form.instance(collaboration: collaboration)
         @form.amount = collaboration.default_amount
+        @form.frequency = 'punctual'
       end
 
       private

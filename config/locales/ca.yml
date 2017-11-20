@@ -6,6 +6,9 @@ ca:
           invalid_format: Format invàlid.
         active_until:
           outside_process_range: La data està fora del rango del proceso participativo.
+      user_collaboration:
+        amount:
+          minimum_valid_amount: "L'import mínim válid es %{amount}"
     attributes:
       collaboration:
         title: Títol
@@ -21,6 +24,7 @@ ca:
         user: Usuari
         state: Estat
         amount: Quantitat
+        frequency: Freqüència
   decidim:
     form_builder:
       donate_tag:
@@ -34,6 +38,13 @@ ca:
           step:
             collaborations_allowed: Aportacions permeses
     collaborations:
+      labels:
+        other: Altres
+        frequencies:
+          punctual: Puntual
+          monthly: Mensual
+          quarterly: Trimestral
+          annual: Anual
       actions:
         title: Acciones
         preview: Previsualitzar
@@ -53,6 +64,7 @@ ca:
               user: Usuari
               state: Estat
               amount: Quantitat
+              frequency: Freqüència
       admin:
         models:
           collaboration:
