@@ -36,6 +36,9 @@ module Decidim
 
         validate :amounts_consistency
 
+        validate :active_until_in_process_bounds,
+                 unless: proc { |form| form.active_until.blank? }
+
         def map_model(collaboration)
           self.amounts = collaboration.amounts.join(', ')
         end
@@ -53,6 +56,36 @@ module Decidim
 
         def value_list?(value)
           /^\s*\d+\s*(,\s*\d+\s*)*$/.match?(value)
+        end
+
+        # Validates that active until is inside participatory process bounds.
+        def active_until_in_process_bounds
+          return unless steps?
+          return if included_in_steps?(active_until)
+
+          errors.add(
+            :active_until,
+            I18n.t(
+              'collaboration.active_until.outside_process_range',
+              scope: 'activemodel.errors'
+            )
+          )
+        end
+
+        def included_in_steps?(date)
+          steps_containing_date = steps.select do |step|
+            step_range = step.start_date..step.end_date
+            step_range.include? date
+          end
+          steps_containing_date.any?
+        end
+
+        def steps?
+          context.current_feature.participatory_space.respond_to? :steps
+        end
+
+        def steps
+          context.current_feature.participatory_space.steps
         end
       end
     end

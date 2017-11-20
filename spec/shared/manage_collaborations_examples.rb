@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 shared_examples 'manage collaborations' do
-  let(:valid_until) { (Date.today + 2.months).strftime('%Y-%m-%d') }
+  let(:valid_until) do
+    current_feature.participatory_space.steps.first.end_date.strftime('%Y-%m-%d')
+  end
 
   context 'creates a new collaboration' do
     before do

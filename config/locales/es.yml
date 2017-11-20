@@ -4,6 +4,8 @@ es:
       collaboration:
         amounts:
           invalid_format: Formáto inválido.
+        active_until:
+          outside_process_range: La fecha esta fuera del intervalo de tiempo del proceso participativo.
     attributes:
       collaboration:
         title: Título
@@ -80,6 +82,7 @@ es:
             success: La campaña de colaboración ha sido correctamente borrada.
           form:
             amounts_help: Introduce las cantidades válidas separadas por comas.
+            active_until_help: Esta fecha debe estar dentro de las fases del proceso participativo. En caso de que una fase no acepte donaciones se ignorará y por tanto no será aplicada.
       collaborations:
         count:
           collaborations_count:
