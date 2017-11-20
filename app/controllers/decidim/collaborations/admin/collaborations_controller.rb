@@ -8,6 +8,7 @@ module Decidim
 
         def new
           @form = collaboration_form.instance
+          @form.amounts = Decidim::Collaborations.selectable_amounts.join(', ')
         end
 
         def create

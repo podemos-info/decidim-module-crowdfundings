@@ -2,6 +2,8 @@ en:
   activemodel:
     errors:
       collaboration:
+        amounts:
+          invalid_format: Invalid format.
         active_until:
           outside_process_range: The date is outside the time range of the participatory process.
     attributes:
@@ -13,6 +15,7 @@ en:
         target_amount: Target amount
         total_collected: Total collected
         active_until: Active until
+        amounts: Amounts
       user_collaboration:
         collaboration: Collaboration campaign
         user: User
@@ -31,8 +34,6 @@ en:
           step:
             collaborations_allowed: Collaborations allowed
     collaborations:
-      labels:
-        other: Other
       actions:
         title: Actions
         preview: Preview
@@ -80,6 +81,7 @@ en:
           destroy:
             success: The collaboration campaign has been successfully erased.
           form:
+            amounts_help: Type the valid amounts. Separe the values with comas.
             active_until_help: This date must be inside the participatory process phases. In case a phase do not accepts donations it will be ignored and thus not applied.
       collaborations:
         count:

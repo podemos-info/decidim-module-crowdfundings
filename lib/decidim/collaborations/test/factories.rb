@@ -17,6 +17,7 @@ FactoryGirl.define do
     minimum_custom_amount 500
     target_amount 10_000
     total_collected 0
+    amounts { Decidim::Collaborations.selectable_amounts }
     feature { create(:collaboration_feature) }
   end
 

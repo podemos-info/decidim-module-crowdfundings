@@ -7,25 +7,25 @@ module Decidim
       include ::ActionView::Helpers::FormTagHelper
       include ::ActionView::Helpers::NumberHelper
 
-      def donate_tag(name)
-        amount_selector_tag(name) + amount_input_tag(name)
+      def donate_tag(name, amounts)
+        amount_selector_tag(name, amounts) + amount_input_tag(name)
       end
 
       private
 
-      def amount_selector_tag(name)
+      def amount_selector_tag(name, amounts)
         content_tag :div, class: 'amount-selector' do
-          Decidim::Collaborations.selectable_amounts.each do |amount|
+          amounts.each do |amount|
             concat(input_amount_for(name, amount))
           end
 
-          concat(input_other_amounts(name))
+          concat(input_other_amounts(name, amounts))
         end
       end
 
-      def input_other_amounts(name)
+      def input_other_amounts(name, amounts)
         amount = object.send(name)
-        checked = !amount.blank? && !Decidim::Collaborations.selectable_amounts.include?(amount)
+        checked = !amount.blank? && !amounts.include?(amount)
 
         content_tag :label do
           concat radio_button_tag "#{name}_selector".to_sym, 'other', checked

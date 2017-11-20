@@ -2,6 +2,8 @@ es:
   activemodel:
     errors:
       collaboration:
+        amounts:
+          invalid_format: Formáto inválido.
         active_until:
           outside_process_range: La fecha esta fuera del intervalo de tiempo del proceso participativo.
     attributes:
@@ -13,6 +15,7 @@ es:
         target_amount: Monto objetivo
         total_collected: Total recaudado
         active_until: Activa hasta
+        amounts: Importes
       user_collaboration:
         collaboration: Campaña de colaboración
         user: Usuario
@@ -31,8 +34,6 @@ es:
           step:
             collaborations_allowed: Aportaciones permitidas
     collaborations:
-      labels:
-        other: Otro
       actions:
         title: Acciones
         preview: Previsualizar
@@ -80,6 +81,7 @@ es:
           destroy:
             success: La campaña de colaboración ha sido correctamente borrada.
           form:
+            amounts_help: Introduce las cantidades válidas separadas por comas.
             active_until_help: Esta fecha debe estar dentro de las fases del proceso participativo. En caso de que una fase no acepte donaciones se ignorará y por tanto no será aplicada.
       collaborations:
         count:

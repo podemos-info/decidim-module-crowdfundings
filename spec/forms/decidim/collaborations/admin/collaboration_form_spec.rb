@@ -29,6 +29,7 @@ module Decidim
         let(:default_amount) { ::Faker::Number.number(2) }
         let(:minimum_custom_amount) { ::Faker::Number.number(3) }
         let(:target_amount) { ::Faker::Number.number(5) }
+        let(:amounts) { Decidim::Collaborations.selectable_amounts.join(', ') }
         let(:active_until) { step.end_date.strftime('%Y-%m-%d') }
 
         let(:attributes) do
@@ -38,6 +39,7 @@ module Decidim
             default_amount: default_amount,
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
+            amounts: amounts,
             active_until: active_until
           }
         end
@@ -88,6 +90,18 @@ module Decidim
 
           context 'is less or equal 0' do
             let(:target_amount) { 0 }
+            it { is_expected.not_to be_valid }
+          end
+        end
+
+        context 'amounts' do
+          context 'is missing' do
+            let(:amounts) { nil }
+            it { is_expected.not_to be_valid }
+          end
+
+          context 'invalid format' do
+            let(:amounts) { 'weird input' }
             it { is_expected.not_to be_valid }
           end
         end
