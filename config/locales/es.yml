@@ -96,11 +96,11 @@ es:
         filters:
           search: Buscar
         collaboration:
-          donate: Donar
+          donate: Apoyar
         totals:
           overall_totals: Acumulado
           user_totals: Usuario
           target_amount: "Objetivo: %{amount}"
           overall_percentage: Porcentaje total
         donate_form:
-          donate: Donar
+          donate: Apoyar

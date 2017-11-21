@@ -96,11 +96,11 @@ ca:
         filters:
           search: Cerca
         collaboration:
-          donate: Donar
+          donate: Donar suport
         totals:
           overall_totals: Acumulat
           user_totals: Usuari
           target_amount: "Objetiu: %{amount}"
           overall_percentage: Percentatge total
         donate_form:
-          donate: Donar
+          donate: Donar suport

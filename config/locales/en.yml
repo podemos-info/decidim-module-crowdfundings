@@ -96,12 +96,12 @@ en:
         filters:
           search: Search
         collaboration:
-          donate: Donate
+          donate: Support
         totals:
           overall_totals: Overall totals
           user_totals: User totals
           target_amount: "Target amount: %{amount}"
           overall_percentage: Overall percentage
         donate_form:
-          donate: Donate
+          donate: Support
 
