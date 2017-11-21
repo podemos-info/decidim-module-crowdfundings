@@ -31,8 +31,6 @@ module Decidim
           expect(helper.percentage_class(nil)).to be_blank
         end
       end
-
-
     end
   end
 end

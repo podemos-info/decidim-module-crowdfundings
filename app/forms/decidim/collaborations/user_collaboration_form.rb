@@ -8,13 +8,14 @@ module Decidim
 
       attribute :amount, Integer
       attribute :frequency, String
+      attribute :payment_method_type, String
 
       validates :amount,
                 presence: true,
                 numericality: { only_integer: true, greater_than: 0 }
 
-      validates :frequency, presence: true, if: :recurrent_donation_allowed?
-
+      validates :frequency, presence: true
+      validates :payment_method_type, presence: true
       validate :minimum_custom_amount
 
       private
@@ -22,6 +23,7 @@ module Decidim
       # This validator method checks that the amount set by the user is
       # higher or equal to the minimum value allowed for custom amounts
       def minimum_custom_amount
+        return if amount.nil?
         return if context.collaboration.amounts.include? amount
         return if amount >= context.collaboration.minimum_custom_amount
 
@@ -30,13 +32,9 @@ module Decidim
           I18n.t(
             'amount.minimum_valid_amount',
             amount: context.collaboration.minimum_custom_amount,
-            scope: 'active_model.errors.user_collaborations'
+            scope: 'activemodel.errors.user_collaborations'
           )
         )
-      end
-
-      def recurrent_donation_allowed?
-        context.collaboration.recurrent_donation_allowed?
       end
     end
   end
