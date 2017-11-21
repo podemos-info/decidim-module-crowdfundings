@@ -13,7 +13,6 @@ describe 'Explore collaborations', type: :feature do
 
   before do
     visit_feature
-    find_link(translated(collaboration.title)).click
   end
 
   context 'show' do

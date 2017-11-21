@@ -11,6 +11,16 @@ module Decidim
       helper Decidim::Collaborations::TotalsHelper
       helper Decidim::PaginateHelper
 
+      def index
+        return unless feature_collaborations.count == 1
+
+        redirect_to collaboration_path(
+          feature_id: params[:feature_id],
+          participatory_process_slug: params[:participatory_process_slug],
+          id: feature_collaborations.first.id
+        )
+      end
+
       def show
         @form = user_collaboration_form.instance
         @form.amount = collaboration.default_amount
@@ -24,9 +34,13 @@ module Decidim
 
       def collaborations
         @collaborations ||= search
-                              .results
-                              .page(params[:page])
-                              .per(Decidim::Collaborations.collaborations_shown_per_page)
+                            .results
+                            .page(params[:page])
+                            .per(Decidim::Collaborations.collaborations_shown_per_page)
+      end
+
+      def feature_collaborations
+        Collaboration.for_feature(current_feature)
       end
 
       def random_seed
