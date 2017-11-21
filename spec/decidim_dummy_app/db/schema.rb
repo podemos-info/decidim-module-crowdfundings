@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117122655) do
+ActiveRecord::Schema.define(version: 20171120131946) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -181,6 +182,7 @@ ActiveRecord::Schema.define(version: 20171117122655) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequency", default: 0, null: false
+    t.integer "payment_method_id"
     t.index ["decidim_collaborations_collaboration_id"], name: "user_collaboration_collaboration_idx"
     t.index ["decidim_user_id"], name: "user_colaboration_user_idx"
     t.index ["state"], name: "index_decidim_collaborations_user_collaborations_on_state"

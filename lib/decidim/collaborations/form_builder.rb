@@ -27,7 +27,7 @@ module Decidim
         amount = object.send(name)
         checked = !amount.blank? && !amounts.include?(amount)
 
-        content_tag :label do
+        content_tag :label, for: "#{name}_selector_other" do
           concat radio_button_tag "#{name}_selector".to_sym, 'other', checked
           concat amount_label(I18n.t('donate_tag.other', scope: 'decidim.form_builder'))
         end
@@ -36,7 +36,7 @@ module Decidim
       def input_amount_for(name, amount)
         checked = object.send(name) == amount
 
-        content_tag :label do
+        content_tag :label, for: "#{name}_selector_#{amount}" do
           concat radio_button_tag "#{name}_selector".to_sym, amount, checked
           concat amount_label(amount)
         end

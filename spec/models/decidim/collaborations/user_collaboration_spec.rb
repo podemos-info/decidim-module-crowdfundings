@@ -5,7 +5,9 @@ require 'spec_helper'
 module Decidim
   module Collaborations
     describe UserCollaboration do
-      let(:user_collaboration) { create :user_collaboration, :accepted, :punctual }
+      let(:user_collaboration) do
+        create :user_collaboration, :accepted, :punctual
+      end
       subject { user_collaboration }
 
       it { is_expected.to be_valid }

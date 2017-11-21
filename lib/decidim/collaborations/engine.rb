@@ -13,7 +13,11 @@ module Decidim
 
       routes do
         resources :collaborations, only: %i[index show] do
-          resources :user_collaborations, shallow: true
+          resources :user_collaborations, shallow: true do
+            collection do
+              post :confirm
+            end
+          end
         end
 
         root to: 'collaborations#index'

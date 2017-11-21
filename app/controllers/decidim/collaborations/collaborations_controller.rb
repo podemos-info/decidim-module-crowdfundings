@@ -6,10 +6,11 @@ module Decidim
     class CollaborationsController < Decidim::Collaborations::ApplicationController
       include FilterResource
 
-      helper_method :collaboration, :collaborations, :random_seed
-      helper Decidim::Collaborations::Admin::CollaborationsHelper
-      helper Decidim::Collaborations::TotalsHelper
+      helper_method :collaborations, :random_seed
       helper Decidim::PaginateHelper
+      helper Decidim::ParticipatoryProcesses::ParticipatoryProcessHelper
+
+      include NeedsCollaboration
 
       def show
         @form = user_collaboration_form.instance(collaboration: collaboration)
@@ -18,10 +19,6 @@ module Decidim
       end
 
       private
-
-      def collaboration
-        @collaboration ||= Collaboration.find(params[:id])
-      end
 
       def collaborations
         @collaborations ||= search

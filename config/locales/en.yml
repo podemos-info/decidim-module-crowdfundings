@@ -6,9 +6,11 @@ en:
           invalid_format: Invalid format.
         active_until:
           outside_process_range: The date is outside the time range of the participatory process.
-      user_collaboration:
+      user_collaborations:
         amount:
           minimum_valid_amount: 'Minimum valid amount is %{amount}'
+        iban:
+          invalid_value: Invalid IBAN code.
     attributes:
       collaboration:
         title: Title
@@ -25,6 +27,9 @@ en:
         state: State
         amount: Amount
         frequency: Frequency
+        payment_method_type: Payment method
+        iban: IBAN
+        payment_method_id: Payment method
   decidim:
     form_builder:
       donate_tag:
@@ -45,6 +50,10 @@ en:
           monthly: Monthly
           quarterly: Quarterly
           annual: Annual
+        payment_method_types:
+          existing_payment_method: Existing payment method
+          direct_debit: Direct debit
+          credit_card_external: Credit card
       actions:
         title: Actions
         preview: Preview
@@ -116,4 +125,10 @@ en:
           overall_percentage: Overall percentage
         donate_form:
           donate: Donate
+      user_collaborations:
+        confirm_form:
+          collaboration_resume: Collaboration resume
+          confirm: Confirm
+          are_you_sure: Are you sure?
+          fill_required_data: Fill the following fields
 

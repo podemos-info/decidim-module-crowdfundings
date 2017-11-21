@@ -40,7 +40,7 @@ module Decidim
                  unless: proc { |form| form.active_until.blank? }
 
         def map_model(collaboration)
-          self.amounts = collaboration.amounts.join(', ')
+          self.amounts = collaboration.amounts&.join(', ')
         end
 
         private
