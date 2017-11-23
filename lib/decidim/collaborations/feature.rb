@@ -16,6 +16,8 @@ Decidim.register_feature(:collaborations) do |feature|
 
   feature.register_resource do |resource|
     resource.model_class_name = 'Decidim::Collaborations::Collaboration'
+
+    #TODO
     resource.template = 'decidim/collaborations/collaborations/linked_collaborations'
   end
 
@@ -54,7 +56,8 @@ Decidim.register_feature(:collaborations) do |feature|
       end,
       minimum_custom_amount: 1_000,
       target_amount: 100_000,
-      default_amount: 100
+      default_amount: 100,
+      amounts: Decidim::Collaborations.selectable_amounts
     )
 
     3.times do

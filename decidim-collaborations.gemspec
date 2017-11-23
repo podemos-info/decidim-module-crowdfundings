@@ -7,7 +7,7 @@ require 'decidim/collaborations/version'
 Gem::Specification.new do |s|
 
   s.version = Decidim::Collaborations::VERSION
-  s.authors = ['Juan Salvador Pérez García']
+  s.authors = ['Juan Salvador Perez Garcia']
   s.email = ['jsperezg@gmail.com']
   s.license = 'AGPL-3.0'
   s.homepage = 'https://github.com/podemos-info/decidim-collaborations'
