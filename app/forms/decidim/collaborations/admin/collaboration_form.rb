@@ -40,7 +40,7 @@ module Decidim
                  unless: proc { |form| form.active_until.blank? }
 
         def map_model(collaboration)
-          self.amounts = collaboration.amounts.join(', ')
+          self.amounts = collaboration.amounts&.join(', ')
         end
 
         private
@@ -49,7 +49,10 @@ module Decidim
           unless value_list?(amounts)
             errors.add(
               :amounts,
-              I18n.t('collaboration.amounts.invalid_format', scope: 'activemodel.errors')
+              I18n.t(
+                'collaboration.amounts.invalid_format',
+                scope: 'activemodel.errors'
+              )
             )
           end
         end

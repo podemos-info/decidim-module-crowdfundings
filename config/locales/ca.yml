@@ -6,6 +6,11 @@ ca:
           invalid_format: Format invàlid.
         active_until:
           outside_process_range: La data està fora del rango del proceso participativo.
+      user_collaborations:
+        amount:
+          minimum_valid_amount: "L'import mínim válid es %{amount}"
+        iban:
+          invalid_value: Codi IBAN invàlid.
     attributes:
       collaboration:
         title: Títol
@@ -21,6 +26,10 @@ ca:
         user: Usuari
         state: Estat
         amount: Quantitat
+        frequency: Freqüència
+        payment_method_type: Forma de pagament
+        iban: IBAN
+        payment_method_id: Forma de pagament
   decidim:
     form_builder:
       donate_tag:
@@ -34,6 +43,17 @@ ca:
           step:
             collaborations_allowed: Aportacions permeses
     collaborations:
+      labels:
+        other: Altres
+        frequencies:
+          punctual: Puntual
+          monthly: Mensual
+          quarterly: Trimestral
+          annual: Anual
+        payment_method_types:
+          existing_payment_method: Forma de pagament existent
+          direct_debit: Dèbit directe
+          credit_card_external: Targeta de crèdit
       actions:
         title: Acciones
         preview: Previsualitzar
@@ -53,6 +73,7 @@ ca:
               user: Usuari
               state: Estat
               amount: Quantitat
+              frequency: Freqüència
       admin:
         models:
           collaboration:
@@ -104,3 +125,9 @@ ca:
           overall_percentage: Percentatge total
         donate_form:
           donate: Donar suport
+      user_collaborations:
+        confirm_form:
+          collaboration_resume: Resum de la col·laboració
+          confirm: Confirmar
+          are_you_sure: ¿Estas segur?
+          fill_required_data: Completa els següents camps

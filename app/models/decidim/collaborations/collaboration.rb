@@ -51,6 +51,11 @@ module Decidim
       def user_total_collected(user)
         user_collaborations.donated_by(user).accepted.sum(:amount)
       end
+
+      # PUBLIC returns whether recurrent donations are allowed or not.
+      def recurrent_donation_allowed?
+        feature&.participatory_space_type == 'Decidim::Assembly'
+      end
     end
   end
 end

@@ -6,31 +6,26 @@ module Decidim
     class CollaborationsController < Decidim::Collaborations::ApplicationController
       include FilterResource
 
-      helper_method :collaboration, :collaborations, :random_seed
-      helper Decidim::Collaborations::Admin::CollaborationsHelper
-      helper Decidim::Collaborations::TotalsHelper
+      helper_method :collaborations, :random_seed
       helper Decidim::PaginateHelper
+      helper Decidim::ParticipatoryProcesses::ParticipatoryProcessHelper
+
+      include NeedsCollaboration
 
       def index
         return unless feature_collaborations.count == 1
 
-        redirect_to collaboration_path(
-          feature_id: params[:feature_id],
-          participatory_process_slug: params[:participatory_process_slug],
-          id: feature_collaborations.first.id
-        )
+        redirect_to EngineRouter.main_proxy(current_feature)
+                      .collaboration_path(feature_collaborations.first)
       end
 
       def show
-        @form = user_collaboration_form.instance
+        @form = user_collaboration_form.instance(collaboration: collaboration)
         @form.amount = collaboration.default_amount
+        @form.frequency = 'punctual'
       end
 
       private
-
-      def collaboration
-        @collaboration ||= Collaboration.find(params[:id])
-      end
 
       def collaborations
         @collaborations ||= search

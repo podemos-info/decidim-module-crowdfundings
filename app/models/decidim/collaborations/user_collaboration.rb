@@ -13,8 +13,10 @@ module Decidim
                  foreign_key: 'decidim_user_id'
 
       enum state: %i[pending accepted rejected]
+      enum frequency: %i[punctual monthly quarterly annual]
 
       validates :state, presence: true
+      validates :frequency, presence: true
       validates :amount, presence: true, numericality: {
         greater_than: 0
       }

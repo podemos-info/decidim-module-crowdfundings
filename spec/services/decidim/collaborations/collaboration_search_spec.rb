@@ -5,7 +5,7 @@ require 'spec_helper'
 module Decidim
   module Collaborations
     describe CollaborationSearch do
-      let(:feature) { create :collaboration_feature }
+      let(:feature) { create :collaboration_feature, :participatory_process }
 
       describe 'results' do
         let(:search_text) { nil }

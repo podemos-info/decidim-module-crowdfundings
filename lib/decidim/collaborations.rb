@@ -28,5 +28,10 @@ module Decidim
     config_accessor :collaborations_shown_per_page do
       15
     end
+
+    # Entry point for Census API
+    config_accessor :census_api_base_uri do
+      'https://census-api.unpais.es'
+    end
   end
 end
