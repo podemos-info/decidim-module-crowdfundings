@@ -1,0 +1,4 @@
+# Common configuration.
+AllCops:
+  Exclude:
+    - 'spec/decidim_dummy_app/**/*'

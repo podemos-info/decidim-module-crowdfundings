@@ -33,5 +33,10 @@ module Decidim
     config_accessor :census_api_base_uri do
       'https://census-api.unpais.es'
     end
+
+    # Default recurrent collaboration
+    config_accessor :default_frequency do
+      'monthly'
+    end
   end
 end

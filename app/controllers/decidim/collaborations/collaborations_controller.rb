@@ -21,11 +21,19 @@ module Decidim
 
       def show
         @form = user_collaboration_form.instance(collaboration: collaboration)
-        @form.amount = collaboration.default_amount
-        @form.frequency = 'punctual'
+        initialize_form_defaults
       end
 
       private
+
+      def initialize_form_defaults
+        @form.amount = collaboration.default_amount
+        if collaboration.recurrent_donation_allowed?
+          @form.frequency = Decidim::Collaborations.default_frequency
+        else
+          @form.frequency = 'punctual'
+        end
+      end
 
       def collaborations
         @collaborations ||= search
