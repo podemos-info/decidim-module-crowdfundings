@@ -12,7 +12,7 @@ module Decidim
         @request.env['decidim.current_feature'] = feature
       end
 
-      let(:feature) { create :collaboration_feature }
+      let(:feature) { create :collaboration_feature, :participatory_process }
       let(:params) do
         {
           feature_id: feature.id,
@@ -24,11 +24,9 @@ module Decidim
         context 'one collaboration' do
           let!(:collaboration) { create(:collaboration, feature: feature) }
           let(:path) do
-            collaboration_path(
-              feature_id: params[:feature_id],
-              participatory_process_slug: params[:participatory_process_slug],
-              id: collaboration.id
-            )
+            EngineRouter
+              .main_proxy(feature)
+              .collaboration_path(collaboration)
           end
 
           it 'redirects to the collaboration page' do

@@ -1,10 +1,20 @@
 <%= decidim_form_for(@form,
-                     url: collaboration_user_collaborations_path(collaboration),
+                     url: confirm_collaboration_user_collaborations_path(collaboration),
                      html: { class: 'form new_user_collaboration' }) do |f| %>
     <%= f.donate_tag :amount, collaboration.amounts %>
 
-    <div class="button--double form-general-submit">
-      <%= f.submit t('.donate') %>
+    <% if collaboration.recurrent_donation_allowed? %>
+      <div class="field">
+        <%= f.select :frequency, frequency_options %>
+      </div>
+    <% else %>
+        <%= f.hidden_field :frequency %>
+    <% end %>
+
+    <%= f.select :payment_method_type, payment_method_options %>
+
+    <div class="form-general-submit">
+      <%= f.submit t('.donate'), class: 'button secondary donate' %>
     </div>
 <% end %>
 

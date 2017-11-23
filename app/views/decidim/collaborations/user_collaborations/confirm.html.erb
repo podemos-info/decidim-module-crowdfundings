@@ -1,0 +1,25 @@
+<% add_decidim_meta_tags(
+       title: translated_attribute(collaboration.title),
+       description: translated_attribute(collaboration.description)
+   ) %>
+
+<div class="row">
+  <div id="collaboration" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
+    <%= render 'decidim/collaborations/collaborations/totals', user: nil %>
+    <% if user_signed_in? %>
+        <%= render 'decidim/collaborations/collaborations/totals', user: current_user %>
+    <% end %>
+  </div>
+
+  <div class="columns mediumlarge-8 mediumlarge-pull-4">
+    <div class="row column view-header">
+      <h2 class="heading2"><%= translated_attribute collaboration.title %></h2>
+    </div>
+    <div class="section">
+      <%= sanitize translated_attribute collaboration.description %>
+    </div>
+    <div class="section">
+      <%= render 'confirm_form' %>
+    </div>
+  </div>
+</div>

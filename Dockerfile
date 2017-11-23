@@ -26,7 +26,8 @@ RUN curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTO
     mv phantomjs-$PHANTOM_JS_VERSION-linux-x86_64 /usr/local/share && \
     ln -sf /usr/local/share/phantomjs-$PHANTOM_JS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin && \
     mkdir -p /root/.phantomjs/$PHANTOM_JS_VERSION/x86_64-linux/bin && \
-    ln -sf /usr/local/share/phantomjs-$PHANTOM_JS_VERSION-linux-x86_64/bin/phantomjs /root/.phantomjs/$PHANTOM_JS_VERSION/x86_64-linux/bin/phantomjs
+    ln -sf /usr/local/share/phantomjs-$PHANTOM_JS_VERSION-linux-x86_64/bin/phantomjs /root/.phantomjs/$PHANTOM_JS_VERSION/x86_64-linux/bin/phantomjs && \
+    rm phantomjs-$PHANTOM_JS_VERSION-linux-x86_64.tar.bz2
 
 
 # Define where our application will live inside the image
@@ -62,8 +63,9 @@ USER aspgems
 
 # Bundle configuration
 RUN gem install bundler
+RUN bundle config path $GEM_HOME
 
 ENV BUNDLE_JOBS=4
-RUN bundle check --path $GEM_HOME || bundle install --path $GEM_HOME
+RUN bundle check || bundle install
 
 

@@ -7,7 +7,11 @@ describe 'Explore collaborations', type: :feature do
   let(:manifest_name) { 'collaborations' }
   let!(:collaboration) { create(:collaboration, feature: feature) }
   let!(:user_collaboration) do
-    create(:user_collaboration, :accepted, collaboration: collaboration, amount: collaboration.target_amount / 2)
+    create(:user_collaboration,
+           :accepted,
+           :punctual,
+           collaboration: collaboration,
+           amount: collaboration.target_amount / 2)
   end
   let(:user) { user_collaboration.user }
 
