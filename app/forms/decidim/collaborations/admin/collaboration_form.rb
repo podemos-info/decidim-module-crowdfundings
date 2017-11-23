@@ -50,8 +50,8 @@ module Decidim
             errors.add(
               :amounts,
               I18n.t(
-                'collaboration.amounts.invalid_format',
-                scope: 'activemodel.errors'
+                'amounts.invalid_format',
+                scope: 'activemodel.errors.models.collaboration.attributes'
               )
             )
           end
@@ -69,8 +69,8 @@ module Decidim
           errors.add(
             :active_until,
             I18n.t(
-              'collaboration.active_until.outside_process_range',
-              scope: 'activemodel.errors'
+              'active_until.outside_process_range',
+              scope: 'activemodel.errors.models.collaboration.attributes'
             )
           )
         end

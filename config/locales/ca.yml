@@ -1,16 +1,20 @@
 ca:
   activemodel:
     errors:
-      collaboration:
-        amounts:
-          invalid_format: Format invàlid.
-        active_until:
-          outside_process_range: La data està fora del rango del proceso participativo.
-      user_collaborations:
-        amount:
-          minimum_valid_amount: "L'import mínim válid es %{amount}"
-        iban:
-          invalid_value: Codi IBAN invàlid.
+      models:
+        collaboration:
+          attributes:
+            amounts:
+              invalid_format: Format invàlid.
+            active_until:
+              outside_process_range: La data està fora del rango del proceso participativo.
+        user_collaboration:
+          attributes:
+            amount:
+              minimum_valid_amount: "L'import mínim válid es %{amount}"
+            iban:
+              invalid_format: format invàlid.
+              invalid_country_check: codi de país invàlid.
     attributes:
       collaboration:
         title: Títol

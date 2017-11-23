@@ -17,6 +17,9 @@ And then execute:
 $ bundle
 $ bundle exec rails decidim_collaborations:install:migrations
 $ bundle exec rails db:migrate
+$ bundle exec rails generate iban_bic:install
+$ bundle exec rails db:migrate
+$ bundle exec rails iban_bic:load_data
 ```
 
 ## Contributing

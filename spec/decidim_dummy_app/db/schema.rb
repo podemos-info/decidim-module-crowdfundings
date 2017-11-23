@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120131946) do
+ActiveRecord::Schema.define(version: 20171123112501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bics", force: :cascade do |t|
+    t.string "country", null: false
+    t.string "bank_code", null: false
+    t.string "bic", null: false
+    t.index ["country", "bank_code"], name: "index_bics_on_country_and_bank_code", unique: true
+  end
 
   create_table "decidim_accountability_results", id: :serial, force: :cascade do |t|
     t.jsonb "title"

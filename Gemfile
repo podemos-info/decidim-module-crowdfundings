@@ -16,6 +16,7 @@ gemspec
 gem 'bootsnap', require: false
 gem 'decidim', '>= 0.7.0', '<= 0.8.0'
 gem 'decidim-assemblies'
+gem 'iban_bic'
 
 group :test, :development do
   gem 'byebug'

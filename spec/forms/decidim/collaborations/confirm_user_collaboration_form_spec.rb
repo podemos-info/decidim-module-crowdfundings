@@ -63,7 +63,7 @@ module Decidim
         end
 
         context 'iban is valid' do
-          let(:iban) { 'ES1022605877289079247850' }
+          let(:iban) { 'ES5463332518114045210672' }
           it { is_expected.to be_valid }
         end
       end

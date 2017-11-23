@@ -32,7 +32,7 @@ module Decidim
           I18n.t(
             'amount.minimum_valid_amount',
             amount: context.collaboration.minimum_custom_amount,
-            scope: 'activemodel.errors.user_collaborations'
+            scope: 'activemodel.errors.models.user_collaboration.attributes'
           )
         )
       end

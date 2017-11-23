@@ -5,7 +5,6 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'decidim/collaborations/version'
 
 Gem::Specification.new do |s|
-
   s.version = Decidim::Collaborations::VERSION
   s.authors = ['Juan Salvador Perez Garcia']
   s.email = ['jsperezg@gmail.com']
@@ -25,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rectify'
   s.add_dependency 'rails', '~> 5.1.4'
   s.add_dependency 'httparty'
-  s.add_dependency 'ibanizator'
+  s.add_dependency 'iban_bic'
 
   s.add_development_dependency 'decidim-dev'
 end

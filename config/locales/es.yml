@@ -1,16 +1,20 @@
 es:
   activemodel:
     errors:
-      collaboration:
-        amounts:
-          invalid_format: Formáto inválido.
-        active_until:
-          outside_process_range: La fecha esta fuera del intervalo de tiempo del proceso participativo.
-      user_collaborations:
-        amount:
-          minimum_valid_amount: 'El importe mínimo válido es %{amount}'
-        iban:
-          invalid_value: Código IBAN inválido.
+      models:
+        collaboration:
+          attributes:
+            amounts:
+              invalid_format: Formáto inválido.
+            active_until:
+              outside_process_range: La fecha esta fuera del intervalo de tiempo del proceso participativo.
+        user_collaboration:
+          attributes:
+            amount:
+              minimum_valid_amount: 'El importe mínimo válido es %{amount}'
+            iban:
+              invalid_format: tiene un formato inválido.
+              invalid_country_check: tiene un código de país inválido.
     attributes:
       collaboration:
         title: Título

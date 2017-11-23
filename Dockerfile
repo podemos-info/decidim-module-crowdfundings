@@ -34,8 +34,11 @@ RUN curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTO
 ENV RAILS_ROOT /decidim-collaborations
 RUN mkdir -p $RAILS_ROOT
 
-ENV GEM_HOME /gems
-run mkdir -p $GEM_HOME
+ENV BUNDLE_PATH /gems
+ENV GEM_HOME_BASE=$BUNDLE_PATH
+ENV GEM_HOME=$BUNDLE_PATH
+
+RUN mkdir -p $BUNDLE_PATH
 
 # Locale generation
 RUN locale-gen --purge en_US.UTF-8 && \
@@ -53,7 +56,7 @@ RUN groupadd $USER_NAME -g $GROUP_ID && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL !requiretty' >> /etc/sudoers
 
 RUN chown -R aspgems:aspgems $RAILS_ROOT
-RUN chown -R aspgems:aspgems $GEM_HOME
+RUN chown -R aspgems:aspgems $BUNDLE_PATH
 
 WORKDIR $RAILS_ROOT
 
@@ -63,7 +66,6 @@ USER aspgems
 
 # Bundle configuration
 RUN gem install bundler
-RUN bundle config path $GEM_HOME
 
 ENV BUNDLE_JOBS=4
 RUN bundle check || bundle install
