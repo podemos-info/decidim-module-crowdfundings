@@ -24,7 +24,7 @@ describe 'Confirm collaboration', type: :feature do
     context 'Existing payment method' do
       before do
         within '.new_user_collaboration' do
-          select 'Existing payment method', from: :user_collaboration_payment_method_type
+          find('label[for=user_collaboration_payment_method_type_existing_payment_method]').click
           find('*[type=submit]').click
         end
       end
@@ -45,16 +45,15 @@ describe 'Confirm collaboration', type: :feature do
         expect(page).to have_content('EXISTING PAYMENT METHOD')
       end
 
-      it 'Payment method needed' do
-        expect(page).to have_content('FILL THE FOLLOWING FIELDS')
-        expect(page).to have_field('Payment method')
+      it 'No extra fields are needed' do
+        expect(page).not_to have_content('FILL THE FOLLOWING FIELDS')
       end
     end
 
     context 'Direct debit' do
       before do
         within '.new_user_collaboration' do
-          select 'Direct debit', from: :user_collaboration_payment_method_type
+          find('label[for=user_collaboration_payment_method_type_direct_debit]').click
           find('*[type=submit]').click
         end
       end
@@ -84,7 +83,7 @@ describe 'Confirm collaboration', type: :feature do
     context 'Credit card' do
       before do
         within '.new_user_collaboration' do
-          select 'Credit card', from: :user_collaboration_payment_method_type
+          find('label[for=user_collaboration_payment_method_type_credit_card_external]').click
           find('*[type=submit]').click
         end
       end
@@ -107,6 +106,22 @@ describe 'Confirm collaboration', type: :feature do
 
       it 'No extra fields are needed' do
         expect(page).not_to have_content('FILL THE FOLLOWING FIELDS')
+      end
+    end
+
+    context 'No payment method selected' do
+      before do
+        within '.new_user_collaboration' do
+          find('*[type=submit]').click
+        end
+      end
+
+      it 'renders the form again' do
+        expect(page).to have_content('SELECT THE PAYMENT METHOD')
+      end
+
+      it 'shows an error message' do
+        expect(page).to have_content('You must select a payment method.')
       end
     end
   end

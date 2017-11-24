@@ -10,6 +10,10 @@ ca:
               outside_process_range: La data està fora del rango del proceso participativo.
         user_collaboration:
           attributes:
+            frequency:
+              blank: Deus sel·leccionar una freqüència per la teua aportació.
+            payment_method_type:
+              blank: Deus sel·leccionar una forma de pagament.
             amount:
               minimum_valid_amount: "L'import mínim válid es %{amount}"
             iban:
@@ -128,6 +132,9 @@ ca:
           target_amount: "Objetiu: %{amount}"
           overall_percentage: Percentatge total
         donate_form:
+          select_amount: Sel·lecciona la quantitat
+          select_frequency: Sel·lecciona la frequència
+          select_payment_method: Sel·lecciona la forma de pagament
           donate: Donar suport
       user_collaborations:
         confirm_form:

@@ -35,20 +35,6 @@ module Decidim
 
       it { is_expected.to be_valid }
 
-      context 'existing_payment_method' do
-        let(:payment_method_type) { 'existing_payment_method' }
-
-        context 'payment method id missing' do
-          let(:payment_method_id) { nil }
-          it { is_expected.not_to be_valid }
-        end
-
-        context 'payment method id informed' do
-          let(:payment_method_id) { 1234 }
-          it { is_expected.to be_valid }
-        end
-      end
-
       context 'direct_debit' do
         let(:payment_method_type) { 'direct_debit' }
 

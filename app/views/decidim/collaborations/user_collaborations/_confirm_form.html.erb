@@ -23,20 +23,12 @@
       </div>
     </div>
 
-    <% if payment_data?(@form) %>
+    <% if iban_field?(@form) %>
       <h2 class="section-heading"><%=t '.fill_required_data' %></h2>
       <div class="row">
-        <% if iban_field?(@form) %>
-          <div class="field">
-            <%= f.text_field :iban %>
-          </div>
-        <% end %>
-
-        <% if payment_method_select?(@form) %>
-          <div class="field">
-            <%= f.select :payment_method_id, [] %>
-          </div>
-        <% end %>
+        <div class="field">
+          <%= f.text_field :iban %>
+        </div>
       </div>
     <% end %>
 

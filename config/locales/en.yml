@@ -10,6 +10,10 @@ en:
               outside_process_range: The date is outside the time range of the participatory process.
         user_collaboration:
           attributes:
+            frequency:
+              blank: You must select the frequency.
+            payment_method_type:
+              blank: You must select a payment method.
             amount:
               minimum_valid_amount: 'Minimum valid amount is %{amount}'
             iban:
@@ -128,6 +132,9 @@ en:
           target_amount: "Target amount: %{amount}"
           overall_percentage: Overall percentage
         donate_form:
+          select_amount: Select the amount
+          select_frequency: Select the frequency
+          select_payment_method: Select the payment method
           donate: Support
       user_collaborations:
         confirm_form:

@@ -38,7 +38,8 @@ describe 'Explore collaborations', type: :feature do
       end
 
       it 'Frequency is punctual by default' do
-        expect(find(:css, '#user_collaboration_frequency', visible: false).value).to eq('punctual')
+        frequency = find(:css, '#user_collaboration_frequency', visible: false)
+        expect(frequency.value).to eq('punctual')
       end
     end
   end
@@ -54,7 +55,13 @@ describe 'Explore collaborations', type: :feature do
 
     context 'show' do
       it 'Frequency is monthly by default' do
-        expect(page).to have_select('user_collaboration_frequency', selected: 'Monthly')
+        amount = find(
+          :radio_button,
+          'user_collaboration[frequency]',
+          checked: true,
+          visible: false
+        )
+        expect(amount.value).to eq('monthly')
       end
     end
   end
