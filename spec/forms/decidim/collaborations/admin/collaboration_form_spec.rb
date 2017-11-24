@@ -26,6 +26,7 @@ module Decidim
 
         let(:title) { Decidim::Faker::Localized.sentence(3) }
         let(:description) { Decidim::Faker::Localized.sentence(3) }
+        let(:terms_and_conditions) { Decidim::Faker::Localized.paragraph(5) }
         let(:default_amount) { ::Faker::Number.number(2) }
         let(:minimum_custom_amount) { ::Faker::Number.number(3) }
         let(:target_amount) { ::Faker::Number.number(5) }
@@ -36,6 +37,7 @@ module Decidim
           {
             title: title,
             description: description,
+            terms_and_conditions: terms_and_conditions,
             default_amount: default_amount,
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
@@ -55,6 +57,11 @@ module Decidim
 
         describe 'when description is missing' do
           let(:description) { { en: nil } }
+          it { is_expected.not_to be_valid }
+        end
+
+        describe 'when terms and conditions is missing' do
+          let(:terms_and_conditions) { { en: nil } }
           it { is_expected.not_to be_valid }
         end
 

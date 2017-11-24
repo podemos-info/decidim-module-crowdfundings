@@ -17,7 +17,7 @@ Decidim.register_feature(:collaborations) do |feature|
   feature.register_resource do |resource|
     resource.model_class_name = 'Decidim::Collaborations::Collaboration'
 
-    #TODO
+    # TODO: The view linked collaborations needs to be implemented
     resource.template = 'decidim/collaborations/collaborations/linked_collaborations'
   end
 
@@ -53,6 +53,9 @@ Decidim.register_feature(:collaborations) do |feature|
       title: Decidim::Faker::Localized.sentence(2),
       description: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
         Decidim::Faker::Localized.paragraph(3)
+      end,
+      terms_and_conditions: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
+        Decidim::Faker::Localized.paragraph(5)
       end,
       minimum_custom_amount: 1_000,
       target_amount: 100_000,

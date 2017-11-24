@@ -1,0 +1,6 @@
+<% unless collaboration.terms_and_conditions.nil? %>
+  <h2 class="section-heading"><%=t 'activemodel.attributes.collaboration.terms_and_conditions' %></h2>
+  <div class="section">
+    <%= sanitize translated_attribute collaboration.terms_and_conditions %>
+  </div>
+<% end %>

@@ -42,6 +42,14 @@ shared_examples 'manage collaborations' do
         ca: 'La descripció de la col·laboració'
       )
 
+      fill_in_i18n_editor(
+        :collaboration_terms_and_conditions,
+        '#collaboration-terms_and_conditions-tabs',
+        en: 'My collaboration terms and conditions',
+        es: 'Los términos y condiciones de mi campaña de colaboración',
+        ca: 'Els termes i condicions de la meva campanya de col·laboració'
+      )
+
       fill_in :collaboration_minimum_custom_amount, with: 1_000
       fill_in :collaboration_target_amount, with: 100_000
       fill_in :collaboration_amounts, with: '50,100,200,500'
@@ -98,6 +106,14 @@ shared_examples 'manage collaborations' do
           en: 'My updated collaboration description',
           es: 'La descripción de la colaboración actualizada',
           ca: 'La descripció de la col·laboració actualitzada'
+        )
+
+        fill_in_i18n_editor(
+          :collaboration_terms_and_conditions,
+          '#collaboration-terms_and_conditions-tabs',
+          en: 'My updated collaboration terms and conditions',
+          es: 'Los términos y condiciones de mi campaña de colaboración actualizados',
+          ca: 'Els termes i condicions de la meva campanya de col·laboració actualitzats'
         )
 
         fill_in :collaboration_minimum_custom_amount, with: 1_500

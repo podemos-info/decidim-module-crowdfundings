@@ -11,6 +11,7 @@ module Decidim
 
         translatable_attribute :title, String
         translatable_attribute :description, String
+        translatable_attribute :terms_and_conditions, String
 
         attribute :default_amount, Integer
         attribute :minimum_custom_amount, Integer
@@ -20,6 +21,8 @@ module Decidim
 
         validates :title, translatable_presence: true
         validates :description, translatable_presence: true
+        validates :terms_and_conditions, translatable_presence: true
+
         validates :amounts, presence: true
 
         validates :default_amount,

@@ -6,12 +6,13 @@ module Decidim
   module Collaborations
     module Admin
       describe UpdateCollaboration do
-        let(:organization) { create(:organization) }
+        let(:organization) {create(:organization)}
         let(:participatory_process) do
           create :participatory_process, organization: organization
         end
         let(:current_feature) do
-          create :collaboration_feature, participatory_space: participatory_process
+          create :collaboration_feature,
+                 participatory_space: participatory_process
         end
 
         let(:context) do
@@ -25,6 +26,7 @@ module Decidim
 
         let(:title) { Decidim::Faker::Localized.sentence(3) }
         let(:description) { Decidim::Faker::Localized.sentence(3) }
+        let(:terms_and_conditions) { Decidim::Faker::Localized.paragraph(5) }
         let(:default_amount) { ::Faker::Number.number(2).to_i }
         let(:minimum_custom_amount) { ::Faker::Number.number(3).to_i }
         let(:target_amount) { ::Faker::Number.number(5).to_i }
@@ -35,6 +37,7 @@ module Decidim
             invalid?: invalid,
             title: title,
             description: description,
+            terms_and_conditions: terms_and_conditions,
             default_amount: default_amount,
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
@@ -43,14 +46,14 @@ module Decidim
             amounts: amounts
           )
         end
-        let(:invalid) { false }
-        subject { described_class.new(form, collaboration) }
+        let(:invalid) {false}
+        subject {described_class.new(form, collaboration)}
 
         context 'when the form is not valid' do
-          let(:invalid) { true }
+          let(:invalid) {true}
 
           it 'is not valid' do
-            expect { subject.call }.to broadcast(:invalid)
+            expect {subject.call}.to broadcast(:invalid)
           end
         end
 
@@ -61,6 +64,7 @@ module Decidim
             subject.call
             expect(updated_collaboration.title).to eq title
             expect(updated_collaboration.description).to eq description
+            expect(updated_collaboration.terms_and_conditions).to eq terms_and_conditions
             expect(updated_collaboration.default_amount).to eq default_amount
             expect(updated_collaboration.minimum_custom_amount).to eq minimum_custom_amount
             expect(updated_collaboration.target_amount).to eq target_amount

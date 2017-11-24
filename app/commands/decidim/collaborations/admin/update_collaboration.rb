@@ -33,6 +33,7 @@ module Decidim
           collaboration.update_attributes!(
             title: form.title,
             description: form.description,
+            terms_and_conditions: form.terms_and_conditions,
             default_amount: form.default_amount,
             minimum_custom_amount: form.minimum_custom_amount,
             target_amount: form.target_amount,

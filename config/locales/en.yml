@@ -23,6 +23,7 @@ en:
       collaboration:
         title: Title
         description: Description
+        terms_and_conditions: Terms and conditions
         default_amount: Default amount
         minimum_custom_amount: Minimum valid amount
         target_amount: Target amount

@@ -23,6 +23,7 @@ es:
       collaboration:
         title: Título
         description: Descripción
+        terms_and_conditions: Términos y condiciones
         default_amount: Monto por defecto
         minimum_custom_amount: Mínimo monto válido
         target_amount: Monto objetivo

@@ -15,7 +15,7 @@ ca:
             payment_method_type:
               blank: Deus sel·leccionar una forma de pagament.
             amount:
-              minimum_valid_amount: "L'import mínim válid es %{amount}"
+              minimum_valid_amount: "L'import mínim vàlid es %{amount}"
             iban:
               invalid_format: format invàlid.
               invalid_country_check: codi de país invàlid.
@@ -23,6 +23,7 @@ ca:
       collaboration:
         title: Títol
         description: Descripció
+        terms_and_conditions: Termes i condicions
         default_amount: Import per defecte
         minimum_custom_amount: Mínim import vàlid
         target_amount: Import objectiu
