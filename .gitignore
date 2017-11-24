@@ -44,6 +44,7 @@ bower.json
 .byebug_history
 
 .idea
+.vscode
 .rbenv-gemsets
 spec/decidim_dummy_app/log
 spec/decidim_dummy_app/tmp
