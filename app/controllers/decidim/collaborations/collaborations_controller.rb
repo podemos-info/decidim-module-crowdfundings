@@ -5,6 +5,7 @@ module Decidim
     # Exposes collaborations to users.
     class CollaborationsController < Decidim::Collaborations::ApplicationController
       include FilterResource
+      include CensusAPI
 
       helper_method :collaborations, :random_seed
       helper Decidim::PaginateHelper
@@ -28,11 +29,11 @@ module Decidim
 
       def initialize_form_defaults
         @form.amount = collaboration.default_amount
-        if collaboration.recurrent_donation_allowed?
-          @form.frequency = Decidim::Collaborations.default_frequency
-        else
-          @form.frequency = 'punctual'
-        end
+        @form.frequency = if collaboration.recurrent_donation_allowed?
+                            Decidim::Collaborations.default_frequency
+                          else
+                            'punctual'
+                          end
       end
 
       def collaborations

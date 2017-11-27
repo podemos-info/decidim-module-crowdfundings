@@ -6,14 +6,26 @@ module Decidim
       mimic :user_collaboration
 
       attribute :iban, String
+      attribute :payment_method_id, Integer
 
       validates :iban, presence: true, if: :direct_debit?
       validates :iban, iban: true, unless: proc { |form| form.iban.blank? }
+      validates :payment_method_id, presence: true, if: :existing_payment_method?
+
+      def correct_payment_method
+        return unless payment_method_type.match?(/\A\d+\z/)
+        self.payment_method_id = payment_method_type.to_i
+        self.payment_method_type = 'existing_payment_method'
+      end
 
       private
 
       def direct_debit?
         payment_method_type == 'direct_debit'
+      end
+
+      def existing_payment_method?
+        payment_method_type == 'existing_payment_method'
       end
     end
   end

@@ -18,7 +18,13 @@
         </div>
         <div class="card--list__item">
           <div class="card--list__text"><%= f.object.class.human_attribute_name(:payment_method_type) %></div>
-          <div class="card--list__data"><%= payment_method_label f.object.payment_method_type %></div>
+          <div class="card--list__data">
+            <% if existing_payment_method?(@form) %>
+              <%= user_payment_method(f.object.payment_method_id) %>
+            <% else %>
+              <%= payment_method_label f.object.payment_method_type %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

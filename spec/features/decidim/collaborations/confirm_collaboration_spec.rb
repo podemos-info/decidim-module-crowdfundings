@@ -9,7 +9,17 @@ describe 'Confirm collaboration', type: :feature do
   let(:user) { create(:user, :confirmed, organization: organization) }
   let(:amount) { ::Faker::Number.number(4) }
 
+  let(:existing_payment_methods) do
+    [
+      { id: 1, name: 'Existing payment method'}
+    ]
+  end
+
   before do
+    allow(::Census::API::PaymentMethod).to receive(:for_user)
+                                             .with(anything)
+                                             .and_return(existing_payment_methods)
+
     login_as(user, scope: :user)
 
     visit_feature
@@ -24,7 +34,7 @@ describe 'Confirm collaboration', type: :feature do
     context 'Existing payment method' do
       before do
         within '.new_user_collaboration' do
-          find('label[for=user_collaboration_payment_method_type_existing_payment_method]').click
+          find('label[for=user_collaboration_payment_method_type_1]').click
           find('*[type=submit]').click
         end
       end
