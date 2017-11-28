@@ -1,9 +1,10 @@
 <%= decidim_form_for(@form,
                      url: collaboration_user_collaborations_path(collaboration),
-                     html: { class: 'form confirm_user_collaboration' }) do |f| %>
+                     html: { class: 'form confirm_user_collaboration', id: 'confirm_user_collaboration' }) do |f| %>
     <%= f.hidden_field :amount %>
     <%= f.hidden_field :frequency %>
     <%= f.hidden_field :payment_method_type %>
+    <%= f.hidden_field :payment_method_id %>
 
     <h2 class="section-heading"><%=t '.collaboration_resume' %></h2>
     <div class="row collaboration--resume">

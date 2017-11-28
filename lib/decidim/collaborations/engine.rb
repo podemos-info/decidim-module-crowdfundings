@@ -13,9 +13,12 @@ module Decidim
 
       routes do
         resources :collaborations, only: %i[index show] do
-          resources :user_collaborations, shallow: true do
+          resources :user_collaborations, only: %i[create], shallow: true do
             collection do
               post :confirm
+            end
+            member do
+              get :validate
             end
           end
         end

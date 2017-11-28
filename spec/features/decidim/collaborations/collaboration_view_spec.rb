@@ -6,6 +6,22 @@ describe 'Explore collaborations', type: :feature do
   let(:manifest_name) { 'collaborations' }
   let(:confirmed_user) { create(:user, :confirmed, organization: organization) }
 
+  let(:payment_methods) do
+    [
+      { id: 1, name: 'Payment method 1'},
+      { id: 2, name: 'Payment method 2'}
+    ]
+  end
+
+  before do
+    stub_request(:get, %r{/api/v1/payments/payment_methods})
+      .to_return(
+        status: 200,
+        body: payment_methods.to_json,
+        headers: {}
+      )
+  end
+
   context 'Participatory process' do
     include_context 'feature'
     let!(:collaboration) { create(:collaboration, feature: feature) }
@@ -40,6 +56,12 @@ describe 'Explore collaborations', type: :feature do
       it 'Frequency is punctual by default' do
         frequency = find(:css, '#user_collaboration_frequency', visible: false)
         expect(frequency.value).to eq('punctual')
+      end
+
+      it 'User payment methods are selectable' do
+        payment_methods.each do |method|
+          expect(page).to have_content(method[:name])
+        end
       end
     end
   end

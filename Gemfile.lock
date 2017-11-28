@@ -577,6 +577,7 @@ DEPENDENCIES
   decidim-dev
   faker
   iban_bic
+  webmock
 
 RUBY VERSION
    ruby 2.4.2p198

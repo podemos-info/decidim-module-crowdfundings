@@ -18,14 +18,16 @@ module Decidim
         self.payment_method_type = 'existing_payment_method'
       end
 
-      private
+      def existing_payment_method?
+        payment_method_type == 'existing_payment_method'
+      end
 
       def direct_debit?
         payment_method_type == 'direct_debit'
       end
 
-      def existing_payment_method?
-        payment_method_type == 'existing_payment_method'
+      def credit_card_external?
+        payment_method_type == 'credit_card_external'
       end
     end
   end

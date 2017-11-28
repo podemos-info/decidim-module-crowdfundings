@@ -6,7 +6,7 @@ module Decidim
       # This command is executed when the user creates a Collaboration from
       # the admin panel.
       class CreateCollaboration < CollaborationCommand
-        # Creates the project if valid.
+        # Creates the collaboration if valid.
         #
         # Broadcasts :ok if successful, :invalid otherwise.
         def call

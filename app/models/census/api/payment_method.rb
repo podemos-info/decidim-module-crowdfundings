@@ -10,22 +10,18 @@ module Census
         credit_card_external
       ].freeze
 
-      # Sugar syntax to avoid creating a new instance of the API
-      # when retrieving the list of payment methods available for
-      # a user.
-      def self.for_user(person_id)
-        new.for_user(person_id)
-      end
-
       # PUBLIC retrieve the available payment methods for the given user.
-      def for_user(person_id)
-        response = self.class.get(
+      def self.for_user(person_id)
+        response = get(
           '/api/v1/payments/payment_methods',
           query: { person_id: person_id }
         )
 
         return [] if response.code != 200
         JSON.parse(response.body, symbolize_names: true)
+      rescue StandardError => e
+        Rails.logger.debug "Request to /api/v1/payments/payment_methods failed with code #{e.response.code}: #{e.response.message}"
+        []
       end
     end
   end
