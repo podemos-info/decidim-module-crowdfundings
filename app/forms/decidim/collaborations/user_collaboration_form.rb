@@ -17,6 +17,7 @@ module Decidim
       validates :frequency, presence: true
       validates :payment_method_type, presence: true
       validate :minimum_custom_amount
+      validate :maximum_user_amount
 
       private
 
@@ -31,6 +32,23 @@ module Decidim
           :amount,
           I18n.t(
             'amount.minimum_valid_amount',
+            amount: context.collaboration.minimum_custom_amount,
+            scope: 'activemodel.errors.models.user_collaboration.attributes'
+          )
+        )
+      end
+
+      # This validator method checks that the amount set by the user do not
+      # increases the annual accumulated amount over the maximum allowed
+      def maximum_user_amount
+        return if amount.nil?
+        annual_accumulated = Census::API::Totals.user_totals(context.current_user.id)
+        return if annual_accumulated + amount <= Decidim::Collaborations.maximum_annual_collaboration
+
+        errors.add(
+          :amount,
+          I18n.t(
+            'amount.annual_limit_exceeded',
             amount: context.collaboration.minimum_custom_amount,
             scope: 'activemodel.errors.models.user_collaboration.attributes'
           )

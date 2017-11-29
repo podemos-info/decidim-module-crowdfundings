@@ -31,7 +31,7 @@ module Decidim
 
     # Entry point for Census API
     config_accessor :census_api_base_uri do
-      'https://census-api.unpais.es'
+      'https://census_api.example.org'
     end
 
     # IP address for the proxy used to access to the Census API

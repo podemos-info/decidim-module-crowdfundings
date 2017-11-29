@@ -3,6 +3,7 @@
 module Decidim
   module Collaborations
     module Abilities
+      # CanCanCan abilities related to current user.
       class CurrentUserAbility
         include CanCan::Ability
 
@@ -16,9 +17,13 @@ module Decidim
 
           can :donate, Collaboration do |collaboration|
             collaboration.accepts_donations? &&
-              current_settings.collaborations_allowed?
+              current_settings.collaborations_allowed? &&
+              Census::API::Totals.user_totals(user.id) < Decidim::Collaborations.maximum_annual_collaboration
+          end
 
-            # TODO: Validate user limits
+          can :donate_recurrently, Collaboration do |collaboration|
+            collaboration.recurrent_donation_allowed? &&
+              !collaboration.user_collaborations.donated_by(user).any?
           end
         end
 

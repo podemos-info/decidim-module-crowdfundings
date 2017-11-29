@@ -16,6 +16,7 @@ ca:
               blank: Deus sel·leccionar una forma de pagament.
             amount:
               minimum_valid_amount: "L'import mínim vàlid es %{amount}"
+              annual_limit_exceeded: L'import sel·leccionat supera el màxim anual permes.
             iban:
               invalid_format: format invàlid.
               invalid_country_check: codi de país invàlid.

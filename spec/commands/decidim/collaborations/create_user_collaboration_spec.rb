@@ -39,6 +39,10 @@ module Decidim
 
       subject { described_class.new(form) }
 
+      before do
+        stub_totals_request(0)
+      end
+
       context 'when the form is not valid' do
         before do
           allow(form).to receive(:invalid?).and_return(true)

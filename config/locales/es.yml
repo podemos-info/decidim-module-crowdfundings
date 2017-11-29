@@ -16,6 +16,7 @@ es:
               blank: Debes elegir una forma de pago.
             amount:
               minimum_valid_amount: 'El importe mínimo válido es %{amount}'
+              annual_limit_exceeded: El importe seleccionado supera el máximo anual permitido.
             iban:
               invalid_format: tiene un formato inválido.
               invalid_country_check: tiene un código de país inválido.
