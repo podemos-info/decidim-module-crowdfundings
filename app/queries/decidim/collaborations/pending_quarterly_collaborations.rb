@@ -5,7 +5,7 @@ module Decidim
     # Returns recurrent quarterly user collaborations that must be renewed
     class PendingQuarterlyCollaborations < Rectify::Query
       def query
-        UserCollaboration.accepted.quarterly
+        UserCollaboration.is_accepted.quarterly_frequency
       end
     end
   end

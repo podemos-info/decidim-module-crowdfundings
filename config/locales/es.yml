@@ -54,6 +54,7 @@ es:
     collaborations:
       labels:
         other: Otro
+        not_available: n/d
         frequencies:
           punctual: Puntual
           monthly: Mensual

@@ -6,6 +6,8 @@ module Decidim
       class CollaborationsController < Admin::ApplicationController
         before_action :init_form_from_params, only: %i[create update]
 
+        helper Decidim::Collaborations::TotalsHelper
+
         def new
           @form = collaboration_form.instance
           @form.amounts = Decidim::Collaborations.selectable_amounts.join(', ')

@@ -23,8 +23,11 @@ module Decidim
         let(:collaboration) do
           build :collaboration,
                 target_amount: target_amount,
-                total_collected: total_collected,
                 active_until: active_until
+        end
+
+        before do
+          stub_totals_request(total_collected)
         end
 
         context 'the collecting period has finished' do
@@ -36,70 +39,133 @@ module Decidim
         end
 
         context 'Target amount has been satisfied' do
+          let(:total_collected) { target_amount }
+
           it 'returns false' do
-            expect(collaboration).to receive(:total_collected)
-                                       .and_return(target_amount)
             expect(collaboration.accepts_donations?).to be_falsey
+          end
+        end
+
+        context 'Census API returns error' do
+          before do
+            stub_totals_request_error
+          end
+
+          it 'returns false' do
+            expect(collaboration.accepts_donations?).to be_falsey
+          end
+        end
+
+        context 'Census API is down' do
+          before do
+            stub_totals_service_down
+          end
+
+          it 'returns nil' do
+            expect(collaboration.percentage).to be_nil
           end
         end
       end
 
       context 'percentages and totals' do
-        let!(:pending_user_collaboration) do
-          create :user_collaboration,
-                 :pending,
-                 :punctual,
-                 collaboration: collaboration,
-                 amount: collaboration.target_amount / 2
-        end
-
-        let!(:rejected_user_collaboration) do
-          create :user_collaboration,
-                 :rejected,
-                 :punctual,
-                 collaboration: collaboration,
-                 amount: collaboration.target_amount / 2
-        end
-
-        let!(:accepted_user_collaboration) do
-          create :user_collaboration,
-                 :accepted,
-                 :punctual,
-                 collaboration: collaboration,
-                 amount: collaboration.target_amount / 2
-        end
-
         context 'percentage' do
-          it 'percentage reflects only accepted collaborations' do
-            expect(collaboration.percentage).to eq(50)
+          context 'API is up' do
+            before do
+              stub_totals_request(collaboration.target_amount / 2)
+            end
+
+            it 'percentage calculated from census response' do
+              expect(collaboration.percentage).to eq(50)
+            end
+          end
+
+          context 'API returns error' do
+            before do
+              stub_totals_request_error
+            end
+
+            it 'returns nil' do
+              expect(collaboration.percentage).to be_nil
+            end
+          end
+
+          context 'Census API is down' do
+            before do
+              stub_totals_service_down
+            end
+
+            it 'returns nil' do
+              expect(collaboration.percentage).to be_nil
+            end
           end
         end
 
         context 'user percentage' do
-          it 'Reflects user percentage for accepted collaborations' do
-            expect(collaboration.user_percentage(accepted_user_collaboration.user)).to eq(50)
+          let(:user) { create(:user, organization: collaboration.organization) }
+
+          context 'Census API up' do
+            before do
+              stub_totals_request(collaboration.target_amount / 2)
+            end
+
+            it 'Percentage calculated from census response' do
+              expect(collaboration.user_percentage(user)).to eq(50)
+            end
           end
 
-          it 'Do not reflects user percentage for rejected collaborations' do
-            expect(collaboration.user_percentage(rejected_user_collaboration.user)).to eq(0)
+          context 'API returns error' do
+            before do
+              stub_totals_request_error
+            end
+
+            it 'returns nil' do
+              expect(collaboration.user_percentage(user)).to be_nil
+            end
           end
 
-          it 'Do not reflects user percentage for pending collaborations' do
-            expect(collaboration.user_percentage(pending_user_collaboration.user)).to eq(0)
+          context 'Census API is down' do
+            before do
+              stub_totals_service_down
+            end
+
+            it 'returns nil' do
+              expect(collaboration.user_percentage(user)).to be_nil
+            end
           end
         end
 
         context 'user_total_collected' do
-          it 'accepted collaborations are taken into consideration' do
-            expect(collaboration.user_total_collected(accepted_user_collaboration.user)).to eq(accepted_user_collaboration.amount)
+          let(:user) { create(:user, organization: collaboration.organization) }
+          let(:amount) { collaboration.target_amount / 2 }
+
+          context 'Census API up' do
+            before do
+              stub_totals_request(amount)
+            end
+
+            it 'Value is retrieved from census API' do
+              expect(collaboration.user_total_collected(user)).to eq(amount)
+            end
           end
 
-          it 'rejected collaborations are not taken into consideration' do
-            expect(collaboration.user_total_collected(rejected_user_collaboration.user)).to eq(0)
+          context 'API returns error' do
+            before do
+              stub_totals_request_error
+            end
+
+            it 'returns nil' do
+              expect(collaboration.user_total_collected(user)).to be_nil
+            end
           end
 
-          it 'pending collaborations are not taken into consideration' do
-            expect(collaboration.user_total_collected(pending_user_collaboration.user)).to eq(0)
+          context 'Census API is down' do
+            before do
+              stub_totals_service_down
+            end
+
+            it 'returns nil' do
+              expect(collaboration.user_total_collected(user)).to be_nil
+            end
           end
         end
       end

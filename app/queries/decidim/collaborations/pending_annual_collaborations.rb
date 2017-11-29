@@ -5,7 +5,7 @@ module Decidim
     # Returns recurrent annual user collaborations that must be renewed
     class PendingAnnualCollaborations < Rectify::Query
       def query
-        UserCollaboration.accepted.annual
+        UserCollaboration.is_accepted.annual_frequency
       end
     end
   end

@@ -33,12 +33,8 @@ describe 'Confirm user collaboration', type: :feature do
   end
 
   before do
-    stub_request(:get, %r{/api/v1/payments/payment_methods})
-      .to_return(
-        status: 200,
-        body: payment_methods.to_json,
-        headers: {}
-      )
+    stub_payment_methods(payment_methods)
+    stub_totals_request(0)
 
     login_as(user, scope: :user)
   end

@@ -25,16 +25,21 @@ module Decidim
       # block
       def total_collected(collaboration, user)
         if user.nil?
-          return decidim_number_to_currency collaboration.total_collected
+          return total_collected_to_currency collaboration.total_collected
         end
 
-        decidim_number_to_currency collaboration.user_total_collected(user)
+        total_collected_to_currency collaboration.user_total_collected(user)
       end
 
       # PUBLIC: Returns percentage value formatted as a percentage without
       # decimal places.
       def percentage(collaboration, user)
-        number_to_percentage percentage_value(collaboration, user), precision: 0
+        value = percentage_value(collaboration, user)
+        if value.nil?
+          return I18n.t('decidim.collaborations.labels.not_available')
+        end
+
+        number_to_percentage value, precision: 0
       end
 
       # PUBLIC: Returns the percentage value over the objective amount: If user
@@ -51,7 +56,8 @@ module Decidim
       def percentage_tag(collaboration, user)
         css_class = percentage_class(percentage_value(collaboration, user))
 
-        content_tag(:div, class: "extra__percentage percentage #{css_class}".strip) do
+        content_tag(:div,
+                    class: "extra__percentage percentage #{css_class}".strip) do
           5.times do
             concat(content_tag(:span, class: 'percentage__item') {})
           end
@@ -77,6 +83,14 @@ module Decidim
         return 'percentage--level5' if percentage >= 100
 
         ''
+      end
+
+      # PUBLIC converts the amount collected into a currency string.
+      def total_collected_to_currency(total_collected)
+        if total_collected.nil?
+          return I18n.t('decidim.collaborations.labels.not_available')
+        end
+        decidim_number_to_currency(total_collected)
       end
     end
   end

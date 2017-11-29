@@ -54,6 +54,7 @@ en:
     collaborations:
       labels:
         other: Other
+        not_available: n/a
         frequencies:
           punctual: Punctual
           monthly: Monthly

@@ -16,9 +16,8 @@ describe 'Confirm collaboration', type: :feature do
   end
 
   before do
-    allow(::Census::API::PaymentMethod).to receive(:for_user)
-                                             .with(anything)
-                                             .and_return(existing_payment_methods)
+    stub_payment_methods(existing_payment_methods)
+    stub_totals_request(0)
 
     login_as(user, scope: :user)
 

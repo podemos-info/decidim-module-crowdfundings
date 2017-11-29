@@ -11,6 +11,10 @@ describe 'Explore collaborations', type: :feature do
     create_list(:collaboration, collaborations_count, feature: feature)
   end
 
+  before do
+    stub_totals_request(0)
+  end
+
   context 'index' do
     it 'shows all collaborations for the given process' do
       visit_feature

@@ -8,18 +8,8 @@ module Census
       let(:result) { ::Census::API::Order.create({}) }
 
       context 'Communication error' do
-        let(:response) do
-          Net::HTTPServiceUnavailable.new('1.1', 503, 'Service Unavailable')
-        end
-
-        let(:exception) do
-          Net::HTTPFatalError.new('503 Service Unavailable', response)
-        end
-
         before do
-          allow(::Census::API::Order).to receive(:post)
-                                           .with('/api/v1/payments/orders', anything)
-                                           .and_raise(exception)
+          stub_orders_service_down
         end
 
         it 'Returns structure with error code and message' do
@@ -30,12 +20,7 @@ module Census
 
       context 'Successful request' do
         before do
-          stub_request(:post, %r{/api/v1/payments/orders})
-            .to_return(
-              status: http_response_code,
-              body: json.to_json,
-              headers: {}
-            )
+          stub_orders(http_response_code, json)
         end
 
         context 'Existing payment method / Direct debit' do
