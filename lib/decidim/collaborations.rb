@@ -34,6 +34,22 @@ module Decidim
       'https://census-api.unpais.es'
     end
 
+    # IP address for the proxy used to access to the Census API
+    config_accessor :census_api_proxy_address do
+      nil
+    end
+
+    # Port used for the proxy used to access to the Census API
+    config_accessor :census_api_proxy_port do
+      nil
+    end
+
+    # Enable debug output in the logs for the communication with
+    # Census API.
+    config_accessor :census_api_debug do
+      false
+    end
+
     # Default recurrent collaboration
     config_accessor :default_frequency do
       'monthly'

@@ -138,6 +138,12 @@ en:
           select_payment_method: Select the payment method
           donate: Support
       user_collaborations:
+        create:
+          invalid: Operation failed.
+          success: You have successfully supported the collaboration campaign.
+        validate:
+          invalid: Operation has been denied.
+          success: You have successfully supported the collaboration campaign.
         confirm_form:
           collaboration_resume: Collaboration resume
           confirm: Confirm

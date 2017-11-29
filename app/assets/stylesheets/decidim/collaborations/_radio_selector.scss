@@ -1,12 +1,19 @@
 .radio-selector {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
+  align-content: flex-start;
+  margin-bottom: 15pt;
 
   label {
     cursor: pointer;
-    float: left;
     display: inline-block;
     margin-right: 10pt;
     font-size: 22px;
+    margin-top: 5pt;
+    flex-grow: 1;
 
     input[type="radio"] {
       display: none;

@@ -1,9 +1,10 @@
 <%= decidim_form_for(@form,
                      url: collaboration_user_collaborations_path(collaboration),
-                     html: { class: 'form confirm_user_collaboration' }) do |f| %>
+                     html: { class: 'form confirm_user_collaboration', id: 'confirm_user_collaboration' }) do |f| %>
     <%= f.hidden_field :amount %>
     <%= f.hidden_field :frequency %>
     <%= f.hidden_field :payment_method_type %>
+    <%= f.hidden_field :payment_method_id %>
 
     <h2 class="section-heading"><%=t '.collaboration_resume' %></h2>
     <div class="row collaboration--resume">
@@ -18,7 +19,13 @@
         </div>
         <div class="card--list__item">
           <div class="card--list__text"><%= f.object.class.human_attribute_name(:payment_method_type) %></div>
-          <div class="card--list__data"><%= payment_method_label f.object.payment_method_type %></div>
+          <div class="card--list__data">
+            <% if existing_payment_method?(@form) %>
+              <%= user_payment_method(f.object.payment_method_id) %>
+            <% else %>
+              <%= payment_method_label f.object.payment_method_type %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

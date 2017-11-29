@@ -7,7 +7,7 @@
   <div id="collaboration" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
     <%= render 'decidim/collaborations/collaborations/totals', user: nil %>
     <% if user_signed_in? %>
-        <%= render 'decidim/collaborations/collaborations/totals', user: current_user %>
+      <%= render 'decidim/collaborations/collaborations/totals', user: current_user %>
     <% end %>
   </div>
 

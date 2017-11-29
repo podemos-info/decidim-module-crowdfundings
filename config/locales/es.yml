@@ -138,6 +138,12 @@ es:
           select_payment_method: Selecciona la forma de pago
           donate: Apoyar
       user_collaborations:
+        create:
+          invalid: Falló la operación.
+          success: Has apoyado la campaña de colaboración.
+        validate:
+          invalid: La operación ha sido denegada.
+          success: Has apoyado la campaña de colaboración.
         confirm_form:
           collaboration_resume: Resumen de la colaboración
           confirm: Confirmar

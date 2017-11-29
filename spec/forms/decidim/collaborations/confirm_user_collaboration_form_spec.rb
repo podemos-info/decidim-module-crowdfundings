@@ -38,6 +38,10 @@ module Decidim
       context 'direct_debit' do
         let(:payment_method_type) { 'direct_debit' }
 
+        it { is_expected.not_to be_credit_card_external }
+        it { is_expected.not_to be_existing_payment_method }
+        it { is_expected.to be_direct_debit }
+
         context 'iban is missing' do
           let(:iban) { nil }
           it { is_expected.not_to be_valid }
@@ -52,6 +56,26 @@ module Decidim
           let(:iban) { 'ES5463332518114045210672' }
           it { is_expected.to be_valid }
         end
+      end
+
+      context 'existing payment method' do
+        let(:payment_method_type) { 'existing_payment_method' }
+        let(:payment_method_id) { nil }
+
+        it { is_expected.not_to be_credit_card_external }
+        it { is_expected.to be_existing_payment_method }
+        it { is_expected.not_to be_direct_debit }
+
+        context 'payment_method_id is missing' do
+          it { is_expected.not_to be_valid }
+        end
+      end
+
+      context 'Credit card external' do
+        let(:payment_method_type) { 'credit_card_external' }
+        it { is_expected.to be_credit_card_external }
+        it { is_expected.not_to be_existing_payment_method }
+        it { is_expected.not_to be_direct_debit }
       end
     end
   end

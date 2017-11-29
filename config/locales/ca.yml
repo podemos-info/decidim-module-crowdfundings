@@ -138,6 +138,12 @@ ca:
           select_payment_method: Sel·lecciona la forma de pagament
           donate: Donar suport
       user_collaborations:
+        create:
+          invalid: L'operació ha fallat.
+          success: Has donat suport a la campanya de col·laboració.
+        validate:
+          invalid: L'operació ha estat denegada.
+          success: Has donat suport a la campanya de col·laboració.
         confirm_form:
           collaboration_resume: Resum de la col·laboració
           confirm: Confirmar
