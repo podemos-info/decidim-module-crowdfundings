@@ -83,6 +83,7 @@ es:
             state: Estado
             amount: Importe
             frequency: Frecuencia
+            last_order_request_date: Última petición
       admin:
         models:
           collaboration:

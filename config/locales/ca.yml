@@ -83,6 +83,7 @@ ca:
               state: Estat
               amount: Quantitat
               frequency: Freqüència
+              last_order_request_date: Última petició
       admin:
         models:
           collaboration:

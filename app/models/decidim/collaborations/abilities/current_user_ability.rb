@@ -17,6 +17,8 @@ module Decidim
           can :donate, Collaboration do |collaboration|
             collaboration.accepts_donations? &&
               current_settings.collaborations_allowed?
+
+            # TODO: Validate user limits
           end
         end
 

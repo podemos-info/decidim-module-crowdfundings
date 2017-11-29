@@ -6,7 +6,7 @@ module Decidim
   module Collaborations
     module Admin
       describe UpdateCollaboration do
-        let(:organization) {create(:organization)}
+        let(:organization) { create(:organization) }
         let(:participatory_process) do
           create :participatory_process, organization: organization
         end
@@ -46,19 +46,21 @@ module Decidim
             amounts: amounts
           )
         end
-        let(:invalid) {false}
-        subject {described_class.new(form, collaboration)}
+        let(:invalid) { false }
+        subject { described_class.new(form, collaboration) }
 
         context 'when the form is not valid' do
-          let(:invalid) {true}
+          let(:invalid) { true }
 
           it 'is not valid' do
-            expect {subject.call}.to broadcast(:invalid)
+            expect { subject.call }.to broadcast(:invalid)
           end
         end
 
         context 'when everything is ok' do
-          let(:updated_collaboration) { Decidim::Collaborations::Collaboration.last }
+          let(:updated_collaboration) do
+            Decidim::Collaborations::Collaboration.last
+          end
 
           it 'sets all attributes received from the form' do
             subject.call

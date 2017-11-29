@@ -83,6 +83,7 @@ en:
             state: State
             amount: Amount
             frequency: Frequency
+            last_order_request_date: Last request
       admin:
         models:
           collaboration:

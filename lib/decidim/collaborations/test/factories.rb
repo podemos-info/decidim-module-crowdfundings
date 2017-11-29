@@ -53,6 +53,7 @@ FactoryGirl.define do
     collaboration { create(:collaboration) }
     user { create(:user, organization: collaboration.feature.organization) }
     amount 50
+    last_order_request_date { Date.today.beginning_of_month }
 
     trait :punctual do
       frequency 'punctual'

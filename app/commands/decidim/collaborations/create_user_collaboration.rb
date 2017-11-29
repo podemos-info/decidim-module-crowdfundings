@@ -1,5 +1,6 @@
 module Decidim
   module Collaborations
+    # Rectify command that creates a user collaboration
     class CreateUserCollaboration < Rectify::Command
       include Decidim::TranslationsHelper
 
@@ -29,7 +30,7 @@ module Decidim
 
       def process_user_collaboration
         result = register_on_census
-        if result[:http_response_code].between?(201,202)
+        if result[:http_response_code].between?(201, 202)
           create_user_collaboration result[:payment_method_id]
         end
 
@@ -70,7 +71,8 @@ module Decidim
           frequency: form.frequency,
           amount: form.amount,
           payment_method_id: payment_method_id || form.payment_method_id,
-          state: collaboration_state
+          state: collaboration_state,
+          last_order_request_date: Date.today.beginning_of_month
         )
       end
 

@@ -132,6 +132,11 @@ module Decidim
             expect(user_collaboration.user).to eq(user)
           end
 
+          it 'Last request date is set to the first of the month when happened' do
+            subject.call
+            expect(user_collaboration.last_order_request_date).to eq(Date.today.beginning_of_month)
+          end
+
           it 'Payment method id is set with the value received from census' do
             subject.call
             expect(user_collaboration.payment_method_id).to eq(returned_payment_method_id)

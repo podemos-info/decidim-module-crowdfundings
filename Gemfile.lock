@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-collaborations (0.1.6)
+    decidim-collaborations (0.1.7)
       decidim (>= 0.7.0, <= 0.8.0)
       decidim-admin
       decidim-core (>= 0.7.0, <= 0.8.0)
