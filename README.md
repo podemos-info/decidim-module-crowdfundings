@@ -15,10 +15,11 @@ This plugin provides:
 * Rake tasks necessary to automatize recurrent payments.
 
 ## Installation
-Add this line to your application's Gemfile:
+Add the following lines to your application's Gemfile:
 
 ```ruby
 gem 'decidim-collaborations'
+gem 'iban_bic'
 ```
 
 And then execute:
