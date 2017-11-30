@@ -16,6 +16,7 @@ ca:
               blank: Deus sel·leccionar una forma de pagament.
             amount:
               minimum_valid_amount: "L'import mínim vàlid es %{amount}"
+              annual_limit_exceeded: L'import sel·leccionat supera el màxim anual permes.
             iban:
               invalid_format: format invàlid.
               invalid_country_check: codi de país invàlid.
@@ -54,6 +55,7 @@ ca:
     collaborations:
       labels:
         other: Altres
+        not_available: n/d
         frequencies:
           punctual: Puntual
           monthly: Mensual
@@ -83,6 +85,7 @@ ca:
               state: Estat
               amount: Quantitat
               frequency: Freqüència
+              last_order_request_date: Última petició
       admin:
         models:
           collaboration:

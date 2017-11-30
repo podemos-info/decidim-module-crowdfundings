@@ -16,6 +16,7 @@ es:
               blank: Debes elegir una forma de pago.
             amount:
               minimum_valid_amount: 'El importe mínimo válido es %{amount}'
+              annual_limit_exceeded: El importe seleccionado supera el máximo anual permitido.
             iban:
               invalid_format: tiene un formato inválido.
               invalid_country_check: tiene un código de país inválido.
@@ -54,6 +55,7 @@ es:
     collaborations:
       labels:
         other: Otro
+        not_available: n/d
         frequencies:
           punctual: Puntual
           monthly: Mensual
@@ -83,6 +85,7 @@ es:
             state: Estado
             amount: Importe
             frequency: Frecuencia
+            last_order_request_date: Última petición
       admin:
         models:
           collaboration:

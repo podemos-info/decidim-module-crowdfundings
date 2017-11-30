@@ -13,7 +13,7 @@
       <%= link_to t('.donate'), collaboration, class: 'button tiny hollow collaboration--list__action' %>
     <% end %>
     <span class="card--list__data__number collaboration-list__number">
-      <%= decidim_number_to_currency(collaboration.total_collected) %>
+      <%= total_collected_to_currency(collaboration.total_collected) %>
     </span>
   </div>
 </div>

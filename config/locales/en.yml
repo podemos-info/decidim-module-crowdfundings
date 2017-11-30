@@ -16,6 +16,7 @@ en:
               blank: You must select a payment method.
             amount:
               minimum_valid_amount: 'Minimum valid amount is %{amount}'
+              annual_limit_exceeded: The selected amount is greater than the maximum annual allowed amount.
             iban:
               invalid_format: has an invalid format.
               invalid_country_check: has an invalid country code.
@@ -54,6 +55,7 @@ en:
     collaborations:
       labels:
         other: Other
+        not_available: n/a
         frequencies:
           punctual: Punctual
           monthly: Monthly
@@ -83,6 +85,7 @@ en:
             state: State
             amount: Amount
             frequency: Frequency
+            last_order_request_date: Last request
       admin:
         models:
           collaboration:

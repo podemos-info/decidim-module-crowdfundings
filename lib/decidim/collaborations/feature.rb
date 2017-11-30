@@ -70,7 +70,8 @@ Decidim.register_feature(:collaborations) do |feature|
         user: author,
         collaboration: collaboration,
         amount: 50,
-        state: 'accepted'
+        state: 'accepted',
+        last_order_request_date: Date.today.beginning_of_month
       )
     end
   end

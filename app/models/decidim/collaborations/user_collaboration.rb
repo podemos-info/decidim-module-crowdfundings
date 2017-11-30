@@ -22,7 +22,30 @@ module Decidim
       }
 
       scope :donated_by, ->(user) { where(user: user) }
-      scope :accepted, -> { where(state: 'accepted') }
+      scope :is_accepted, -> { where(state: 'accepted') }
+      scope :monthly_frequency, lambda {
+        where(frequency: 'monthly')
+          .where(
+            'last_order_request_date < ?',
+            Date.today.beginning_of_month
+          )
+      }
+
+      scope :quarterly_frequency, lambda {
+        where(frequency: 'quarterly')
+          .where(
+            'last_order_request_date < ?',
+            Date.today.beginning_of_month - 2.months
+          )
+      }
+
+      scope :annual_frequency, lambda {
+        where(frequency: 'annual')
+          .where(
+            'last_order_request_date < ?',
+            Date.today.beginning_of_month - 11.months
+          )
+      }
     end
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Decidim
-  # This holds the decidim-initiatives version.
+  # This holds the decidim-collaborations version.
   module Collaborations
-    VERSION = '0.1.7'
+    VERSION = '0.1.8'
   end
 end

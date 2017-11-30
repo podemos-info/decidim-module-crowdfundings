@@ -157,6 +157,10 @@ shared_examples 'manage collaborations' do
   end
 
   context 'previewing collaborations' do
+    before do
+      stub_payment_methods([])
+    end
+
     it 'allows the user to preview the collaboration' do
       within find('tr', text: translated(collaboration.title)) do
         @new_window = window_opened_by { find('a.action-icon--preview').click }

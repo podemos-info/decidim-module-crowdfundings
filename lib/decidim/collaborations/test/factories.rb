@@ -39,7 +39,6 @@ FactoryGirl.define do
     default_amount 50
     minimum_custom_amount 500
     target_amount 10_000
-    total_collected 0
     amounts { Decidim::Collaborations.selectable_amounts }
     feature { create(:collaboration_feature, :participatory_process) }
 
@@ -53,6 +52,7 @@ FactoryGirl.define do
     collaboration { create(:collaboration) }
     user { create(:user, organization: collaboration.feature.organization) }
     amount 50
+    last_order_request_date { Date.today.beginning_of_month }
 
     trait :punctual do
       frequency 'punctual'

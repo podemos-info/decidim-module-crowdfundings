@@ -31,6 +31,23 @@ module Decidim
           expect(helper.percentage_class(nil)).to be_blank
         end
       end
+
+      context 'total_collected_to_currency' do
+        let(:subject) { helper.total_collected_to_currency(amount) }
+        context 'nil value' do
+          let(:amount) { nil }
+          it 'returns not available' do
+            expect(subject).to eq('n/a')
+          end
+        end
+      end
+
+      context 'percentage' do
+        it 'returns not available when percentage value is nil' do
+          allow(helper).to receive(:percentage_value).with(any_args).and_return(nil)
+          expect(helper.percentage(nil,nil)).to eq('n/a')
+        end
+      end
     end
   end
 end

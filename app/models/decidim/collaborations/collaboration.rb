@@ -18,23 +18,27 @@ module Decidim
 
       scope :for_feature, ->(feature) { where(feature: feature) }
 
-      # TODO Define whether this attribute will be stored or calculated
       # PUBLIC: Returns the amount collected by the campaign
       def total_collected
-        user_collaborations.accepted.sum(:amount)
+        @total_collected ||= Census::API::Totals.campaign_totals(id)
       end
 
       # PUBLIC Returns true if the collaboration campaign accepts donations.
       def accepts_donations?
+        collected = total_collected || target_amount
+
         feature.participatory_space.published? &&
           (active_until.nil? || active_until >= Time.now) &&
-          (target_amount > total_collected)
+          (target_amount > collected)
       end
 
       # PUBLIC returns the percentage of funds donated with regards to
       # the total collected
       def percentage
-        result = (total_collected * 100.0) / target_amount
+        census_total_collected = total_collected
+        return nil if census_total_collected.nil?
+
+        result = (census_total_collected * 100.0) / target_amount
         result = 100.0 if result > 100
         result
       end
@@ -42,14 +46,17 @@ module Decidim
       # PUBLIC returns the percentage of funds donated by a user
       # with regards to the total collected.
       def user_percentage(user)
-        result = (user_total_collected(user) * 100.0) / target_amount
+        census_user_total_collected = user_total_collected(user)
+        return nil if census_user_total_collected.nil?
+
+        result = (census_user_total_collected * 100.0) / target_amount
         result = 100.0 if result > 100
         result
       end
 
       # PUBLIC returns the amount donated by a user
       def user_total_collected(user)
-        user_collaborations.donated_by(user).accepted.sum(:amount)
+        Census::API::Totals.user_campaign_totals(user.id, id)
       end
 
       # PUBLIC returns whether recurrent donations are allowed or not.

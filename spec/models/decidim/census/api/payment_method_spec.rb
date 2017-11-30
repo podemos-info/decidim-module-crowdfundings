@@ -9,18 +9,8 @@ module Census
       let(:result) { ::Census::API::PaymentMethod.for_user(person_id) }
 
       context 'Communication error' do
-        let(:response) do
-          Net::HTTPServiceUnavailable.new('1.1', 503, 'Service Unavailable')
-        end
-
-        let(:exception) do
-          Net::HTTPFatalError.new('503 Service Unavailable', response)
-        end
-
         before do
-          allow(::Census::API::PaymentMethod).to receive(:get)
-                                           .with('/api/v1/payments/payment_methods', anything)
-                                           .and_raise(exception)
+          stub_payment_methods_service_down
         end
 
         it 'Returns structure with error code and message' do
@@ -30,12 +20,7 @@ module Census
 
       context 'Error response' do
         before do
-          stub_request(:get, %r{/api/v1/payments/payment_methods})
-            .to_return(
-              status: 422,
-              body: 'Error message',
-              headers: {}
-            )
+          stub_payment_methods_error
         end
 
         it 'Returns structure with error code and message' do
@@ -52,12 +37,7 @@ module Census
         end
 
         before do
-          stub_request(:get, %r{/api/v1/payments/payment_methods})
-            .to_return(
-              status: 200,
-              body: payment_methods.to_json,
-              headers: {}
-            )
+          stub_payment_methods(payment_methods)
         end
 
         it 'returns the list of payment methods' do

@@ -39,6 +39,10 @@ module Decidim
 
       subject { described_class.new(form) }
 
+      before do
+        stub_totals_request(0)
+      end
+
       context 'when the form is not valid' do
         before do
           allow(form).to receive(:invalid?).and_return(true)
@@ -130,6 +134,11 @@ module Decidim
             expect(user_collaboration.frequency).to eq(frequency)
             expect(user_collaboration.collaboration).to eq(collaboration)
             expect(user_collaboration.user).to eq(user)
+          end
+
+          it 'Last request date is set to the first of the month when happened' do
+            subject.call
+            expect(user_collaboration.last_order_request_date).to eq(Date.today.beginning_of_month)
           end
 
           it 'Payment method id is set with the value received from census' do

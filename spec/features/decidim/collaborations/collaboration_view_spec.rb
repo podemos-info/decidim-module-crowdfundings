@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Explore collaborations', type: :feature do
+describe 'Collaborations view', type: :feature do
   let(:manifest_name) { 'collaborations' }
   let(:confirmed_user) { create(:user, :confirmed, organization: organization) }
 
@@ -14,12 +14,8 @@ describe 'Explore collaborations', type: :feature do
   end
 
   before do
-    stub_request(:get, %r{/api/v1/payments/payment_methods})
-      .to_return(
-        status: 200,
-        body: payment_methods.to_json,
-        headers: {}
-      )
+    stub_payment_methods(payment_methods)
+    stub_totals_request(500)
   end
 
   context 'Participatory process' do

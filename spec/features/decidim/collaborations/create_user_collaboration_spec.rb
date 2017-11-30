@@ -17,19 +17,9 @@ describe 'Create user collaboration', type: :feature do
   end
 
   before do
-    stub_request(:get, %r{/api/v1/payments/payment_methods})
-      .to_return(
-        status: 200,
-        body: payment_methods.to_json,
-        headers: {}
-      )
-
-    stub_request(:post, %r{/api/v1/payments/orders})
-      .to_return(
-        status: order_http_response_code,
-        body: order_response_json.to_json,
-        headers: {}
-      )
+    stub_payment_methods(payment_methods)
+    stub_orders(order_http_response_code, order_response_json)
+    stub_totals_request(0)
 
     login_as(user, scope: :user)
 

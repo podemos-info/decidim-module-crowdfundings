@@ -6,6 +6,7 @@ module Decidim
   module Collaborations
     describe ConfirmUserCollaborationForm do
       let(:collaboration) { create(:collaboration) }
+      let(:current_user) { create(:user, organization: collaboration.organization) }
 
       let(:amount) { ::Faker::Number.number(4) }
       let(:frequency) { 'punctual' }
@@ -27,13 +28,18 @@ module Decidim
         {
           current_organization: collaboration.organization,
           current_feature: collaboration.feature,
-          collaboration: collaboration
+          collaboration: collaboration,
+          current_user: current_user
         }
       end
 
       subject { described_class.from_params(attributes).with_context(context) }
 
       it { is_expected.to be_valid }
+
+      before do
+        stub_totals_request(0)
+      end
 
       context 'direct_debit' do
         let(:payment_method_type) { 'direct_debit' }
