@@ -23,7 +23,7 @@ module Decidim
 
           can :donate_recurrently, Collaboration do |collaboration|
             collaboration.recurrent_donation_allowed? &&
-              !collaboration.user_collaborations.donated_by(user).any?
+              collaboration.user_collaborations.donated_by(user).none?
           end
         end
 
