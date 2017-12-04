@@ -13,12 +13,14 @@ module Decidim
       let(:payment_method_type) { 'existing_payment_method' }
       let(:user_annual_accumulated) { 0 }
       let(:over_18) { true }
+      let(:accept_terms_and_conditions) { true }
       let(:attributes) do
         {
           amount: amount,
           frequency: frequency,
           payment_method_type: payment_method_type,
-          over_18: over_18
+          over_18: over_18,
+          accept_terms_and_conditions: accept_terms_and_conditions
         }
       end
 
@@ -83,6 +85,11 @@ module Decidim
 
       context 'over 18 is missing' do
         let(:over_18) { nil }
+        it { is_expected.not_to be_valid }
+      end
+
+      context 'accept_terms_and_conditions is missing' do
+        let(:accept_terms_and_conditions) { nil }
         it { is_expected.not_to be_valid }
       end
     end

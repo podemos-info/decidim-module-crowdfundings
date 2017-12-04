@@ -2,54 +2,57 @@
                      url: confirm_collaboration_user_collaborations_path(collaboration),
                      html: { class: 'form new_user_collaboration' }) do |f| %>
 
+  <div class="conditions-row">
+    <%= f.check_box :accept_terms_and_conditions, required: true %>
     <%= f.check_box :over_18, required: true %>
+  </div>
+
+  <h2 class=section-heading><%=t '.select_amount' %></h2>
+  <%= f.donate_tag :amount, collaboration.amounts %>
+
+  <% if can? :donate_recurrently, collaboration %>
     <br>
-    <h2 class=section-heading><%=t '.select_amount' %></h2>
-    <%= f.donate_tag :amount, collaboration.amounts %>
-
-    <% if can? :donate_recurrently, collaboration %>
-      <br>
-      <h2 class=section-heading><%=t '.select_frequency' %></h2>
-      <div class="radio-selector">
-        <% frequency_options.each do |option| %>
-          <%= f.label :frequency, '', value: option[1] do %>
-            <%= f.radio_button :frequency, option[1], label: false %>
-            <div><%= option[0] %></div>
-          <% end %>
-        <% end %>
-      </div>
-
-      <% if f.object.errors.key? :frequency %>
-        <small class="form-error is-visible"><%= f.object.errors[:frequency].join(', ') %></small>
-      <% end %>
-    <% else %>
-      <%= f.hidden_field :frequency %>
-    <% end %>
-
-    <br><br>
-    <h2 class=section-heading><%=t '.select_payment_method' %></h2>
+    <h2 class=section-heading><%=t '.select_frequency' %></h2>
     <div class="radio-selector">
-      <% payment_method_options(:existing_payment_method).each do |method| %>
-        <%= f.label :payment_method_type, '', value: method[1] do %>
-          <%= f.radio_button :payment_method_type,  method[1], label: false %>
-          <div><%= method[0] %></div>
-        <% end %>
-      <% end %>
-
-      <% user_payment_methods.each do |payment_method| %>
-        <%= f.label :payment_method_type, '', value: payment_method[:id] do %>
-          <%= f.radio_button :payment_method_type,  payment_method[:id], label: false %>
-          <div><%= payment_method[:name] %></div>
+      <% frequency_options.each do |option| %>
+        <%= f.label :frequency, '', value: option[1] do %>
+          <%= f.radio_button :frequency, option[1], label: false %>
+          <div><%= option[0] %></div>
         <% end %>
       <% end %>
     </div>
-    <% if f.object.errors.key? :payment_method_type %>
-      <small class="form-error is-visible"><%= f.object.errors[:payment_method_type].join(', ') %></small>
+
+    <% if f.object.errors.key? :frequency %>
+      <small class="form-error is-visible"><%= f.object.errors[:frequency].join(', ') %></small>
+    <% end %>
+  <% else %>
+    <%= f.hidden_field :frequency %>
+  <% end %>
+
+  <br><br>
+  <h2 class=section-heading><%=t '.select_payment_method' %></h2>
+  <div class="radio-selector">
+    <% payment_method_options(:existing_payment_method).each do |method| %>
+      <%= f.label :payment_method_type, '', value: method[1] do %>
+        <%= f.radio_button :payment_method_type,  method[1], label: false %>
+        <div><%= method[0] %></div>
+      <% end %>
     <% end %>
 
-    <div class="form-general-submit">
-      <%= f.submit t('.donate'), class: 'button secondary donate' %>
-    </div>
+    <% user_payment_methods.each do |payment_method| %>
+      <%= f.label :payment_method_type, '', value: payment_method[:id] do %>
+        <%= f.radio_button :payment_method_type,  payment_method[:id], label: false %>
+        <div><%= payment_method[:name] %></div>
+      <% end %>
+    <% end %>
+  </div>
+  <% if f.object.errors.key? :payment_method_type %>
+    <small class="form-error is-visible"><%= f.object.errors[:payment_method_type].join(', ') %></small>
+  <% end %>
+
+  <div class="form-general-submit">
+    <%= f.submit t('.donate'), class: 'button secondary donate' %>
+  </div>
 <% end %>
 
 <%= javascript_include_tag 'decidim/collaborations/user_collaborations' %>

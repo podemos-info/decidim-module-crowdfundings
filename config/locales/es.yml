@@ -41,6 +41,7 @@ es:
         iban: IBAN
         payment_method_id: Forma de pago
         over_18: Soy mayor de 18 años
+        accept_terms_and_conditions: Acepto los términos y condiciones
   decidim:
     form_builder:
       donate_tag:
