@@ -40,6 +40,7 @@ ca:
         payment_method_type: Forma de pagament
         iban: IBAN
         payment_method_id: Forma de pagament
+        over_18: Soc major de 18 anys
   decidim:
     form_builder:
       donate_tag:

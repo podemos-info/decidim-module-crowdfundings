@@ -9,6 +9,7 @@ module Decidim
       attribute :amount, Integer
       attribute :frequency, String
       attribute :payment_method_type, String
+      attribute :over_18, Boolean
 
       validates :amount,
                 presence: true,
@@ -16,6 +17,7 @@ module Decidim
 
       validates :frequency, presence: true
       validates :payment_method_type, presence: true
+      validates :over_18, presence: true
       validate :minimum_custom_amount
       validate :maximum_user_amount
 

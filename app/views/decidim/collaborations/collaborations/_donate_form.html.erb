@@ -1,6 +1,9 @@
 <%= decidim_form_for(@form,
                      url: confirm_collaboration_user_collaborations_path(collaboration),
                      html: { class: 'form new_user_collaboration' }) do |f| %>
+
+    <%= f.check_box :over_18, required: true %>
+    <br>
     <h2 class=section-heading><%=t '.select_amount' %></h2>
     <%= f.donate_tag :amount, collaboration.amounts %>
 

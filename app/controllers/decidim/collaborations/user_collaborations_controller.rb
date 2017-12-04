@@ -29,24 +29,27 @@ module Decidim
       # depending on the response response received through the
       # result attribute
       def validate
-        if params[:result] == 'ok'
-          user_collaboration.update_attributes(state: 'accepted')
-          flash[:notice] = I18n.t(
-            'user_collaborations.validate.success',
-            scope: 'decidim.collaborations'
-          )
-        end
-
-        if params[:result] == 'ko'
-          user_collaboration.update_attributes(state: 'rejected')
-          flash[:alert] = I18n.t(
-            'user_collaborations.validate.invalid',
-            scope: 'decidim.collaborations'
-          )
-        end
+        accept_user_collaboration if params[:result] == 'ok'
+        reject_user_collaboration if params[:result] == 'ko'
 
         redirect_to EngineRouter.main_proxy(current_feature)
                     .collaboration_path(collaboration)
+      end
+
+      def accept_user_collaboration
+        user_collaboration.update_attributes(state: 'accepted')
+        flash[:notice] = I18n.t(
+          'user_collaborations.validate.success',
+          scope: 'decidim.collaborations'
+        )
+      end
+
+      def reject_user_collaboration
+        user_collaboration.update_attributes(state: 'rejected')
+        flash[:alert] = I18n.t(
+          'user_collaborations.validate.invalid',
+          scope: 'decidim.collaborations'
+        )
       end
 
       def confirm
