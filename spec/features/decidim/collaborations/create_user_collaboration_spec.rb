@@ -29,6 +29,7 @@ describe 'Create user collaboration', type: :feature do
       find('label[for=amount_selector_other]').click
       fill_in :user_collaboration_amount, with: amount
       find(:css, "#user_collaboration_over_18[value='1']").set(true)
+      find(:css, "#user_collaboration_accept_terms_and_conditions[value='1']").set(true)
     end
   end
 

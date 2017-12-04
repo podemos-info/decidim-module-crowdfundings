@@ -41,6 +41,7 @@ ca:
         iban: IBAN
         payment_method_id: Forma de pagament
         over_18: Soc major de 18 anys
+        accept_terms_and_conditions: Accepte els termes i condicions
   decidim:
     form_builder:
       donate_tag:

@@ -14,6 +14,7 @@ module Decidim
       let(:payment_method_id) { nil }
       let(:iban) { nil }
       let(:over_18) { true }
+      let(:accept_terms_and_conditions) { true }
 
       let(:attributes) do
         {
@@ -22,7 +23,8 @@ module Decidim
           payment_method_type: payment_method_type,
           payment_method_id: payment_method_id,
           iban: iban,
-          over_18: true
+          over_18: true,
+          accept_terms_and_conditions: true
         }
       end
 

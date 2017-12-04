@@ -26,6 +26,7 @@ module Decidim
       let(:payment_method_id) { 1 }
       let(:iban) { nil }
       let(:over_18) { true }
+      let(:accept_terms_and_conditions) { true }
 
       let(:form) do
         ConfirmUserCollaborationForm
@@ -35,7 +36,8 @@ module Decidim
             payment_method_type: payment_method_type,
             payment_method_id: payment_method_id,
             iban: iban,
-            over_18: over_18
+            over_18: over_18,
+            accept_terms_and_conditions: accept_terms_and_conditions
           ).with_context(context)
       end
 
