@@ -27,9 +27,6 @@ And then execute:
 $ bundle
 $ bundle exec rails decidim_collaborations:install:migrations
 $ bundle exec rails db:migrate
-$ bundle exec rails generate iban_bic:install
-$ bundle exec rails db:migrate
-$ bundle exec rails iban_bic:load_data
 ```
 
 ## Tests
@@ -38,7 +35,6 @@ In order to execute the tests data from iban_bic gem must be populated as well:
 
 ```bash
 $ bundle exec rails db:migrate RAILS_ENV=test
-$ bundle exec rails iban_bic:load_data RAILS_ENV=test
 ```
 
 ## Docker & Docker compose
