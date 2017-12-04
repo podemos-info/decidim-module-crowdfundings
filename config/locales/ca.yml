@@ -140,6 +140,8 @@ ca:
           select_frequency: Sel·lecciona la frequència
           select_payment_method: Sel·lecciona la forma de pagament
           donate: Donar suport
+        sign_in:
+          donate: Donar suport
       user_collaborations:
         create:
           invalid: L'operació ha fallat.

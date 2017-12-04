@@ -17,7 +17,7 @@ module Decidim
 
           can :donate, Collaboration do |collaboration|
             collaboration.accepts_donations? &&
-              current_settings.collaborations_allowed? &&
+              current_settings&.collaborations_allowed? &&
               Census::API::Totals.user_totals(user.id) < Decidim::Collaborations.maximum_annual_collaboration
           end
 

@@ -8,6 +8,8 @@
     <%= render 'decidim/collaborations/collaborations/totals', user: nil %>
     <% if user_signed_in? %>
       <%= render 'decidim/collaborations/collaborations/totals', user: current_user %>
+    <% else %>
+      <%= render 'decidim/collaborations/collaborations/sign_in', collaboration: collaboration %>
     <% end %>
   </div>
 
@@ -18,7 +20,7 @@
     <div class="section">
       <%= sanitize translated_attribute collaboration.description %>
     </div>
-    <% if can? :donate, collaboration %>
+    <% if user_signed_in? && can?(:donate, collaboration) %>
       <%= render 'decidim/collaborations/collaborations/terms_and_conditions' %>
       <div class="section">
         <%= render 'decidim/collaborations/collaborations/donate_form' %>

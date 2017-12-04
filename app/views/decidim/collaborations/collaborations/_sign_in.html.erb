@@ -1,0 +1,8 @@
+<div class="definition-data__item vote-block">
+  <% if can? :donate, collaboration %>
+    <%= action_authorized_link_to :donate, collaboration_path(collaboration),
+                                  class: "card__button button expanded button--sc" do %>
+      <%= t('.donate') %>
+    <% end %>
+  <% end %>
+</div>

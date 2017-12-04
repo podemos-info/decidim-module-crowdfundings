@@ -30,6 +30,7 @@ module Decidim
         Decidim.configure do |config|
           config.abilities += %w[
             Decidim::Collaborations::Abilities::CurrentUserAbility
+            Decidim::Collaborations::Abilities::GuestUserAbility
           ]
         end
       end
