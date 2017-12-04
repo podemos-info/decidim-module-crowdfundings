@@ -26,6 +26,7 @@ describe 'Confirm collaboration', type: :feature do
     within '.new_user_collaboration' do
       find('label[for=amount_selector_other]').click
       fill_in :user_collaboration_amount, with: amount
+      find(:css, "#user_collaboration_over_18[value='1']").set(true)
     end
   end
 

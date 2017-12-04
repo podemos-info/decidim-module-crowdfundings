@@ -40,6 +40,7 @@ en:
         payment_method_type: Payment method
         iban: IBAN
         payment_method_id: Payment method
+        over_18: I'm over 18
   decidim:
     form_builder:
       donate_tag:

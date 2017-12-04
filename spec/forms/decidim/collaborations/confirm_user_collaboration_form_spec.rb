@@ -13,6 +13,7 @@ module Decidim
       let(:payment_method_type) { 'credit_card_external' }
       let(:payment_method_id) { nil }
       let(:iban) { nil }
+      let(:over_18) { true }
 
       let(:attributes) do
         {
@@ -20,7 +21,8 @@ module Decidim
           frequency: frequency,
           payment_method_type: payment_method_type,
           payment_method_id: payment_method_id,
-          iban: iban
+          iban: iban,
+          over_18: true
         }
       end
 

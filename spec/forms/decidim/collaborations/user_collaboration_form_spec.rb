@@ -12,11 +12,13 @@ module Decidim
       let(:frequency) { 'punctual' }
       let(:payment_method_type) { 'existing_payment_method' }
       let(:user_annual_accumulated) { 0 }
+      let(:over_18) { true }
       let(:attributes) do
         {
           amount: amount,
           frequency: frequency,
-          payment_method_type: payment_method_type
+          payment_method_type: payment_method_type,
+          over_18: over_18
         }
       end
 
@@ -76,6 +78,11 @@ module Decidim
 
       context 'when payment method is missing' do
         let(:payment_method_type) { nil }
+        it { is_expected.not_to be_valid }
+      end
+
+      context 'over 18 is missing' do
+        let(:over_18) { nil }
         it { is_expected.not_to be_valid }
       end
     end
