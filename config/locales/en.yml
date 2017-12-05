@@ -147,6 +147,8 @@ en:
           select_frequency: Select the frequency
           select_payment_method: Select the payment method
           donate: Support
+        sign_in:
+          donate: Support
       user_collaborations:
         create:
           invalid: Operation failed.

@@ -1,0 +1,8 @@
+<% if can? :donate, collaboration %>
+  <div class="definition-data__item sign-in-block">
+    <%= action_authorized_link_to :donate, collaboration_path(collaboration),
+                                  class: "card__button button expanded button--sc" do %>
+      <%= t('.donate') %>
+    <% end %>
+  </div>
+<% end %>

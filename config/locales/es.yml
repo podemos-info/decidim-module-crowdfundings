@@ -147,6 +147,8 @@ es:
           select_frequency: Seleccciona la frequencia
           select_payment_method: Selecciona la forma de pago
           donate: Apoyar
+        sign_in:
+          donate: Apoyar
       user_collaborations:
         create:
           invalid: Falló la operación.
