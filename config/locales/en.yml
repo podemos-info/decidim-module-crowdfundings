@@ -62,6 +62,11 @@ en:
           monthly: Monthly
           quarterly: Quarterly
           annual: Annual
+        donate_status:
+          collaboration_not_allowed: Collaboration is not allowed at this moment.
+          maximum_annual_exceeded: You can not create more collaborations. You have reached the maximum yearly allowed.
+          support_period_finished: The period for accepting collaborations has expired.
+          objective_reached: The target amount has been reached. This campaign do not accepts more collaborations.
         payment_method_types:
           existing_payment_method: Existing payment method
           direct_debit: Direct debit

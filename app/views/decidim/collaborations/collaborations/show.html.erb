@@ -23,6 +23,12 @@
       <div class="section">
         <%= render 'decidim/collaborations/collaborations/donate_form' %>
       </div>
+    <% else %>
+      <% if user_signed_in? %>
+        <div class="callout alert">
+          <%= donate_status_message %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

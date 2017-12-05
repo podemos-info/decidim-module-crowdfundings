@@ -14,6 +14,7 @@ module Decidim
       def self.enhance_controller(instance_or_module)
         instance_or_module.class_eval do
           helper_method :collaboration
+          helper_method :donate_status_message
 
           helper Decidim::Collaborations::Admin::CollaborationsHelper
           helper Decidim::Collaborations::CollaborationsHelper
@@ -30,7 +31,37 @@ module Decidim
           @collaboration ||= detect_collaboration
         end
 
+        # Public: Returns the reason why collaboration is not allowed.
+        def donate_status_message
+          if maximum_per_year_reached?
+            return I18n.t 'decidim.collaborations.labels.donate_status.maximum_annual_exceeded'
+          end
+
+          if target_amount_reached?
+            return I18n.t 'decidim.collaborations.labels.donate_status.objective_reached'
+          end
+
+          if out_of_collaboration_period?
+            return I18n.t 'decidim.collaborations.labels.donate_status.support_period_finished'
+          end
+
+          I18n.t 'decidim.collaborations.labels.donate_status.collaboration_not_allowed'
+        end
+
         private
+
+        def target_amount_reached?
+          collaboration.percentage && collaboration.percentage >= 100.0
+        end
+
+        def maximum_per_year_reached?
+          user_totals = Census::API::Totals.user_totals(current_user.id)
+          user_totals && user_totals >= Decidim::Collaborations.maximum_annual_collaboration
+        end
+
+        def out_of_collaboration_period?
+          collaboration.active_until && collaboration.active_until < Date.today
+        end
 
         def detect_collaboration
           request.env['current_collaboration'] ||

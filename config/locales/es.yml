@@ -62,6 +62,11 @@ es:
           monthly: Mensual
           quarterly: Trimestral
           annual: Anual
+        donate_status:
+          collaboration_not_allowed: La colaboración no está permitida en estos momentos.
+          maximum_annual_exceeded: No puedes realizar mas colaboraciones. Has alcanzado el máximo anual permitido.
+          support_period_finished: El periodo para realizar colaboraciones ha concluido.
+          objective_reached: Se ha alcanzado el objetivo para la campaña. No se admiten mas colaboraciones.
         payment_method_types:
           existing_payment_method: Método de pago existente
           direct_debit: Débito directo
