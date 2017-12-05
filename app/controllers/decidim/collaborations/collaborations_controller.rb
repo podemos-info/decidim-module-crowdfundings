@@ -29,7 +29,7 @@ module Decidim
 
       def initialize_form_defaults
         @form.amount = collaboration.default_amount
-        @form.frequency = if collaboration.recurrent_donation_allowed?
+        @form.frequency = if collaboration.recurrent_support_allowed?
                             Decidim::Collaborations.default_frequency
                           else
                             'punctual'

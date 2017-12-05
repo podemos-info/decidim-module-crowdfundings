@@ -30,7 +30,7 @@ module Census
       end
 
       # PUBLIC Return User totals in the context of the given campaign.
-      # Returns the amount donated by the user for the given campaign. Nil in
+      # Returns the amount supported by the user for the given campaign. Nil in
       # case an error occurs.
       def self.user_campaign_totals(user_id, campaign_id)
         response = totals_request(person_id: user_id, campaign_code: campaign_id)

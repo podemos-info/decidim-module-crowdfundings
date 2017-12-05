@@ -19,32 +19,32 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
                                   .and_return(collaborations_allowed)
   end
 
-  context 'donate to collaboration' do
+  context 'support collaboration' do
     context 'collaboration allowed' do
       let(:collaborations_allowed) { true }
 
-      it 'let the user donate when collaboration accepts donations' do
-        expect(collaboration).to receive(:accepts_donations?).and_return(true)
-        expect(subject).to be_able_to(:donate, collaboration)
+      it 'let the user support when collaboration accepts supports' do
+        expect(collaboration).to receive(:accepts_supports?).and_return(true)
+        expect(subject).to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user donate when collaboration do not accepts donations' do
-        expect(collaboration).to receive(:accepts_donations?).and_return(false)
-        expect(subject).not_to be_able_to(:donate, collaboration)
+      it 'Do not let the user support when collaboration do not accepts supports' do
+        expect(collaboration).to receive(:accepts_supports?).and_return(false)
+        expect(subject).not_to be_able_to(:support, collaboration)
       end
     end
 
     context 'collaboration not allowed' do
       let(:collaborations_allowed) { false }
 
-      it 'do not let the user donate when collaboration accepts donations' do
-        expect(collaboration).to receive(:accepts_donations?).and_return(true)
-        expect(subject).not_to be_able_to(:donate, collaboration)
+      it 'do not let the user support when collaboration accepts supports' do
+        expect(collaboration).to receive(:accepts_supports?).and_return(true)
+        expect(subject).not_to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user donate when collaboration do not accepts donations' do
-        expect(collaboration).to receive(:accepts_donations?).and_return(false)
-        expect(subject).not_to be_able_to(:donate, collaboration)
+      it 'Do not let the user support when collaboration do not accepts supports' do
+        expect(collaboration).to receive(:accepts_supports?).and_return(false)
+        expect(subject).not_to be_able_to(:support, collaboration)
       end
     end
 
@@ -52,39 +52,39 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
       context 'User is in the limit' do
         let(:user_annual_accumulated) { Decidim::Collaborations.maximum_annual_collaboration }
 
-        it 'User is not allowed to donate' do
-          expect(subject).not_to be_able_to(:donate, collaboration)
+        it 'User is not allowed to support' do
+          expect(subject).not_to be_able_to(:support, collaboration)
         end
       end
 
       context 'User is under the limit' do
         let(:user_annual_accumulated) { 0 }
 
-        it 'User is allowed to donate' do
-          expect(subject).to be_able_to(:donate, collaboration)
+        it 'User is allowed to support' do
+          expect(subject).to be_able_to(:support, collaboration)
         end
       end
     end
   end
 
-  context 'donate_recurrently' do
-    context 'First user recurrent collaboration' do
+  context 'support_recurrently' do
+    context 'First user recurrent support' do
       before do
-        allow(collaboration).to receive(:recurrent_donation_allowed?).and_return(true)
+        allow(collaboration).to receive(:recurrent_support_allowed?).and_return(true)
       end
 
-      it 'User can do a recurrent donation' do
-        expect(subject).to be_able_to(:donate_recurrently, collaboration)
+      it 'User can do a recurrent support' do
+        expect(subject).to be_able_to(:support_recurrently, collaboration)
       end
     end
 
-    context 'User already has a recurrent collaboration' do
+    context 'User already has a recurrent support' do
       let!(:user_collaboration) do
         create(:user_collaboration, :monthly, :accepted, collaboration: collaboration)
       end
 
-      it 'User can not do a recurrent donation' do
-        expect(subject).not_to be_able_to(:donate_recurrently, collaboration)
+      it 'User can not do a recurrent support' do
+        expect(subject).not_to be_able_to(:support_recurrently, collaboration)
       end
     end
   end

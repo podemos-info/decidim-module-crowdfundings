@@ -23,8 +23,8 @@ module Decidim
         @total_collected ||= Census::API::Totals.campaign_totals(id)
       end
 
-      # PUBLIC Returns true if the collaboration campaign accepts donations.
-      def accepts_donations?
+      # PUBLIC Returns true if the collaboration campaign accepts supports.
+      def accepts_supports?
         collected = total_collected || target_amount
 
         feature.participatory_space.published? &&
@@ -32,7 +32,7 @@ module Decidim
           (target_amount > collected)
       end
 
-      # PUBLIC returns the percentage of funds donated with regards to
+      # PUBLIC returns the percentage of funds supported with regards to
       # the total collected
       def percentage
         census_total_collected = total_collected
@@ -43,7 +43,7 @@ module Decidim
         result
       end
 
-      # PUBLIC returns the percentage of funds donated by a user
+      # PUBLIC returns the percentage of funds supported by a user
       # with regards to the total collected.
       def user_percentage(user)
         census_user_total_collected = user_total_collected(user)
@@ -54,13 +54,13 @@ module Decidim
         result
       end
 
-      # PUBLIC returns the amount donated by a user
+      # PUBLIC returns the amount supported by a user
       def user_total_collected(user)
         Census::API::Totals.user_campaign_totals(user.id, id)
       end
 
-      # PUBLIC returns whether recurrent donations are allowed or not.
-      def recurrent_donation_allowed?
+      # PUBLIC returns whether recurrent supports are allowed or not.
+      def recurrent_support_allowed?
         feature&.participatory_space_type == 'Decidim::Assembly'
       end
     end

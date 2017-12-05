@@ -23,7 +23,7 @@
     <% if user_signed_in? && can?(:donate, collaboration) %>
       <%= render 'decidim/collaborations/collaborations/terms_and_conditions' %>
       <div class="section">
-        <%= render 'decidim/collaborations/collaborations/donate_form' %>
+        <%= render 'decidim/collaborations/collaborations/support_form' %>
       </div>
     <% else %>
       <% if user_signed_in? %>

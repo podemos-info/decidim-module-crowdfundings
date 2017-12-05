@@ -44,7 +44,7 @@ ca:
         accept_terms_and_conditions: Accepte els termes i condicions
   decidim:
     form_builder:
-      donate_tag:
+      support_tag:
         other: Altres
     features:
       collaborations:
@@ -136,13 +136,13 @@ ca:
         filters:
           search: Cerca
         collaboration:
-          donate: Donar suport
+          support: Donar suport
         totals:
           overall_totals: Acumulat
           user_totals: Usuari
           target_amount: "Objetiu: %{amount}"
           overall_percentage: Percentatge total
-        donate_form:
+        support_form:
           select_amount: Sel·lecciona la quantitat
           select_frequency: Sel·lecciona la frequència
           select_payment_method: Sel·lecciona la forma de pagament

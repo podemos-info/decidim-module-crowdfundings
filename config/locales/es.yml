@@ -44,7 +44,7 @@ es:
         accept_terms_and_conditions: Acepto los términos y condiciones
   decidim:
     form_builder:
-      donate_tag:
+      support_tag:
         other: Otros
     features:
       collaborations:
@@ -136,13 +136,13 @@ es:
         filters:
           search: Buscar
         collaboration:
-          donate: Apoyar
+          support: Apoyar
         totals:
           overall_totals: Acumulado
           user_totals: Usuario
           target_amount: "Objetivo: %{amount}"
           overall_percentage: Porcentaje total
-        donate_form:
+        support_form:
           select_amount: Seleccciona la cantidad
           select_frequency: Seleccciona la frequencia
           select_payment_method: Selecciona la forma de pago
