@@ -23,6 +23,20 @@ module Census
         Rails.logger.debug "Request to /api/v1/payments/payment_methods failed with code #{e.response.code}: #{e.response.message}"
         []
       end
+
+      # PUBLIC retrieve the details for the given payment method
+      def self.payment_method(id)
+        response = get(
+          '/api/v1/payments/payment_method',
+          query: { id: id }
+        )
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        json_response[:http_response_code] = response.code.to_i
+
+        json_response
+      rescue StandardError => e
+        { http_response_code: e.response.code.to_i }
+      end
     end
   end
 end

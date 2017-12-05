@@ -49,6 +49,21 @@ module CensusTestHelpers
                                            .and_raise(service_unavailable_exception)
   end
 
+  def stub_payment_method_service_down
+    allow(::Census::API::PaymentMethod).to receive(:get)
+                                             .with('/api/v1/payments/payment_method', anything)
+                                             .and_raise(service_unavailable_exception)
+  end
+
+  def stub_payment_method(payment_method)
+    stub_request(:get, %r{/api/v1/payments/payment_method})
+      .to_return(
+        status: 200,
+        body: payment_method.to_json,
+        headers: {}
+      )
+  end
+
   def stub_orders(http_response_code, json)
     stub_request(:post, %r{/api/v1/payments/orders})
       .to_return(

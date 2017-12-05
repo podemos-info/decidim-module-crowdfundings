@@ -16,29 +16,41 @@ module Decidim
 
       subject { described_class.new(user_collaboration) }
 
-      context 'when the form is not valid' do
-        before do
-          expect(subject).to receive(:valid?).and_return(false)
+      context 'valid?' do
+        context 'Collaboration do not accepts supports' do
+          before do
+            allow(user_collaboration.collaboration).to receive(:accepts_supports?).and_return(false)
+          end
+
+          it 'is not valid' do
+            expect { subject.call }.to broadcast(:invalid)
+          end
         end
 
-        it 'is not valid' do
-          expect { subject.call }.to broadcast(:invalid)
+        context 'Census API is down' do
+          before do
+            stub_totals_service_down
+          end
+
+          it 'is not valid' do
+            expect { subject.call }.to broadcast(:invalid)
+          end
+        end
+
+        context 'User has reached the maximum allowed' do
+          before do
+            stub_totals_request(Decidim::Collaborations.maximum_annual_collaboration)
+          end
+
+          it 'is not valid' do
+            expect { subject.call }.to broadcast(:invalid)
+          end
         end
       end
 
       context 'Census service is down' do
-        let(:response) do
-          Net::HTTPServiceUnavailable.new('1.1', 503, 'Service Unavailable')
-        end
-
-        let(:exception) do
-          Net::HTTPFatalError.new('503 Service Unavailable', response)
-        end
-
         before do
-          allow(::Census::API::Order).to receive(:post)
-                                           .with('/api/v1/payments/orders', anything)
-                                           .and_raise(exception)
+          stub_orders_service_down
         end
 
         it 'do not updates the collaboration' do
@@ -54,12 +66,8 @@ module Decidim
 
       context 'Census API rejects the request' do
         before do
-          stub_request(:post, %r{/api/v1/payments/orders})
-            .to_return(
-              status: 422,
-              body: { errorCode: 1, errorMessage: 'Error message'}.to_json,
-              headers: {}
-            )
+          stub_totals_request(0)
+          stub_orders(422, { errorCode: 1, errorMessage: 'Error message'})
         end
 
         it 'do not updates the collaboration' do
@@ -79,13 +87,8 @@ module Decidim
         end
 
         before do
-          stub_request(:post, %r{/api/v1/payments/orders})
-            .to_return(
-              status: 201,
-              body: json.to_json,
-              headers: {}
-            )
-
+          stub_orders(201, json)
+          stub_totals_request(0)
           subject.call
           user_collaboration.reload
         end

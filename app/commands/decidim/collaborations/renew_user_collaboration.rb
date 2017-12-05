@@ -29,9 +29,13 @@ module Decidim
       private
 
       def valid?
-        # TODO: pending until resolution of issue #17
-        # Validate: Collaboration accepts supports.
-        # User do not overpasses the maximum allowed
+        return false unless user_collaboration.collaboration.accepts_supports?
+
+        user_totals = Census::API::Totals.user_totals(user_collaboration.user.id)
+        return false if user_totals.nil?
+
+        return false if user_totals >= Decidim::Collaborations.maximum_annual_collaboration
+
         true
       end
 
