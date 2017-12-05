@@ -63,7 +63,7 @@ es:
           monthly: Mensual
           quarterly: Trimestral
           annual: Anual
-        donate_status:
+        support_status:
           collaboration_not_allowed: La colaboración no está permitida en estos momentos.
           maximum_annual_exceeded: No puedes realizar mas colaboraciones. Has alcanzado el máximo anual permitido.
           support_period_finished: El periodo para realizar colaboraciones ha concluido.
@@ -146,9 +146,9 @@ es:
           select_amount: Seleccciona la cantidad
           select_frequency: Seleccciona la frequencia
           select_payment_method: Selecciona la forma de pago
-          donate: Apoyar
+          support: Apoyar
         sign_in:
-          donate: Apoyar
+          support: Apoyar
       user_collaborations:
         create:
           invalid: Falló la operación.

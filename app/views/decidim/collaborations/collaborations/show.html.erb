@@ -20,7 +20,7 @@
     <div class="section">
       <%= sanitize translated_attribute collaboration.description %>
     </div>
-    <% if user_signed_in? && can?(:donate, collaboration) %>
+    <% if user_signed_in? && can?(:support, collaboration) %>
       <%= render 'decidim/collaborations/collaborations/terms_and_conditions' %>
       <div class="section">
         <%= render 'decidim/collaborations/collaborations/support_form' %>
@@ -28,7 +28,7 @@
     <% else %>
       <% if user_signed_in? %>
         <div class="callout alert">
-          <%= donate_status_message %>
+          <%= support_status_message %>
         </div>
       <% end %>
     <% end %>
