@@ -8,9 +8,9 @@
   </div>
 
   <h2 class=section-heading><%=t '.select_amount' %></h2>
-  <%= f.donate_tag :amount, collaboration.amounts %>
+  <%= f.support_tag :amount, collaboration.amounts %>
 
-  <% if can? :donate_recurrently, collaboration %>
+  <% if can? :support_recurrently, collaboration %>
     <br>
     <h2 class=section-heading><%=t '.select_frequency' %></h2>
     <div class="radio-selector">
@@ -51,7 +51,7 @@
   <% end %>
 
   <div class="form-general-submit">
-    <%= f.submit t('.donate'), class: 'button secondary donate' %>
+    <%= f.submit t('.support'), class: 'button secondary support' %>
   </div>
 <% end %>
 

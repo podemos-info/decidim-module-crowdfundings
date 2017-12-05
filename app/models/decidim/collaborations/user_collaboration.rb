@@ -21,7 +21,7 @@ module Decidim
         greater_than: 0
       }
 
-      scope :donated_by, ->(user) { where(user: user) }
+      scope :supported_by, ->(user) { where(user: user) }
       scope :is_accepted, -> { where(state: 'accepted') }
       scope :monthly_frequency, lambda {
         where(frequency: 'monthly')

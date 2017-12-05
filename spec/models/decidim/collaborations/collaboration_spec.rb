@@ -16,7 +16,7 @@ module Decidim
         it { is_expected.not_to be_valid }
       end
 
-      context 'accepts_donations?' do
+      context 'accepts_supports?' do
         let(:active_until) { nil }
         let(:target_amount) { 10_000 }
         let(:total_collected) { 0 }
@@ -34,7 +34,7 @@ module Decidim
           let(:active_until) { DateTime.now - 1.day }
 
           it 'returns false' do
-            expect(collaboration.accepts_donations?).to be_falsey
+            expect(collaboration.accepts_supports?).to be_falsey
           end
         end
 
@@ -42,7 +42,7 @@ module Decidim
           let(:total_collected) { target_amount }
 
           it 'returns false' do
-            expect(collaboration.accepts_donations?).to be_falsey
+            expect(collaboration.accepts_supports?).to be_falsey
           end
         end
 
@@ -52,7 +52,7 @@ module Decidim
           end
 
           it 'returns false' do
-            expect(collaboration.accepts_donations?).to be_falsey
+            expect(collaboration.accepts_supports?).to be_falsey
           end
         end
 
@@ -170,20 +170,20 @@ module Decidim
         end
       end
 
-      context 'recurrent_donation_allowed?' do
+      context 'recurrent_support_allowed?' do
         let(:collaboration) { create :collaboration }
 
         context 'assemblies' do
           let(:collaboration) { create :collaboration, :assembly }
 
-          it 'accept recurrent donations' do
-            expect(subject).to  be_recurrent_donation_allowed
+          it 'accept recurrent supports' do
+            expect(subject).to  be_recurrent_support_allowed
           end
         end
 
         context 'participatory process' do
-          it "don't accept recurrent donations" do
-            expect(subject).not_to  be_recurrent_donation_allowed
+          it "don't accept recurrent supports" do
+            expect(subject).not_to  be_recurrent_support_allowed
           end
         end
       end

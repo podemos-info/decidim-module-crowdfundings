@@ -15,15 +15,15 @@ module Decidim
           @user = user
           @context = context
 
-          can :donate, Collaboration do |collaboration|
-            collaboration.accepts_donations? &&
-              current_settings&.collaborations_allowed? &&
+          can :support, Collaboration do |collaboration|
+            collaboration.accepts_supports? &&
+              current_settings.collaborations_allowed? &&
               Census::API::Totals.user_totals(user.id) < Decidim::Collaborations.maximum_annual_collaboration
           end
 
-          can :donate_recurrently, Collaboration do |collaboration|
-            collaboration.recurrent_donation_allowed? &&
-              collaboration.user_collaborations.donated_by(user).none?
+          can :support_recurrently, Collaboration do |collaboration|
+            collaboration.recurrent_support_allowed? &&
+              collaboration.user_collaborations.supported_by(user).none?
           end
         end
 

@@ -7,7 +7,7 @@ module Decidim
       include ::ActionView::Helpers::FormTagHelper
       include ::ActionView::Helpers::NumberHelper
 
-      def donate_tag(name, amounts)
+      def support_tag(name, amounts)
         amount_selector_tag(name, amounts) + amount_input_tag(name)
       end
 
@@ -29,7 +29,7 @@ module Decidim
 
         content_tag :label, for: "#{name}_selector_other" do
           concat radio_button_tag "#{name}_selector".to_sym, 'other', checked
-          concat amount_label(I18n.t('donate_tag.other', scope: 'decidim.form_builder'))
+          concat amount_label(I18n.t('support_tag.other', scope: 'decidim.form_builder'))
         end
       end
 

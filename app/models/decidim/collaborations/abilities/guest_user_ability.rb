@@ -15,8 +15,8 @@ module Decidim
 
           @context = context
 
-          can :donate, Collaboration do |collaboration|
-            collaboration.accepts_donations? &&
+          can :support, Collaboration do |collaboration|
+            collaboration.accepts_supports? &&
               current_settings&.collaborations_allowed?
           end
         end
