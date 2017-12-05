@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Create user collaboration', type: :feature do
-  include_context 'feature'
+  include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
   let!(:collaboration) { create(:collaboration, feature: feature) }
   let(:user) { create(:user, :confirmed, organization: organization) }
@@ -47,6 +47,8 @@ describe 'Create user collaboration', type: :feature do
         within '.confirm_user_collaboration' do
           find('*[type=submit]').click
         end
+
+        page.driver.browser.switch_to.alert.accept
       end
 
       it 'Finish with success message' do
@@ -66,6 +68,8 @@ describe 'Create user collaboration', type: :feature do
         within '.confirm_user_collaboration' do
           fill_in :user_collaboration_iban, with: iban
           find('*[type=submit]').click
+
+          page.driver.browser.switch_to.alert.accept
         end
       end
 
@@ -109,12 +113,15 @@ describe 'Create user collaboration', type: :feature do
       within '.confirm_user_collaboration' do
         find('*[type=submit]').click
       end
+
+      page.driver.browser.switch_to.alert.accept
     end
 
-    it 'Contains a form that redirects to payment platform' do
-      form = find('#census-form')&.native
-      expect(form).not_to be_nil
-      expect(form.attributes['action']).to eq(order_response_json[:form][:action])
+    it 'Redirects to payment platform' do
+      expect(page).to have_content('Importe')
+      expect(page).to have_content('Código Comercio')
+      expect(page).to have_content('Terminal')
+      expect(page).to have_content('Número pedido')
     end
   end
 end

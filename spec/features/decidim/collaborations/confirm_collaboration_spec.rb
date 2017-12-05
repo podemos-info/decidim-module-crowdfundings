@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Confirm collaboration', type: :feature do
-  include_context 'feature'
+  include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
   let!(:collaboration) { create(:collaboration, feature: feature) }
   let(:user) { create(:user, :confirmed, organization: organization) }
