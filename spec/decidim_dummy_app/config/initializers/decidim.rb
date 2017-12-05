@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.application_name = 'Collaborations test app'
-  config.mailer_sender = 'change-me@domain.org'
-  config.authorization_handlers = ['Decidim::DummyAuthorizationHandler']
+  config.application_name = "My Application Name"
+  config.mailer_sender = "change-me@domain.org"
 
   # Change these lines to set your preferred locales
   config.default_locale = :en
-  config.available_locales = %i[en ca es]
+  config.available_locales = [:en, :ca, :es]
 
   # Geocoder configuration
   # config.geocoder = {
