@@ -23,6 +23,7 @@ module Decidim
 
       scope :supported_by, ->(user) { where(user: user) }
       scope :is_accepted, -> { where(state: 'accepted') }
+      scope :is_pending, -> { where(state: 'pending') }
       scope :monthly_frequency, lambda {
         where(frequency: 'monthly')
           .where(

@@ -5,43 +5,82 @@ require 'spec_helper'
 module Census
   module API
     describe PaymentMethod do
-      let(:person_id) { 1 }
-      let(:result) { ::Census::API::PaymentMethod.for_user(person_id) }
+      context 'Payment methods' do
+        let(:person_id) { 1 }
+        let(:result) { ::Census::API::PaymentMethod.for_user(person_id) }
 
-      context 'Communication error' do
-        before do
-          stub_payment_methods_service_down
+        context 'Communication error' do
+          before do
+            stub_payment_methods_service_down
+          end
+
+          it 'Returns structure with error code and message' do
+            expect(result).to be_empty
+          end
         end
 
-        it 'Returns structure with error code and message' do
-          expect(result).to be_empty
+        context 'Error response' do
+          before do
+            stub_payment_methods_error
+          end
+
+          it 'Returns structure with error code and message' do
+            expect(result).to be_empty
+          end
+        end
+
+        context 'Successful response' do
+          let(:payment_methods) do
+            [
+              { id: 1, name: 'Payment method 1'},
+              { id: 2, name: 'Payment method 2'}
+            ]
+          end
+
+          before do
+            stub_payment_methods(payment_methods)
+          end
+
+          it 'returns the list of payment methods' do
+            expect(result).to eq(payment_methods)
+          end
         end
       end
 
-      context 'Error response' do
-        before do
-          stub_payment_methods_error
+      context 'Payment method' do
+        let(:result) { ::Census::API::PaymentMethod.payment_method(1) }
+
+        context 'Communication error' do
+          before do
+            stub_payment_method_service_down
+          end
+
+          it 'Returns structure with error code and message' do
+            expect(result).to have_key(:http_response_code)
+            expect(result[:http_response_code]).not_to eq(200)
+          end
         end
 
-        it 'Returns structure with error code and message' do
-          expect(result).to be_empty
-        end
-      end
+        context 'Successful response' do
+          let(:payment_method) do
+            {
+              id: 1,
+              name: 'Existing payment method',
+              type: 'PaymentMethods::DirectDebit',
+              status: 'active'
+            }
+          end
 
-      context 'Successful response' do
-        let(:payment_methods) do
-          [
-            { id: 1, name: 'Payment method 1'},
-            { id: 2, name: 'Payment method 2'}
-          ]
-        end
+          before do
+            stub_payment_method(payment_method)
+          end
 
-        before do
-          stub_payment_methods(payment_methods)
-        end
+          it 'returns the list of payment methods' do
+            expect(result).to have_key(:http_response_code)
+            expect(result[:http_response_code]).to eq(200)
 
-        it 'returns the list of payment methods' do
-          expect(result).to eq(payment_methods)
+            expect(result.except(:http_response_code)).to eq(payment_method)
+          end
         end
       end
     end

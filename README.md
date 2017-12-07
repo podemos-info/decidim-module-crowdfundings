@@ -79,5 +79,13 @@ This engine provides the following rake tasks:
 This task collects all recurrent collaborations that need to be renewed. Ideally it
 should be automatically executed at least once per month.
 
+### decidim_collaborations:update_status
+
+This task collects all user collaborations in pending status. Then proceeds querying
+Census about the payment method status. According to Census response the collaboration will
+be accepted or rejected. This process should be executed several times per month, ideally on 
+periods of low load. It should be executed at least once before the *decidim_collaborations:recurrent_collaborations*
+is executed.
+
 ## License
 This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
