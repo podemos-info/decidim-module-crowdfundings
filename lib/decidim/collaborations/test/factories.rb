@@ -81,5 +81,9 @@ FactoryBot.define do
     trait :rejected do
       state 'rejected'
     end
+
+    trait :paused do
+      state 'paused'
+    end
   end
 end

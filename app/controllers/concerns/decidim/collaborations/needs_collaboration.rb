@@ -16,7 +16,6 @@ module Decidim
           helper_method :collaboration
           helper_method :support_status_message
 
-          helper Decidim::Collaborations::Admin::CollaborationsHelper
           helper Decidim::Collaborations::CollaborationsHelper
           helper Decidim::Collaborations::TotalsHelper
         end

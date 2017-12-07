@@ -10,6 +10,7 @@ module Decidim
       # override its layout and provide all kinds of useful methods.
       class ApplicationController < Decidim::Admin::Features::BaseController
         helper_method :collaborations, :collaboration
+        helper Decidim::Collaborations::CollaborationsHelper
 
         def collaborations
           @collaborations ||= Collaboration

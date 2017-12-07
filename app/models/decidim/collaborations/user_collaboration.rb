@@ -12,7 +12,7 @@ module Decidim
                  class_name: 'Decidim::User',
                  foreign_key: 'decidim_user_id'
 
-      enum state: %i[pending accepted rejected]
+      enum state: %i[pending accepted rejected paused]
       enum frequency: %i[punctual monthly quarterly annual]
 
       validates :state, presence: true

@@ -43,6 +43,8 @@ ca:
         over_18: Soc major de 18 anys
         accept_terms_and_conditions: Accepte els termes i condicions
   decidim:
+    menu:
+      collaborations: Col·laboracions
     form_builder:
       support_tag:
         other: Altres
@@ -72,12 +74,20 @@ ca:
           existing_payment_method: Forma de pagament existent
           direct_debit: Dèbit directe
           credit_card_external: Targeta de crèdit
+        user_collaboration:
+          states:
+            pending: Pendent
+            accepted: Acceptadd
+            rejected: Rebutjada
+            paused: Suspesa
       actions:
         title: Acciones
         preview: Previsualitzar
         edit: Editar
         destroy: Esborrar
         confirm_destroy: ¿Estas segur?
+        pause: Suspendre
+        resume: Rependre
       models:
         collaboration:
           fields:
@@ -161,3 +171,21 @@ ca:
           confirm: Confirmar
           are_you_sure: ¿Estas segur?
           fill_required_data: Completa els següents camps
+      user_profile:
+        user_collaborations:
+          index:
+            title: Les teves col·laboracions periòdiques
+            no_records_found: No s'hi han trobat col·laboracions
+          pause:
+            success: La teva col·laboració s'hi ha suspes satisfactoriament.
+            fail: No s'hi ha pogut suspendre la col·laboració.
+          resume:
+            success: La teva col·laboració s'hi ha repres satisfactoriament.
+            fail: No s'hi ha pogut rependre la col·laboració.
+          edit:
+            select_amount: Sel·lecciona la quantitat
+            select_frequency: Sel·lecciona la frequència
+            update: Actualitza
+          update:
+            success: La teva col·laboració s'ha actualitzat satisfactoriament.
+            fail: No s'ha pogut actualitzar la col·laboració.

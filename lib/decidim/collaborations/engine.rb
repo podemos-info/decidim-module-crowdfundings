@@ -2,14 +2,21 @@
 
 require 'rails'
 require 'active_support/all'
-
 require 'decidim/core'
+# require 'decidim/colllaborations/user_profile_engine'
 
 module Decidim
   module Collaborations
     # Decidim's Collaborations Rails Engine.
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::Collaborations
+
+      # TODO: Repace this by global routes feature that will be released in decidim 0.8.1
+      initializer "decidim_collaborations_user_profile.mount_routes" do |_app|
+        Decidim::Core::Engine.routes do
+          mount Decidim::Collaborations::UserProfileEngine => '/collaborations'
+        end
+      end
 
       routes do
         resources :collaborations, only: %i[index show] do
