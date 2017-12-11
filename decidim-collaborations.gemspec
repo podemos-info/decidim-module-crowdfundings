@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/podemos-info/decidim-module-crowdfundings'
   s.required_ruby_version = '>= 2.3.1'
 
-  s.name = 'decidim-module-crowdfundings'
+  s.name = 'decidim-collaborations'
   s.summary = 'New feature that adds the possibility of having crowdfunding campaigns within participatory spaces'
   s.description = s.summary
 

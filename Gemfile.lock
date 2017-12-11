@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-module-crowdfunding (0.1.8)
+    decidim-collaborations (0.1.8)
       decidim (~> 0.8.0)
       decidim-admin
       decidim-core (~> 0.8.0)
@@ -586,8 +586,8 @@ DEPENDENCIES
   byebug
   decidim (>= 0.8.0)
   decidim-assemblies
+  decidim-collaborations!
   decidim-dev
-  decidim-module-crowdfunding!
   faker
   iban_bic
   letter_opener_web
