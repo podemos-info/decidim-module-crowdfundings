@@ -4,6 +4,14 @@ module Decidim
   module Collaborations
     # Helper methods for collaboration controller views.
     module CollaborationsHelper
+      # Formats a number as a currency following the conventions and
+      # settings predefined in the platform.d
+      def decidim_number_to_currency(number)
+        number_to_currency(number.nil? ? 0 : number,
+                           unit: Decidim.currency_unit,
+                           format: '%n %u')
+      end
+
       # PUBLIC returns a list of frequency options that can be used
       # in a select input tag.
       def frequency_options
@@ -17,6 +25,13 @@ module Decidim
         I18n.t(
           frequency.to_sym,
           scope: 'decidim.collaborations.labels.frequencies'
+        )
+      end
+
+      def state_label(user_collaboration_state)
+        I18n.t(
+          user_collaboration_state.to_sym,
+          scope: 'decidim.collaborations.labels.user_collaboration.states'
         )
       end
 

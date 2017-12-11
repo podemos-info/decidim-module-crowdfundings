@@ -10,7 +10,7 @@ describe 'Admin manages collaborations', type: :feature, serves_map: true do
     stub_totals_request(500)
   end
 
-  include_context 'feature admin'
+  include_context 'when managing a feature as an admin'
 
   it_behaves_like 'manage collaborations'
 end

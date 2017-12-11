@@ -19,7 +19,7 @@ describe 'Collaborations view', type: :feature do
   end
 
   context 'Participatory process' do
-    include_context 'feature'
+    include_context 'with a feature'
     let!(:collaboration) { create(:collaboration, feature: feature) }
     let!(:user_collaboration) do
       create(:user_collaboration,

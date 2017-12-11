@@ -16,8 +16,6 @@ Decidim.register_feature(:collaborations) do |feature|
 
   feature.register_resource do |resource|
     resource.model_class_name = 'Decidim::Collaborations::Collaboration'
-
-    # TODO: The view linked collaborations needs to be implemented
     resource.template = 'decidim/collaborations/collaborations/linked_collaborations'
   end
 

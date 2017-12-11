@@ -25,6 +25,14 @@ module Decidim
             collaboration.recurrent_support_allowed? &&
               collaboration.user_collaborations.supported_by(user).none?
           end
+
+          can :update, UserCollaboration do |user_collaboration|
+            user_collaboration.user.id == user.id && user_collaboration.accepted?
+          end
+
+          can :resume, UserCollaboration do |user_collaboration|
+            user_collaboration.user.id == user.id && user_collaboration.paused?
+          end
         end
 
         private

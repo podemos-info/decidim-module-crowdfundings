@@ -43,6 +43,8 @@ en:
         over_18: I'm over 18
         accept_terms_and_conditions: I accept all the terms and conditions
   decidim:
+    menu:
+      collaborations: Collaborations
     form_builder:
       support_tag:
         other: Other
@@ -72,12 +74,20 @@ en:
           existing_payment_method: Existing payment method
           direct_debit: Direct debit
           credit_card_external: Credit card
+        user_collaboration:
+          states:
+            pending: Pending
+            accepted: Accepted
+            rejected: Rejected
+            paused: Suspended
       actions:
         title: Actions
         preview: Preview
         edit: Edit
         destroy: Destroy
         confirm_destroy: Are you sure?
+        pause: Suspend
+        resume: Resume
       models:
         collaboration:
           fields:
@@ -161,4 +171,21 @@ en:
           confirm: Confirm
           are_you_sure: Are you sure?
           fill_required_data: Fill the following fields
-
+      user_profile:
+        user_collaborations:
+          index:
+            title: Your recurrent collaborations
+            no_records_found: No collaborations found
+          pause:
+            success: Your collaboration has been successfully suspended.
+            fail: Couldn't suspend the collaboration.
+          resume:
+            success: Your collaboration has been successfully resumed.
+            fail: Couldn't resume the collaboration.
+          edit:
+            select_amount: Select the amount
+            select_frequency: Select the frequency
+            update: Update
+          update:
+            success: Your collaboration has been successfully updated.
+            fail: Couldn't update the collaboration.

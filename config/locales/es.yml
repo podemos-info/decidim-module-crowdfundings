@@ -43,6 +43,8 @@ es:
         over_18: Soy mayor de 18 años
         accept_terms_and_conditions: Acepto los términos y condiciones
   decidim:
+    menu:
+      collaborations: Colaboraciones
     form_builder:
       support_tag:
         other: Otros
@@ -72,12 +74,20 @@ es:
           existing_payment_method: Método de pago existente
           direct_debit: Débito directo
           credit_card_external: Tarjeta de crédito
+        user_collaboration:
+          states:
+            pending: Pendiente
+            accepted: Aceptada
+            rejected: Rechazada
+            paused: Suspendida
       actions:
         title: Acciones
         preview: Previsualizar
         edit: Editar
         destroy: Borrar
         confirm_destroy: ¿Estás seguro?
+        pause: Suspender
+        resume: Reanudar
       models:
         collaboration:
           fields:
@@ -161,3 +171,21 @@ es:
           confirm: Confirmar
           are_you_sure: ¿Estás seguro?
           fill_required_data: Completa los siguientes campos
+      user_profile:
+        user_collaborations:
+          index:
+            title: Tus colaboraciones periódicas
+            no_records_found: No se han encontrado colaboraciones.
+          pause:
+            success: Tu colaboración ha sido suspendida satisfactoriamente.
+            fail: No se ha podido suspender tu colaboración.
+          resume:
+            success: Tu colaboración ha sido reanudada satisfactoriamente.
+            fail: No se ha podido reanudar tu colaboración.
+          edit:
+            select_amount: Seleccciona la cantidad
+            select_frequency: Seleccciona la frequencia
+            update: Actualiza
+          update:
+            success: Tu colaboración ha sido actualizada satisfactoriamente.
+            fail: No se ha podido actualizar tu colaboración.

@@ -13,12 +13,15 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
-gem 'bootsnap', require: false
-gem 'decidim', '>= 0.7.0', '<= 0.8.0'
+gem 'decidim', '>= 0.8.0'
 gem 'decidim-assemblies'
 gem 'iban_bic'
 
 group :test, :development do
   gem 'byebug'
   gem 'faker'
+end
+
+group :development do
+  gem 'letter_opener_web'
 end

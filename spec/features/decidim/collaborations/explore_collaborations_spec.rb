@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Explore collaborations', type: :feature do
-  include_context 'feature'
+  include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
 
   let(:collaborations_count) { 5 }

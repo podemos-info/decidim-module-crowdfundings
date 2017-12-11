@@ -13,13 +13,12 @@ shared_examples 'manage collaborations' do
     it 'with invalid data' do
       within '.new_collaboration' do
         fill_in :collaboration_minimum_custom_amount, with: 1_000
-        fill_in :collaboration_amounts, with: '50,100,200,500'
         select '100', from: :collaboration_default_amount
         find('*[type=submit]').click
       end
 
       within '.callout-wrapper' do
-        expect(page).to have_content('Check the form data and correct the errors')
+        expect(page).to have_content('Check the form data and correct the errors.')
       end
 
       expect(page).to have_content('NEW COLLABORATION CAMPAIGN')
@@ -52,9 +51,7 @@ shared_examples 'manage collaborations' do
 
       fill_in :collaboration_minimum_custom_amount, with: 1_000
       fill_in :collaboration_target_amount, with: 100_000
-      fill_in :collaboration_amounts, with: '50,100,200,500'
       select '100', from: :collaboration_default_amount
-      find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set valid_until
 
       within '.new_collaboration' do
         find('*[type=submit]').click
@@ -119,8 +116,6 @@ shared_examples 'manage collaborations' do
         fill_in :collaboration_minimum_custom_amount, with: 1_500
         fill_in :collaboration_target_amount, with: 150_000
         select '50', from: :collaboration_default_amount
-        find(:xpath, "//input[@id='collaboration_active_until']", visible: false).set ''
-
         find('*[type=submit]').click
       end
 

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Collaborations view', type: :feature do
-  include_context 'feature'
+  include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
   let(:active_until) { nil }
   let!(:collaboration) do

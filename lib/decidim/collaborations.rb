@@ -3,6 +3,8 @@
 require 'decidim/collaborations/engine'
 require 'decidim/collaborations/admin'
 require 'decidim/collaborations/admin_engine'
+require 'decidim/collaborations/user_profile'
+require 'decidim/collaborations/user_profile_engine'
 require 'decidim/collaborations/feature'
 require 'decidim/collaborations/form_builder'
 

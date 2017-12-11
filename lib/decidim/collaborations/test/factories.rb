@@ -3,7 +3,7 @@
 require 'decidim/faker/localized'
 require 'decidim/dev'
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :collaboration_feature, parent: :feature do
     name do
       Decidim::Features::Namer.new(
@@ -80,6 +80,10 @@ FactoryGirl.define do
 
     trait :rejected do
       state 'rejected'
+    end
+
+    trait :paused do
+      state 'paused'
     end
   end
 end

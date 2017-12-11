@@ -46,7 +46,6 @@ module Decidim
       # increases the annual accumulated amount over the maximum allowed
       def maximum_user_amount
         return if amount.nil?
-        annual_accumulated = Census::API::Totals.user_totals(context.current_user.id)
         return if annual_accumulated + amount <= Decidim::Collaborations.maximum_annual_collaboration
 
         errors.add(
@@ -57,6 +56,10 @@ module Decidim
             scope: 'activemodel.errors.models.user_collaboration.attributes'
           )
         )
+      end
+
+      def annual_accumulated
+        Census::API::Totals.user_totals(context.current_user.id) || Decidim::Collaborations.maximum_annual_collaboration
       end
     end
   end
