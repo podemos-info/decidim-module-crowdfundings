@@ -9,11 +9,11 @@ Gem::Specification.new do |s|
   s.authors = ['Juan Salvador Perez Garcia']
   s.email = ['jsperezg@gmail.com']
   s.license = 'AGPL-3.0'
-  s.homepage = 'https://github.com/podemos-info/decidim-collaborations'
+  s.homepage = 'https://github.com/podemos-info/decidim-module-crowdfunding'
   s.required_ruby_version = '>= 2.3.1'
 
-  s.name = 'decidim-collaborations'
-  s.summary = 'New feature that adds the possibility of having crowfunding campaigns within participatory processes'
+  s.name = 'decidim-module-crowdfunding'
+  s.summary = 'New feature that adds the possibility of having crowdfunding campaigns within participatory processes'
   s.description = s.summary
 
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE-AGPLv3.txt', 'Rakefile', 'README.md']
