@@ -3,7 +3,6 @@
 require 'rails'
 require 'active_support/all'
 require 'decidim/core'
-# require 'decidim/colllaborations/user_profile_engine'
 
 module Decidim
   module Collaborations

@@ -16,9 +16,12 @@ module Decidim
           @context = context
 
           can :support, Collaboration do |collaboration|
+            user_totals = Census::API::Totals.user_totals(user.id)
+
             collaboration.accepts_supports? &&
               current_settings.collaborations_allowed? &&
-              Census::API::Totals.user_totals(user.id) < Decidim::Collaborations.maximum_annual_collaboration
+              user_totals &&
+              user_totals < Decidim::Collaborations.maximum_annual_collaboration
           end
 
           can :support_recurrently, Collaboration do |collaboration|

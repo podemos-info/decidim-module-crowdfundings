@@ -51,6 +51,7 @@ module Decidim
       context 'Census service is down' do
         before do
           stub_orders_service_down
+          stub_totals_service_down
         end
 
         it 'do not updates the collaboration' do

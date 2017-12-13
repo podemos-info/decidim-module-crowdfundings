@@ -52,6 +52,10 @@ module Decidim
             )
           end
 
+          before do
+            stub_totals_request(0)
+          end
+
           it 'Calls renew command for all pending collaborations' do
             expect(RenewUserCollaboration).to receive(:new).exactly(count).times.and_call_original
             RenewUserCollaborations.run
@@ -69,6 +73,10 @@ module Decidim
             )
           end
 
+          before do
+            stub_totals_request(0)
+          end
+
           it 'Calls renew command for all pending collaborations' do
             expect(RenewUserCollaboration).to receive(:new).exactly(count).times.and_call_original
             RenewUserCollaborations.run
@@ -84,6 +92,10 @@ module Decidim
               :accepted,
               last_order_request_date: Date.today.beginning_of_month - 1.day
             )
+          end
+
+          before do
+            stub_totals_request(0)
           end
 
           it 'Calls renew command for all pending collaborations' do

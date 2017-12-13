@@ -39,30 +39,10 @@ module Decidim
         end
 
         context 'Target amount has been satisfied' do
-          let(:total_collected) { target_amount }
+          let(:total_collected) { target_amount + 1 }
 
-          it 'returns false' do
-            expect(collaboration.accepts_supports?).to be_falsey
-          end
-        end
-
-        context 'Census API returns error' do
-          before do
-            stub_totals_request_error
-          end
-
-          it 'returns false' do
-            expect(collaboration.accepts_supports?).to be_falsey
-          end
-        end
-
-        context 'Census API is down' do
-          before do
-            stub_totals_service_down
-          end
-
-          it 'returns nil' do
-            expect(collaboration.percentage).to be_nil
+          it 'returns true' do
+            expect(collaboration.accepts_supports?).to be_truthy
           end
         end
       end

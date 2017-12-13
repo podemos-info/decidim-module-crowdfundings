@@ -25,11 +25,8 @@ module Decidim
 
       # PUBLIC Returns true if the collaboration campaign accepts supports.
       def accepts_supports?
-        collected = total_collected || target_amount
-
         feature.participatory_space.published? &&
-          (active_until.nil? || active_until >= Time.now) &&
-          (target_amount > collected)
+          (active_until.nil? || active_until >= Time.now)
       end
 
       # PUBLIC returns the percentage of funds supported with regards to

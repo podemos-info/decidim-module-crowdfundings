@@ -43,26 +43,6 @@ describe 'Collaborations view', type: :feature do
     end
   end
 
-  context 'Target amount reached' do
-    before do
-      allow(Census::API::Totals).to receive(:campaign_totals)
-                                      .with(collaboration.id)
-                                      .and_return(collaboration.target_amount)
-      allow(Census::API::Totals).to receive(:user_totals)
-                                      .with(user.id)
-                                      .and_return(0)
-
-      allow(Census::API::Totals).to receive(:user_campaign_totals)
-                                      .with(user.id, collaboration.id)
-                                      .and_return(0)
-      visit_feature
-    end
-
-    it 'Gives feedback about status' do
-      expect(page).to have_content('The target amount has been reached. This campaign do not accepts more collaborations.')
-    end
-  end
-
   context 'Out of collaboration period' do
     let(:active_until) { Date.today - 1.day }
 
