@@ -7,6 +7,7 @@ require 'decidim/collaborations/user_profile'
 require 'decidim/collaborations/user_profile_engine'
 require 'decidim/collaborations/feature'
 require 'decidim/collaborations/form_builder'
+require 'iban_bic'
 
 module Decidim
   # Base module for this engine.
