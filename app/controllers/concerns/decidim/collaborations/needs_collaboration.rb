@@ -36,10 +36,6 @@ module Decidim
             return I18n.t 'decidim.collaborations.labels.support_status.maximum_annual_exceeded'
           end
 
-          if target_amount_reached?
-            return I18n.t 'decidim.collaborations.labels.support_status.objective_reached'
-          end
-
           if out_of_collaboration_period?
             return I18n.t 'decidim.collaborations.labels.support_status.support_period_finished'
           end
@@ -48,10 +44,6 @@ module Decidim
         end
 
         private
-
-        def target_amount_reached?
-          collaboration.percentage && collaboration.percentage >= 100.0
-        end
 
         def maximum_per_year_reached?
           user_totals = Census::API::Totals.user_totals(current_user.id)
