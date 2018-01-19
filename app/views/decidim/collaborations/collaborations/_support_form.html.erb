@@ -2,13 +2,9 @@
                      url: confirm_collaboration_user_collaborations_path(collaboration),
                      html: { class: 'form new_user_collaboration' }) do |f| %>
 
-  <div class="conditions-row">
-    <%= f.check_box :accept_terms_and_conditions, required: true %>
-    <%= f.check_box :over_18, required: true %>
-  </div>
 
   <h2 class=section-heading><%=t '.select_amount' %></h2>
-  <%= f.support_tag :amount, collaboration.amounts %>
+  <%= f.support_tag :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
 
   <% if can? :support_recurrently, collaboration %>
     <br>
@@ -49,6 +45,13 @@
   <% if f.object.errors.key? :payment_method_type %>
     <small class="form-error is-visible"><%= f.object.errors[:payment_method_type].join(', ') %></small>
   <% end %>
+
+  <%= render 'decidim/collaborations/collaborations/terms_and_conditions' %>
+
+  <div class="conditions-row">
+    <%= f.check_box :accept_terms_and_conditions, required: true %>
+    <%= f.check_box :over_18, required: true %>
+  </div>
 
   <div class="form-general-submit">
     <%= f.submit t('.support'), class: 'button secondary support' %>

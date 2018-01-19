@@ -11,7 +11,7 @@ es:
         user_collaboration:
           attributes:
             frequency:
-              blank: Debes elegir una freqüencia per tu aportación.
+              blank: Debes elegir una frecuencia per tu aportación.
             payment_method_type:
               blank: Debes elegir una forma de pago.
             amount:
@@ -153,7 +153,7 @@ es:
           overall_percentage: Porcentaje total
         support_form:
           select_amount: Seleccciona la cantidad
-          select_frequency: Seleccciona la frequencia
+          select_frequency: Seleccciona la frecuencia
           select_payment_method: Selecciona la forma de pago
           support: Apoyar
         sign_in:
@@ -183,7 +183,7 @@ es:
             fail: No se ha podido reanudar tu colaboración.
           edit:
             select_amount: Seleccciona la cantidad
-            select_frequency: Seleccciona la frequencia
+            select_frequency: Seleccciona la frecuencia
             update: Actualiza
           update:
             success: Tu colaboración ha sido actualizada satisfactoriamente.

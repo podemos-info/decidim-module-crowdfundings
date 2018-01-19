@@ -21,18 +21,19 @@
 
     input[type="radio"]:checked+div {
       background-color: transparent;
-      color: #ef604d;
-      border: 1px solid #ef604d;
+      color: $secondary;
+      border: 1px solid $secondary;
       font-weight: bold;
     }
 
     input[type="radio"]+div {
       padding: 4pt 11pt;
-      background: #ef604d;
+      background: $secondary;
       color: white;
       border-radius: 5pt;
       min-width: 100pt;
       text-align: center;
+      border: 1px solid transparent;
     }
   }
 }

@@ -7,8 +7,8 @@ module Decidim
       include ::ActionView::Helpers::FormTagHelper
       include ::ActionView::Helpers::NumberHelper
 
-      def support_tag(name, amounts)
-        amount_selector_tag(name, amounts) + amount_input_tag(name)
+      def support_tag(name, amounts, minimum)
+        amount_selector_tag(name, amounts) + amount_input_tag(name, minimum)
       end
 
       private
@@ -55,9 +55,9 @@ module Decidim
         end
       end
 
-      def amount_input_tag(name)
+      def amount_input_tag(name, minimum)
         content_tag :div, class: 'field' do
-          number_field name, min: 0, step: 5
+          number_field name, min: minimum, step: 5
         end
       end
     end
