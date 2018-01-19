@@ -21,10 +21,6 @@
     </div>
 
     <div class="row column">
-      <%= form.number_field :target_amount, step: 1, min: 0 %>
-    </div>
-
-    <div class="row column">
       <%= form.text_field :amounts %>
       <p class="help-text"><%=t '.amounts_help' %></p>
     </div>
@@ -37,8 +33,14 @@
     </div>
 
     <div class="row column">
+      <%= form.number_field :target_amount, step: 1, min: 0 %>
+    </div>
+
+    <div class="row column">
       <%= form.date_field :active_until %>
+      <% if current_participatory_space.has_steps? %>
       <p class="help-text"><%=t '.active_until_help' %></p>
+      <% end %>
     </div>
   </div>
 </div>

@@ -34,7 +34,7 @@
                 <%= translated_attribute(collaboration.title) %>
               </td>
               <td class="right">
-                <%= decidim_number_to_currency collaboration.target_amount %>
+                <%= collaboration.target_amount.blank? ? "-" : decidim_number_to_currency(collaboration.target_amount) %>
               </td>
               <td class="right">
                 <%= total_collected_to_currency collaboration.total_collected %>

@@ -34,8 +34,8 @@ module Decidim
                   numericality: { only_integer: true, greater_than: 0 }
 
         validates :target_amount,
-                  presence: false,
-                  numericality: { only_integer: true, greater_than: 0 }
+                  numericality: { only_integer: true, greater_than: 0 },
+                  allow_blank: true
 
         validate :amounts_consistency
 
