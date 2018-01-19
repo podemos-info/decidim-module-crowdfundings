@@ -5,7 +5,7 @@
 
 
   <h2 class=section-heading><%=t '.select_amount' %></h2>
-  <%= f.support_tag :amount, collaboration.amounts %>
+  <%= f.support_tag :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
 
   <br>
   <h2 class=section-heading><%=t '.select_frequency' %></h2>

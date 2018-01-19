@@ -32,27 +32,6 @@ module Decidim
       15
     end
 
-    # Entry point for Census API
-    config_accessor :census_api_base_uri do
-      'https://census_api.example.org'
-    end
-
-    # IP address for the proxy used to access to the Census API
-    config_accessor :census_api_proxy_address do
-      nil
-    end
-
-    # Port used for the proxy used to access to the Census API
-    config_accessor :census_api_proxy_port do
-      nil
-    end
-
-    # Enable debug output in the logs for the communication with
-    # Census API.
-    config_accessor :census_api_debug do
-      false
-    end
-
     # Default recurrent collaboration
     config_accessor :default_frequency do
       'monthly'
