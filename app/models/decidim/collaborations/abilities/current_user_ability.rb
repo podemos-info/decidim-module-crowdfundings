@@ -26,7 +26,7 @@ module Decidim
 
           can :support_recurrently, Collaboration do |collaboration|
             collaboration.recurrent_support_allowed? &&
-              collaboration.user_collaborations.supported_by(user).none?
+              collaboration.user_collaborations.recurrent.supported_by(user).none?
           end
 
           can :update, UserCollaboration do |user_collaboration|
