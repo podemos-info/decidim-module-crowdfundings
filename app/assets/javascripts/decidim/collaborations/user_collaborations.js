@@ -14,8 +14,8 @@ $(document).ready(function () {
           amountInput.val(amount);
         } else {
           amountInput.parent().show();
-          amountInput.val('');
           amountInput.focus();
+          amountInput.val('');
         }
       }
     });

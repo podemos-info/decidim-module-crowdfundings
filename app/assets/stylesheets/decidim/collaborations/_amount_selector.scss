@@ -1,13 +1,14 @@
 .amount-selector {
   display: inline-block;
+  margin-bottom: 1em;
 
   label {
     cursor: pointer;
     float: left;
     display: inline-block;
     margin-right: 10pt;
+    margin-bottom: 0.5em;
     font-size: 22px;
-    margin-top: 5pt;
 
     input[type="radio"] {
       display: none;
@@ -28,6 +29,13 @@
       width: 80pt;
       text-align: center;
       border: 1px solid transparent;
+    }
+  }
+
+  .field {
+    clear: left;
+    label {
+      width: 100%;
     }
   }
 }

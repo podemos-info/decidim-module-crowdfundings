@@ -5,14 +5,14 @@
   justify-content: flex-start;
   align-items: baseline;
   align-content: flex-start;
-  margin-bottom: 15pt;
+  margin-bottom: 1em;
 
   label {
     cursor: pointer;
     display: inline-block;
     margin-right: 10pt;
     font-size: 22px;
-    margin-top: 5pt;
+    margin-bottom: 0.5em;
     flex-grow: 1;
 
     input[type="radio"] {

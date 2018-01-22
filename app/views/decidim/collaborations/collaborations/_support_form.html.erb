@@ -7,7 +7,6 @@
   <%= f.support_tag :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
 
   <% if can? :support_recurrently, collaboration %>
-    <br>
     <h2 class=section-heading><%=t '.select_frequency' %></h2>
     <div class="radio-selector">
       <% frequency_options.each do |option| %>
@@ -25,7 +24,6 @@
     <%= f.hidden_field :frequency %>
   <% end %>
 
-  <br><br>
   <h2 class=section-heading><%=t '.select_payment_method' %></h2>
   <div class="radio-selector">
     <% payment_method_options(:existing_payment_method).each do |method| %>

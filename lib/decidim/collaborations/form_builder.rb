@@ -8,18 +8,19 @@ module Decidim
       include ::ActionView::Helpers::NumberHelper
 
       def support_tag(name, amounts, minimum)
-        amount_selector_tag(name, amounts) + amount_input_tag(name, minimum)
+        amount_selector_tag(name, amounts, minimum)
       end
 
       private
 
-      def amount_selector_tag(name, amounts)
+      def amount_selector_tag(name, amounts, minimum)
         content_tag :div, class: 'amount-selector' do
           amounts.each do |amount|
             concat(input_amount_for(name, amount))
           end
 
           concat(input_other_amounts(name, amounts))
+          concat(amount_input_tag(name, minimum))
         end
       end
 
