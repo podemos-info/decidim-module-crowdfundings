@@ -158,6 +158,11 @@ en:
           support: Support
         sign_in:
           support: Support
+      pages:
+        home:
+          highlighted_collaborations:
+            title: Highlighted collaborations
+            support: Support
       user_collaborations:
         create:
           invalid: Operation failed.

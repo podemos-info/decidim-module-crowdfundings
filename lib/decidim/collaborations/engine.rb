@@ -44,6 +44,22 @@ module Decidim
       initializer 'decidim_collaborations.assets' do |app|
         app.config.assets.precompile += %w[decidim_collaborations_manifest.js]
       end
+
+      initializer "decidim_collaborations.view_hooks" do
+        Decidim.view_hooks.register(:highlighted_elements, priority: Decidim::ViewHooks::MEDIUM_PRIORITY) do |view_context|
+          highlighted_collaborations = PersonPrioritizedCollaborations.new(view_context.person_participatory_spaces)
+
+          next unless highlighted_collaborations.any?
+
+          view_context.render(
+            partial: "decidim/collaborations/pages/home/highlighted_collaborations",
+            locals: {
+              highlighted_collaborations: highlighted_collaborations,
+              highlighted_collaborations_count: highlighted_collaborations.count
+            }
+          )
+        end
+      end
     end
   end
 end

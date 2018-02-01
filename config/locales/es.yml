@@ -158,6 +158,11 @@ es:
           support: Apoyar
         sign_in:
           support: Apoyar
+      pages:
+        home:
+          highlighted_collaborations:
+            title: Colaboraciones destacadas
+            support: Apoyar
       user_collaborations:
         create:
           invalid: Falló la operación.
