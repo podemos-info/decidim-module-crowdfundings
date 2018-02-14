@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'decidim/faker/localized'
-require 'decidim/dev'
+require "decidim/faker/localized"
+require "decidim/dev"
 
 FactoryBot.define do
   factory :collaboration_feature, parent: :feature do
@@ -27,12 +27,12 @@ FactoryBot.define do
   factory :collaboration, class: Decidim::Collaborations::Collaboration do
     title { Decidim::Faker::Localized.sentence(3) }
     description do
-      Decidim::Faker::Localized.wrapped('<p>', '</p>') do
+      Decidim::Faker::Localized.wrapped("<p>", "</p>") do
         Decidim::Faker::Localized.sentence(4)
       end
     end
     terms_and_conditions do
-      Decidim::Faker::Localized.wrapped('<p>', '</p>') do
+      Decidim::Faker::Localized.wrapped("<p>", "</p>") do
         Decidim::Faker::Localized.paragraph(5)
       end
     end
@@ -52,38 +52,38 @@ FactoryBot.define do
     collaboration { create(:collaboration) }
     user { create(:user, organization: collaboration.feature.organization) }
     amount 50
-    last_order_request_date { Date.today.beginning_of_month }
+    last_order_request_date { Time.zone.today.beginning_of_month }
 
     trait :punctual do
-      frequency 'punctual'
+      frequency "punctual"
     end
 
     trait :monthly do
-      frequency 'monthly'
+      frequency "monthly"
     end
 
     trait :quarterly do
-      frequency 'quarterly'
+      frequency "quarterly"
     end
 
     trait :annual do
-      frequency 'annual'
+      frequency "annual"
     end
 
     trait :pending do
-      state 'pending'
+      state "pending"
     end
 
     trait :accepted do
-      state 'accepted'
+      state "accepted"
     end
 
     trait :rejected do
-      state 'rejected'
+      state "rejected"
     end
 
     trait :paused do
-      state 'paused'
+      state "paused"
     end
   end
 end

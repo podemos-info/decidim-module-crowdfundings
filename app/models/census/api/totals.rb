@@ -4,15 +4,15 @@ module Census
   module API
     # This class represents an totals retrieval request in Census API
     class Totals < CensusAPI
-      URL_PATH = '/api/v1/payments/orders/total'
+      URL_PATH = "/api/v1/payments/orders/total"
 
       # PUBLIC User totals within the current year.
       # Returns the amount. Nil in case something failed.
       def self.user_totals(user_id)
         response = totals_request(
           person_id: user_id,
-          from_date: Time.now.beginning_of_year,
-          until_date: Time.now.end_of_year
+          from_date: Time.zone.now.beginning_of_year,
+          until_date: Time.zone.now.end_of_year
         )
 
         process_response(response)
@@ -46,7 +46,7 @@ module Census
       def self.process_response(response)
         unless response.ok?
           Rails.logger.info "[API error] #{response.body}"
-          return nil
+          return
         end
 
         json = JSON.parse(response.body, symbolize_names: true)

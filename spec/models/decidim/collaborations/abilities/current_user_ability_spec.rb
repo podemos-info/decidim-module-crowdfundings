@@ -1,95 +1,95 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-require 'cancan/matchers'
+require "spec_helper"
+require "cancan/matchers"
 
 describe Decidim::Collaborations::Abilities::CurrentUserAbility do
+  subject { described_class.new(user, current_settings: current_settings) }
+
   let(:current_settings) { {} }
   let(:user_annual_accumulated) { 0 }
   let(:collaborations_allowed) { true }
   let(:collaboration) { create(:collaboration) }
   let(:user) { create(:user, organization: collaboration.feature.organization) }
 
-  subject { described_class.new(user, current_settings: current_settings) }
-
   before do
     stub_totals_request(user_annual_accumulated)
     expect(current_settings).to receive(:collaborations_allowed?)
-                                .at_most(:once)
-                                .and_return(collaborations_allowed)
+      .at_most(:once)
+      .and_return(collaborations_allowed)
   end
 
-  context 'support collaboration' do
-    context 'collaboration allowed' do
+  describe "support collaboration" do
+    context "when collaboration allowed" do
       let(:collaborations_allowed) { true }
 
-      it 'let the user support when collaboration accepts supports' do
+      it "let the user support when collaboration accepts supports" do
         expect(collaboration).to receive(:accepts_supports?).and_return(true)
         expect(subject).to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user support when collaboration does not accept supports' do
+      it "Do not let the user support when collaboration does not accept supports" do
         expect(collaboration).to receive(:accepts_supports?).and_return(false)
         expect(subject).not_to be_able_to(:support, collaboration)
       end
     end
 
-    context 'collaboration not allowed' do
+    context "when collaboration not allowed" do
       let(:collaborations_allowed) { false }
 
-      it 'do not let the user support when collaboration accepts supports' do
+      it "do not let the user support when collaboration accepts supports" do
         expect(collaboration).to receive(:accepts_supports?).and_return(true)
         expect(subject).not_to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user support when collaboration does not accept supports' do
+      it "Do not let the user support when collaboration does not accept supports" do
         expect(collaboration).to receive(:accepts_supports?).and_return(false)
         expect(subject).not_to be_able_to(:support, collaboration)
       end
     end
 
-    context 'Maximum annual per user validation' do
-      context 'User is in the limit' do
+    describe "Maximum annual per user validation" do
+      context "when user is in the limit" do
         let(:user_annual_accumulated) { Decidim::Collaborations.maximum_annual_collaboration }
 
-        it 'User is not allowed to support' do
+        it "User is not allowed to support" do
           expect(subject).not_to be_able_to(:support, collaboration)
         end
       end
 
-      context 'User is under the limit' do
+      context "when user is under the limit" do
         let(:user_annual_accumulated) { 0 }
 
-        it 'User is allowed to support' do
+        it "User is allowed to support" do
           expect(subject).to be_able_to(:support, collaboration)
         end
       end
     end
   end
 
-  context 'support_recurrently' do
-    context 'First user recurrent support' do
+  describe "support_recurrently" do
+    context "when first user recurrent support" do
       before do
         allow(collaboration).to receive(:recurrent_support_allowed?).and_return(true)
       end
 
-      it 'User can do a recurrent support' do
+      it "User can do a recurrent support" do
         expect(subject).to be_able_to(:support_recurrently, collaboration)
       end
     end
 
-    context 'User already has a recurrent support' do
+    context "when user already has a recurrent support" do
       let!(:user_collaboration) do
         create(:user_collaboration, :monthly, :accepted, collaboration: collaboration)
       end
 
-      it 'User can not do a recurrent support' do
+      it "User can not do a recurrent support" do
         expect(subject).not_to be_able_to(:support_recurrently, collaboration)
       end
     end
   end
 
-  context 'user collaboration' do
+  describe "user collaboration" do
     let(:user_collaboration) do
       create(:user_collaboration,
              :punctual,
@@ -98,56 +98,57 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
              user: owner)
     end
 
-    context 'update user collaboration' do
+    describe "update user collaboration" do
       let(:state) { :accepted }
 
-      context 'by user collaboration owner' do
+      context "with user collaboration owner" do
         let(:owner) { user }
 
-        it 'is allowed' do
+        it "is allowed" do
           expect(subject).to be_able_to(:update, user_collaboration)
         end
 
-        context 'when state is not accepted' do
+        context "when state is not accepted" do
           let(:state) { :paused }
 
-          it 'is not allowed' do
+          it "is not allowed" do
             expect(subject).not_to be_able_to(:update, user_collaboration)
           end
         end
       end
 
-      context 'other users' do
+      context "with other users" do
         let(:owner) { create(:user, organization: collaboration.organization) }
-        it 'do not allowed' do
+
+        it "do not allowed" do
           expect(subject).not_to be_able_to(:update, user_collaboration)
         end
       end
     end
 
-    context 'resume user collaboration' do
+    describe "resume user collaboration" do
       let(:state) { :paused }
 
-      context 'by user collaboration owner' do
+      context "with user collaboration owner" do
         let(:owner) { user }
 
-        it 'is allowed' do
+        it "is allowed" do
           expect(subject).to be_able_to(:resume, user_collaboration)
         end
 
-        context 'when state is not paused' do
+        context "when state is not paused" do
           let(:state) { :accepted }
 
-          it 'is not allowed' do
+          it "is not allowed" do
             expect(subject).not_to be_able_to(:resume, user_collaboration)
           end
         end
       end
 
-      context 'other users' do
+      context "with other users" do
         let(:owner) { create(:user, organization: collaboration.organization) }
 
-        it 'do not allowed' do
+        it "do not allowed" do
           expect(subject).not_to be_able_to(:resume, user_collaboration)
         end
       end

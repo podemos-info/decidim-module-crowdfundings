@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'decidim/dev/common_rake'
+require "decidim/dev/common_rake"
 
 desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app"

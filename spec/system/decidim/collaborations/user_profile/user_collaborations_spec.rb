@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Explore collaborations', type: :system do
+describe "Explore collaborations", type: :system do
   let(:collaboration) { create(:collaboration) }
   let(:organization) { collaboration.organization }
   let(:user) { create :user, :confirmed, organization: organization }
@@ -12,17 +12,17 @@ describe 'Explore collaborations', type: :system do
     login_as user, scope: :user
   end
 
-  context 'No collaborations found' do
+  context "when no collaborations found" do
     before do
       visit decidim_collaborations_user_profile.user_collaborations_path
     end
 
-    it 'Information message shown' do
-      expect(page).to have_content('No collaborations found')
+    it "Information message shown" do
+      expect(page).to have_content("No collaborations found")
     end
   end
 
-  context 'Collaborations found' do
+  context "when collaborations found" do
     let!(:user_collaboration) do
       create(:user_collaboration,
              :monthly,
@@ -35,10 +35,10 @@ describe 'Explore collaborations', type: :system do
       page.visit decidim_collaborations_user_profile.user_collaborations_path
     end
 
-    it 'Table with collaborations found' do
+    it "Table with collaborations found" do
       expect(page).to have_content(collaboration.title[:en])
-      expect(page).to have_content('Accepted')
-      expect(page).to have_content('Monthly')
+      expect(page).to have_content("Accepted")
+      expect(page).to have_content("Monthly")
     end
   end
 end

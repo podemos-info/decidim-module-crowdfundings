@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   module Collaborations
     # Rectify command that creates a user collaboration
@@ -30,9 +32,7 @@ module Decidim
 
       def process_user_collaboration
         result = register_on_census
-        if result[:http_response_code].between?(201, 202)
-          create_user_collaboration result[:payment_method_id]
-        end
+        create_user_collaboration result[:payment_method_id] if result[:http_response_code].between?(201, 202)
 
         result
       end
@@ -47,18 +47,16 @@ module Decidim
           description: translated_attribute(form.context.collaboration.title),
           amount: form.amount * 100,
           campaign_code: form.context.collaboration.id,
-          payment_method_type: form.payment_method_type,
+          payment_method_type: form.payment_method_type
         }
 
         if form.credit_card_external?
           params[:return_url] = validate_user_collaboration_url(
-            form.context.collaboration, result: '__RESULT__'
+            form.context.collaboration, result: "__RESULT__"
           )
         end
 
-        if form.existing_payment_method?
-          params[:payment_method_id] = form.payment_method_id
-        end
+        params[:payment_method_id] = form.payment_method_id if form.existing_payment_method?
 
         params[:iban] = form.iban if form.direct_debit?
         params
@@ -72,13 +70,13 @@ module Decidim
           amount: form.amount,
           payment_method_id: payment_method_id || form.payment_method_id,
           state: collaboration_state,
-          last_order_request_date: Date.today.beginning_of_month
+          last_order_request_date: Time.zone.today.beginning_of_month
         )
       end
 
       def collaboration_state
-        return 'pending' if form.credit_card_external?
-        'accepted'
+        return "pending" if form.credit_card_external?
+        "accepted"
       end
     end
   end

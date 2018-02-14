@@ -11,7 +11,7 @@ module Decidim
       class ApplicationController < Decidim::ApplicationController
         include Decidim::UserProfile
         include FormFactory
-        
+
         helper Decidim::Collaborations::CollaborationsHelper
         helper Decidim::Admin::IconLinkHelper
       end

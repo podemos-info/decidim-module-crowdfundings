@@ -9,12 +9,13 @@ module Decidim
       include Decidim::HasFeature
       include Decidim::Followable
 
-      feature_manifest_name 'collaborations'
+      feature_manifest_name "collaborations"
 
       has_many :user_collaborations,
-               class_name: 'Decidim::Collaborations::UserCollaboration',
-               foreign_key: 'decidim_collaborations_collaboration_id',
-               dependent: :restrict_with_error
+               class_name: "Decidim::Collaborations::UserCollaboration",
+               foreign_key: "decidim_collaborations_collaboration_id",
+               dependent: :restrict_with_error,
+               inverse_of: :collaboration
 
       scope :for_feature, ->(feature) { where(feature: feature) }
 
@@ -26,14 +27,14 @@ module Decidim
       # PUBLIC Returns true if the collaboration campaign accepts supports.
       def accepts_supports?
         feature.participatory_space.published? &&
-          (active_until.nil? || active_until >= Time.now)
+          (active_until.nil? || active_until >= Time.zone.now)
       end
 
       # PUBLIC returns the percentage of funds supported with regards to
       # the total collected
       def percentage
         census_total_collected = total_collected
-        return nil if census_total_collected.nil?
+        return if census_total_collected.nil?
 
         result = (census_total_collected * 100.0) / target_amount
         result = 100.0 if result > 100
@@ -44,7 +45,7 @@ module Decidim
       # with regards to the total collected.
       def user_percentage(user)
         census_user_total_collected = user_total_collected(user)
-        return nil if census_user_total_collected.nil?
+        return if census_user_total_collected.nil?
 
         result = (census_user_total_collected * 100.0) / target_amount
         result = 100.0 if result > 100
@@ -58,7 +59,7 @@ module Decidim
 
       # PUBLIC returns whether recurrent supports are allowed or not.
       def recurrent_support_allowed?
-        feature&.participatory_space_type == 'Decidim::Assembly'
+        feature&.participatory_space_type == "Decidim::Assembly"
       end
     end
   end

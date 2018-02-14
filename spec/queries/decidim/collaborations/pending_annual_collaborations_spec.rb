@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Collaborations
     describe PendingAnnualCollaborations do
-      let!(:date_limit) { Date.today.beginning_of_month - 11.months }
+      let!(:date_limit) { Time.zone.today.beginning_of_month - 11.months }
 
       let(:subject) { described_class.new }
 
-      context 'Annual collaborations' do
+      describe "Annual collaborations" do
         let!(:old_annual_collaborations) do
           create_list(
             :user_collaboration,
@@ -50,15 +50,15 @@ module Decidim
           )
         end
 
-        it 'Contains annual collaborations that need to be renewed' do
+        it "Contains annual collaborations that need to be renewed" do
           expect(subject).to include(*old_annual_collaborations)
         end
 
-        it 'Do not contains annual collaborations that do not need to be renewed' do
+        it "Do not contains annual collaborations that do not need to be renewed" do
           expect(subject).not_to include(*recent_annual_collaborations)
         end
 
-        it 'Do not contains inactive collaborations' do
+        it "Do not contains inactive collaborations" do
           expect(subject).not_to include(*pending_annual_collaborations)
           expect(subject).not_to include(*rejected_annual_collaborations)
         end

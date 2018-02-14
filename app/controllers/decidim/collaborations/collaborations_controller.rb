@@ -17,7 +17,7 @@ module Decidim
         return unless feature_collaborations.count == 1
 
         redirect_to EngineRouter.main_proxy(current_feature)
-                      .collaboration_path(feature_collaborations.first)
+                                .collaboration_path(feature_collaborations.first)
       end
 
       def show
@@ -32,7 +32,7 @@ module Decidim
         @form.frequency = if collaboration.recurrent_support_allowed?
                             Decidim::Collaborations.default_frequency
                           else
-                            'punctual'
+                            "punctual"
                           end
       end
 
@@ -57,7 +57,7 @@ module Decidim
 
       def default_filter_params
         {
-          search_text: '',
+          search_text: "",
           random_seed: params[:random_seed]
         }
       end

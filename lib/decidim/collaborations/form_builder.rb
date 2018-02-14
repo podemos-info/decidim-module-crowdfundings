@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # frozen_string_literal
 
 module Decidim
@@ -14,7 +16,7 @@ module Decidim
       private
 
       def amount_selector_tag(name, amounts, minimum)
-        content_tag :div, class: 'amount-selector' do
+        content_tag :div, class: "amount-selector" do
           amounts.each do |amount|
             concat(input_amount_for(name, amount))
           end
@@ -26,11 +28,11 @@ module Decidim
 
       def input_other_amounts(name, amounts)
         amount = object.send(name)
-        checked = !amount.blank? && !amounts.include?(amount)
+        checked = amount.present? && !amounts.include?(amount)
 
         content_tag :label, for: "#{name}_selector_other" do
-          concat radio_button_tag "#{name}_selector".to_sym, 'other', checked
-          concat amount_label(I18n.t('support_tag.other', scope: 'decidim.form_builder'))
+          concat radio_button_tag "#{name}_selector".to_sym, "other", checked
+          concat amount_label(I18n.t("support_tag.other", scope: "decidim.form_builder"))
         end
       end
 
@@ -49,7 +51,7 @@ module Decidim
             number_to_currency(amount,
                                unit: Decidim.currency_unit,
                                precision: 0,
-                               format: '%n %u')
+                               format: "%n %u")
           else
             amount
           end
@@ -57,7 +59,7 @@ module Decidim
       end
 
       def amount_input_tag(name, minimum)
-        content_tag :div, class: 'field' do
+        content_tag :div, class: "field" do
           number_field name, min: minimum, step: 5
         end
       end

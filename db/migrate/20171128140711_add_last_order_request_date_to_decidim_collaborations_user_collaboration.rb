@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLastOrderRequestDateToDecidimCollaborationsUserCollaboration < ActiveRecord::Migration[5.1]
   class UserCollaboration < ApplicationRecord
     self.table_name = :decidim_collaborations_user_collaborations

@@ -8,12 +8,12 @@ module Decidim
     class AdminEngine < ::Rails::Engine
       isolate_namespace Decidim::Collaborations::Admin
 
-      paths['db/migrate'] = nil
+      paths["db/migrate"] = nil
 
       routes do
         resources :collaborations
 
-        root to: 'collaborations#index'
+        root to: "collaborations#index"
       end
     end
   end

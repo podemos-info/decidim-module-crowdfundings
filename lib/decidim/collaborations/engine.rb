@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails'
-require 'active_support/all'
-require 'decidim/core'
+require "rails"
+require "active_support/all"
+require "decidim/core"
 
 module Decidim
   module Collaborations
@@ -13,13 +13,13 @@ module Decidim
       # TODO: Repace this by global routes feature that will be released in decidim 0.8.1
       initializer "decidim_collaborations_user_profile.mount_routes" do |_app|
         Decidim::Core::Engine.routes do
-          mount Decidim::Collaborations::UserProfileEngine => '/collaborations'
+          mount Decidim::Collaborations::UserProfileEngine => "/collaborations"
         end
       end
 
       routes do
-        resources :collaborations, only: %i[index show] do
-          resources :user_collaborations, only: %i[create], shallow: true do
+        resources :collaborations, only: [:index, :show] do
+          resources :user_collaborations, only: [:create], shallow: true do
             collection do
               post :confirm
             end
@@ -29,20 +29,20 @@ module Decidim
           end
         end
 
-        root to: 'collaborations#index'
+        root to: "collaborations#index"
       end
 
-      initializer 'decidim_collaborations.inject_abilities_to_user' do |_app|
+      initializer "decidim_collaborations.inject_abilities_to_user" do |_app|
         Decidim.configure do |config|
-          config.abilities += %w[
+          config.abilities += %w(
             Decidim::Collaborations::Abilities::CurrentUserAbility
             Decidim::Collaborations::Abilities::GuestUserAbility
-          ]
+          )
         end
       end
 
-      initializer 'decidim_collaborations.assets' do |app|
-        app.config.assets.precompile += %w[decidim_collaborations_manifest.js]
+      initializer "decidim_collaborations.assets" do |app|
+        app.config.assets.precompile += %w(decidim_collaborations_manifest.js)
       end
 
       initializer "decidim_collaborations.view_hooks" do

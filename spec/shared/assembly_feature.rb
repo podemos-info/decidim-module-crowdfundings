@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-shared_context 'assembly feature' do
+shared_context "with assembly feature" do
   let(:manifest) { Decidim.find_feature_manifest(manifest_name) }
 
   let(:user) { create :user, :confirmed, organization: organization }

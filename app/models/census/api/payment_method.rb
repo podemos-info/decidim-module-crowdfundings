@@ -4,16 +4,12 @@ module Census
   module API
     # This class represents a payment method in Census
     class PaymentMethod < CensusAPI
-      PAYMENT_METHOD_TYPES = %i[
-        existing_payment_method
-        direct_debit
-        credit_card_external
-      ].freeze
+      PAYMENT_METHOD_TYPES = [:existing_payment_method, :direct_debit, :credit_card_external].freeze
 
       # PUBLIC retrieve the available payment methods for the given user.
       def self.for_user(person_id)
         response = get(
-          '/api/v1/payments/payment_methods',
+          "/api/v1/payments/payment_methods",
           query: { person_id: person_id }
         )
 
@@ -27,7 +23,7 @@ module Census
       # PUBLIC retrieve the details for the given payment method
       def self.payment_method(id)
         response = get(
-          '/api/v1/payments/payment_method',
+          "/api/v1/payments/payment_method",
           query: { id: id }
         )
         json_response = JSON.parse(response.body, symbolize_names: true)

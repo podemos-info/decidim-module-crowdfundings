@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Collaborations
@@ -33,7 +33,7 @@ module Decidim
         )
       end
 
-      it 'contains pending collaborations' do
+      it "contains pending collaborations" do
         expect(subject).to include(*pending_collaborations)
         expect(subject).not_to include(*accepted_collaborations)
         expect(subject).not_to include(*rejected_collaborations)

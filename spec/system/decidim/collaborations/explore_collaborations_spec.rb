@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Explore collaborations', type: :system do
-  include_context 'with a feature'
-  let(:manifest_name) { 'collaborations' }
+describe "Explore collaborations", type: :system do
+  include_context "with a feature"
+  let(:manifest_name) { "collaborations" }
 
   let(:collaborations_count) { 5 }
   let!(:collaborations) do
@@ -15,8 +15,8 @@ describe 'Explore collaborations', type: :system do
     stub_totals_request(0)
   end
 
-  context 'index' do
-    it 'shows all collaborations for the given process' do
+  describe "index" do
+    it "shows all collaborations for the given process" do
       visit_feature
 
       collaborations.each do |collaboration|
@@ -26,20 +26,20 @@ describe 'Explore collaborations', type: :system do
     end
   end
 
-  context 'filtering' do
-    it 'allows searching by text' do
+  describe "filtering" do
+    it "allows searching by text" do
       visit_feature
 
-      within '.filters' do
+      within ".filters" do
         fill_in :filter_search_text, with: translated(collaborations.first.title)
 
         # The form should be auto-submitted when filter box is filled up, but
         # somehow it's not happening. So we workaround that be explicitly
         # clicking on "Search" until we find out why.
-        find('.icon--magnifying-glass').click
+        find(".icon--magnifying-glass").click
       end
 
-      expect(page).to have_css('.card--list__item', count: 1)
+      expect(page).to have_css(".card--list__item", count: 1)
       expect(page).to have_content(translated(collaborations.first.title))
     end
   end

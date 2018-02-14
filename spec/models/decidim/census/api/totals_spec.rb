@@ -1,108 +1,109 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Census
   module API
     describe Totals do
       let(:amount) { 50 }
-      context 'User totals' do
+
+      describe "User totals" do
         let(:result) { ::Census::API::Totals.user_totals(1) }
 
-        context 'Error response' do
+        context "when error response" do
           before do
             stub_totals_request_error
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API down' do
+        context "when API is down" do
           before do
             stub_totals_service_down
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API up' do
+        context "when API is up" do
           before do
             stub_totals_request(amount)
           end
 
-          it 'Returns the amount' do
+          it "Returns the amount" do
             expect(result).to eq(amount)
           end
         end
       end
 
-      context 'Campaign totals' do
+      describe "Campaign totals" do
         let(:result) { ::Census::API::Totals.campaign_totals(1) }
 
-        context 'Error response' do
+        context "when error response" do
           before do
             stub_totals_request_error
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API down' do
+        context "when API is down" do
           before do
             stub_totals_service_down
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API up' do
+        context "when API is up" do
           before do
             stub_totals_request(amount)
           end
 
-          it 'Returns the amount' do
+          it "Returns the amount" do
             expect(result).to eq(amount)
           end
         end
       end
 
-      context 'User campaign totals' do
+      describe "User campaign totals" do
         let(:result) { ::Census::API::Totals.user_campaign_totals(1, 1) }
 
-        context 'Error response' do
+        context "when error response" do
           before do
             stub_totals_request_error
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API down' do
+        context "when API is down" do
           before do
             stub_totals_service_down
           end
 
-          it 'Is nil' do
+          it "Is nil" do
             expect(result).to be_nil
           end
         end
 
-        context 'API up' do
+        context "when API is up" do
           before do
             stub_totals_request(amount)
           end
 
-          it 'Returns the amount' do
+          it "Returns the amount" do
             expect(result).to eq(amount)
           end
         end

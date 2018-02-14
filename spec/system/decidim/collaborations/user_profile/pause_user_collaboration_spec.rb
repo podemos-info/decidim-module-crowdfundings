@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Explore collaborations', type: :system do
+describe "Explore collaborations", type: :system do
   let(:collaboration) { create(:collaboration) }
   let(:organization) { collaboration.organization }
   let(:user) { create :user, :confirmed, organization: organization }
@@ -21,18 +21,18 @@ describe 'Explore collaborations', type: :system do
     visit decidim_collaborations_user_profile.user_collaborations_path
   end
 
-  it 'Link that suspends the user collaboration exists' do
-    expect(page).to have_link('', href: decidim_collaborations_user_profile.pause_user_collaboration_path(user_collaboration))
+  it "Link that suspends the user collaboration exists" do
+    expect(page).to have_link("", href: decidim_collaborations_user_profile.pause_user_collaboration_path(user_collaboration))
   end
 
-  context 'suspend link visited' do
+  context "when suspend link visited" do
     before do
-      link = find_link('', href: decidim_collaborations_user_profile.pause_user_collaboration_path(user_collaboration))
+      link = find_link("", href: decidim_collaborations_user_profile.pause_user_collaboration_path(user_collaboration))
       link.click
     end
 
-    it 'status message' do
-      expect(page).to have_content('Your collaboration has been successfully suspended.')
+    it "shows a succcess message" do
+      expect(page).to have_content("Your collaboration has been successfully suspended.")
     end
   end
 end
