@@ -9,14 +9,14 @@ module Decidim
 
       before do
         @request.env['decidim.current_organization'] = feature.organization
+        @request.env["decidim.current_participatory_space"] = feature.participatory_space
         @request.env['decidim.current_feature'] = feature
       end
 
       let(:feature) { create :collaboration_feature, :participatory_process }
       let(:params) do
         {
-          feature_id: feature.id,
-          participatory_process_slug: feature.participatory_space.slug
+          feature_id: feature.id
         }
       end
 
