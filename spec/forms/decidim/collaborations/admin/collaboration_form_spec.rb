@@ -92,7 +92,7 @@ module Decidim
         context 'target_amount' do
           context 'is missing' do
             let(:target_amount) { nil }
-            it { is_expected.not_to be_valid }
+            it { is_expected.to be_valid }
           end
 
           context 'is less or equal 0' do
