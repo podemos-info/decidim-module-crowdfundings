@@ -28,7 +28,7 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
         expect(subject).to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user support when collaboration do not accepts supports' do
+      it 'Do not let the user support when collaboration does not accept supports' do
         expect(collaboration).to receive(:accepts_supports?).and_return(false)
         expect(subject).not_to be_able_to(:support, collaboration)
       end
@@ -42,7 +42,7 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
         expect(subject).not_to be_able_to(:support, collaboration)
       end
 
-      it 'Do not let the user support when collaboration do not accepts supports' do
+      it 'Do not let the user support when collaboration does not accept supports' do
         expect(collaboration).to receive(:accepts_supports?).and_return(false)
         expect(subject).not_to be_able_to(:support, collaboration)
       end
