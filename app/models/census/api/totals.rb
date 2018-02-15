@@ -16,7 +16,8 @@ module Census
         )
 
         process_response(response)
-      rescue StandardError
+      rescue StandardError => e
+        Rails.logger.info "[API connection error] #{e.message}"
         nil
       end
 
@@ -25,7 +26,8 @@ module Census
       def self.campaign_totals(campaign_id)
         response = totals_request(campaign_code: campaign_id)
         process_response(response)
-      rescue StandardError
+      rescue StandardError => e
+        Rails.logger.info "[API connection error] #{e.message}"
         nil
       end
 
@@ -35,13 +37,18 @@ module Census
       def self.user_campaign_totals(user_id, campaign_id)
         response = totals_request(person_id: user_id, campaign_code: campaign_id)
         process_response(response)
-      rescue StandardError
+      rescue StandardError => e
+        Rails.logger.info "[API connection error] #{e.message}"
         nil
       end
 
       # Process response from totals service in Census.
       def self.process_response(response)
-        return nil if response.code != 200
+        unless response.ok?
+          Rails.logger.info "[API error] #{response.body}"
+          return nil
+        end
+
         json = JSON.parse(response.body, symbolize_names: true)
         json[:amount]
       end
