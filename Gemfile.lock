@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 8cc26bc6f0d2813a478d43999b024e82ac2c82fd
+  revision: ced72e3aac3fe7d7405b801816eff3ad6b8b44ef
+  branch: master
   specs:
     decidim (0.10.0.pre)
       decidim-accountability (= 0.10.0.pre)
@@ -139,6 +140,7 @@ GIT
 GIT
   remote: https://github.com/podemos-info/decidim-module-census_connector
   revision: 18eac23bd28c8f4269a180b4d9c1c607b2bcd5ca
+  branch: master
   specs:
     decidim-census_connector (0.10.0.pre)
       decidim-core (= 0.10.0.pre)
