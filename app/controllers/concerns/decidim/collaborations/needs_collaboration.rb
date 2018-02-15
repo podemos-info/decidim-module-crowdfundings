@@ -55,8 +55,7 @@ module Decidim
         end
 
         def detect_collaboration
-          request.env['current_collaboration'] ||
-            Collaboration.find_by(id: params[:collaboration_id] || params[:id])
+          Collaboration.find_by(id: params[:collaboration_id] || params[:id])
         end
       end
     end
