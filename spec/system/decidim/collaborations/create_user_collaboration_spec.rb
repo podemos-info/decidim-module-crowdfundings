@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Create user collaboration', type: :feature do
+describe 'Create user collaboration', type: :system do
   include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
   let!(:collaboration) { create(:collaboration, feature: feature) }

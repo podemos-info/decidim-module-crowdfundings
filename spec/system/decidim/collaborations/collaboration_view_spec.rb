@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Collaborations view', type: :feature do
+describe 'Collaborations view', type: :system do
   let(:manifest_name) { 'collaborations' }
   let(:confirmed_user) { create(:user, :confirmed, organization: organization) }
 

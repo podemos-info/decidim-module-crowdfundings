@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Collaborations view', type: :feature do
+describe 'Collaborations view', type: :system do
   include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
   let(:active_until) { nil }

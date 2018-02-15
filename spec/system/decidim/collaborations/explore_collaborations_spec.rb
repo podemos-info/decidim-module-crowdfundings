@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Explore collaborations', type: :feature do
+describe 'Explore collaborations', type: :system do
   include_context 'with a feature'
   let(:manifest_name) { 'collaborations' }
 

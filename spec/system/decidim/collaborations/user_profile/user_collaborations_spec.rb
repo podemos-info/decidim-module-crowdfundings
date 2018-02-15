@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'Explore collaborations', type: :feature do
+describe 'Explore collaborations', type: :system do
   let(:collaboration) { create(:collaboration) }
   let(:organization) { collaboration.organization }
   let(:user) { create :user, :confirmed, organization: organization }
