@@ -9,14 +9,14 @@ module Decidim
 
       before do
         @request.env['decidim.current_organization'] = feature.organization
+        @request.env["decidim.current_participatory_space"] = feature.participatory_space
         @request.env['decidim.current_feature'] = feature
       end
 
       let(:feature) { create :collaboration_feature, :participatory_process }
       let(:params) do
         {
-          feature_id: feature.id,
-          participatory_process_slug: feature.participatory_space.slug
+          feature_id: feature.id
         }
       end
 
@@ -38,7 +38,7 @@ module Decidim
         context 'several collaborations' do
           let!(:collaborations) { create_list(:collaboration, 2, feature: feature) }
 
-          it 'redirects to the collaboration page' do
+          it 'shows the index page' do
             get :index, params: params
             expect(response).to have_http_status(200)
           end

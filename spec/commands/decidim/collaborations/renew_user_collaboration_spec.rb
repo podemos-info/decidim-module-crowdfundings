@@ -17,7 +17,7 @@ module Decidim
       subject { described_class.new(user_collaboration) }
 
       context 'valid?' do
-        context 'Collaboration do not accepts supports' do
+        context 'Collaboration does not accept supports' do
           before do
             allow(user_collaboration.collaboration).to receive(:accepts_supports?).and_return(false)
           end
