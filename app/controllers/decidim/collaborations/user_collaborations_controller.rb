@@ -33,7 +33,7 @@ module Decidim
         reject_user_collaboration if params[:result] == 'ko'
 
         redirect_to EngineRouter.main_proxy(current_feature)
-                    .collaboration_path(collaboration)
+                    .collaboration_path(user_collaboration.collaboration)
       end
 
       def accept_user_collaboration
