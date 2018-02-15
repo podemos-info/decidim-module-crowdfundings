@@ -14,6 +14,7 @@ shared_examples 'manage collaborations' do
       within '.new_collaboration' do
         fill_in :collaboration_minimum_custom_amount, with: 1_000
         select '100', from: :collaboration_default_amount
+        fill_in :collaboration_target_amount, with: 1_000_000
         find('*[type=submit]').click
       end
 
@@ -76,7 +77,7 @@ shared_examples 'manage collaborations' do
 
     it 'with invalid data' do
       within '.edit_collaboration' do
-        fill_in :collaboration_target_amount, with: ''
+        fill_in :collaboration_target_amount, with: 0
         find('*[type=submit]').click
       end
 
