@@ -29,7 +29,11 @@ And then execute:
 bundle
 bundle exec rails decidim_collaborations:install:migrations
 bundle exec rails db:migrate
+bundle exec rails generate decidim:collaborations:install
 ```
+
+Then you'll need to configure the environment variable CENSUS_URL to point to
+the running instance of [census].
 
 ## Tests
 
@@ -93,3 +97,5 @@ executed.
 ## License
 
 This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
+
+[census]: https://github.com/podemos-info/census
