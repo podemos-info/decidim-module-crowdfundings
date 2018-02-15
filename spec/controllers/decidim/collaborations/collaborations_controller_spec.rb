@@ -38,7 +38,7 @@ module Decidim
         context 'several collaborations' do
           let!(:collaborations) { create_list(:collaboration, 2, feature: feature) }
 
-          it 'redirects to the collaboration page' do
+          it 'shows the index page' do
             get :index, params: params
             expect(response).to have_http_status(200)
           end
