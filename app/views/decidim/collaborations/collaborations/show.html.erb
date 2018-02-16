@@ -14,6 +14,7 @@
       <% end %>
     </div>
   <% end %>
+
   <div class="columns<% if collaboration.target_amount.present? %> mediumlarge-8 mediumlarge-pull-4<% end %>">
     <div class="row column view-header">
       <h2 class="heading2"><%= translated_attribute collaboration.title %></h2>
@@ -21,6 +22,7 @@
     <div class="section">
       <%= sanitize translated_attribute collaboration.description %>
     </div>
+
     <% if user_signed_in? && can?(:support, collaboration) %>
       <div class="section">
         <%= render 'decidim/collaborations/collaborations/support_form' %>
