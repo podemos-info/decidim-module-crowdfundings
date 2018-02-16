@@ -23,12 +23,12 @@
       <%= sanitize translated_attribute collaboration.description %>
     </div>
 
-    <% if user_signed_in? && can?(:support, collaboration) %>
-      <div class="section">
-        <%= render 'decidim/collaborations/collaborations/support_form' %>
-      </div>
-    <% else %>
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <% if can?(:support, collaboration) %>
+        <div class="section">
+          <%= render 'decidim/collaborations/collaborations/support_form' %>
+        </div>
+      <% else %>
         <div class="callout alert">
           <%= support_status_message %>
         </div>
