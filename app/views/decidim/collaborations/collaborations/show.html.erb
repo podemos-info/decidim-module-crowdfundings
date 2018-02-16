@@ -24,7 +24,20 @@
     </div>
 
     <% if user_signed_in? %>
-      <% if can?(:support, collaboration) %>
+      <% if recurrent_user_collaboration %>
+        <div>
+          <p>
+            <%= t(".current_recurrent_support",
+                  amount: decidim_number_to_currency(recurrent_user_collaboration.amount),
+                  periodicity: recurrent_user_collaboration.frequency) %>
+          </p>
+
+          <p>
+            <%= t(".change_collaboration_html",
+                  here: link_to(t(".here"), decidim_collaborations_user_profile.edit_user_collaboration_path(recurrent_user_collaboration))) %>
+          </p>
+        </div>
+      <% elsif can?(:support, collaboration) %>
         <div class="section">
           <%= render 'decidim/collaborations/collaborations/support_form' %>
         </div>

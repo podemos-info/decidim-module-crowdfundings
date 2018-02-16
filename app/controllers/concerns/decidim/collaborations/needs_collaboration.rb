@@ -14,6 +14,7 @@ module Decidim
       def self.enhance_controller(instance_or_module)
         instance_or_module.class_eval do
           helper_method :collaboration
+          helper_method :recurrent_user_collaboration
           helper_method :support_status_message
 
           helper Decidim::Collaborations::CollaborationsHelper
@@ -28,6 +29,14 @@ module Decidim
         # Returns the current collaboration.
         def collaboration
           @collaboration ||= detect_collaboration
+        end
+
+        # Public: Finds the current recurrent user collaboration (if any) given
+        # this controller's context.
+        #
+        # Returns the current user recurrent collaboration.
+        def recurrent_user_collaboration
+          @recurrent_user_collaboration ||= detect_recurrent_user_collaboration
         end
 
         # Public: Returns the reason why collaboration is not allowed.
@@ -52,6 +61,15 @@ module Decidim
 
         def detect_collaboration
           Collaboration.find_by(id: params[:collaboration_id] || params[:id])
+        end
+
+        def detect_recurrent_user_collaboration
+          recurrent_user_collaborations = UserRecurrentCampaignCollaborations.new(current_user, collaboration)
+
+          return if recurrent_user_collaborations.none?
+          raise "Multiple recurrent collaborations for the same campaign!" unless recurrent_user_collaborations.one?
+
+          recurrent_user_collaborations.first
         end
       end
     end

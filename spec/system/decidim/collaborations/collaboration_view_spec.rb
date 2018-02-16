@@ -13,6 +13,8 @@ describe "Collaborations view", type: :system do
     ]
   end
 
+  let(:amount) { collaboration.target_amount / 2 }
+
   before do
     stub_payment_methods(payment_methods)
     stub_totals_request(500)
@@ -26,9 +28,9 @@ describe "Collaborations view", type: :system do
              :accepted,
              :punctual,
              collaboration: collaboration,
-             amount: collaboration.target_amount / 2)
+             user: confirmed_user,
+             amount: amount)
     end
-    let(:user) { user_collaboration.user }
 
     before do
       login_as(confirmed_user, scope: :user)
@@ -62,21 +64,53 @@ describe "Collaborations view", type: :system do
 
   context "with an assembly" do
     include_context "with assembly feature"
-    let!(:collaboration) { create(:collaboration, feature: feature) }
+
+    let!(:collaboration) do
+      create(:collaboration, feature: feature, target_amount: 10_000)
+    end
 
     before do
       login_as(confirmed_user, scope: :user)
-      visit_feature
     end
 
-    it "Frequency is monthly by default" do
-      amount = find(
-        :radio_button,
-        "user_collaboration[frequency]",
-        checked: true,
-        visible: false
-      )
-      expect(amount.value).to eq("monthly")
+    context "when the user has a recurrent collaboration" do
+      let!(:user_collaboration) do
+        create(:user_collaboration,
+               :accepted,
+               :monthly,
+               collaboration: collaboration,
+               user: confirmed_user,
+               amount: amount)
+      end
+
+      before do
+        visit_feature
+      end
+
+      it "contains user collaboration details" do
+        expect(page).to have_content("You are currently giving 500.00 € with monthly periodicity")
+      end
+
+      it "allows the user to change the recurrent collaboration frequency" do
+        expect(page).to have_content("You can change your current donation here")
+        expect(page).to have_link("here")
+      end
+    end
+
+    context "when the user does not have a recurrent collaboration" do
+      before do
+        visit_feature
+      end
+
+      it "Frequency is monthly by default" do
+        amount = find(
+          :radio_button,
+          "user_collaboration[frequency]",
+          checked: true,
+          visible: false
+        )
+        expect(amount.value).to eq("monthly")
+      end
     end
   end
 end
