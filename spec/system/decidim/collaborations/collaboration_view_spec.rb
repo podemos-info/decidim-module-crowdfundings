@@ -35,29 +35,27 @@ describe "Collaborations view", type: :system do
       visit_feature
     end
 
-    describe "show" do
-      it "Contains collaboration details" do
-        expect(page).to have_content(translated(collaboration.title))
-        expect(page).to have_content(strip_tags(translated(collaboration.description)))
-      end
+    it "Contains collaboration details" do
+      expect(page).to have_content(translated(collaboration.title))
+      expect(page).to have_content(strip_tags(translated(collaboration.description)))
+    end
 
-      it "Contains totals" do
-        within "#overall-totals-block" do
-          expect(page).to have_content(decidim_number_to_currency(collaboration.total_collected))
-          expect(page).to have_content("OVERALL PERCENTAGE: #{number_to_percentage(collaboration.percentage, precision: 0)}")
-          expect(page).to have_content(decidim_number_to_currency(collaboration.target_amount))
-        end
+    it "Contains totals" do
+      within "#overall-totals-block" do
+        expect(page).to have_content(decidim_number_to_currency(collaboration.total_collected))
+        expect(page).to have_content("OVERALL PERCENTAGE: #{number_to_percentage(collaboration.percentage, precision: 0)}")
+        expect(page).to have_content(decidim_number_to_currency(collaboration.target_amount))
       end
+    end
 
-      it "Frequency is punctual by default" do
-        frequency = find(:css, "#user_collaboration_frequency", visible: false)
-        expect(frequency.value).to eq("punctual")
-      end
+    it "Frequency is punctual by default" do
+      frequency = find(:css, "#user_collaboration_frequency", visible: false)
+      expect(frequency.value).to eq("punctual")
+    end
 
-      it "User payment methods are selectable" do
-        payment_methods.each do |method|
-          expect(page).to have_content(method[:name])
-        end
+    it "User payment methods are selectable" do
+      payment_methods.each do |method|
+        expect(page).to have_content(method[:name])
       end
     end
   end
@@ -71,16 +69,14 @@ describe "Collaborations view", type: :system do
       visit_feature
     end
 
-    describe "show" do
-      it "Frequency is monthly by default" do
-        amount = find(
-          :radio_button,
-          "user_collaboration[frequency]",
-          checked: true,
-          visible: false
-        )
-        expect(amount.value).to eq("monthly")
-      end
+    it "Frequency is monthly by default" do
+      amount = find(
+        :radio_button,
+        "user_collaboration[frequency]",
+        checked: true,
+        visible: false
+      )
+      expect(amount.value).to eq("monthly")
     end
   end
 end
