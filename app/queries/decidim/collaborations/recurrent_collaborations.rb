@@ -21,7 +21,7 @@ module Decidim
         UserCollaboration
           .includes(:collaboration, :user)
           .supported_by(user)
-          .where.not(frequency: 'punctual')
+          .where.not(frequency: "punctual")
           .order(created_at: :desc)
       end
     end

@@ -24,7 +24,7 @@ module Decidim
       def results
         @collaborations ||= Collaboration.transaction do
           Collaboration.connection.execute("SELECT setseed(#{Collaboration.connection.quote(random_seed)})")
-          super.reorder('RANDOM()').load
+          super.reorder("RANDOM()").load
         end
       end
 
@@ -46,7 +46,7 @@ module Decidim
       def localized_search_text_in(field)
         options[:organization].available_locales.map do |l|
           "#{field} ->> '#{l}' ILIKE :text"
-        end.join(' OR ')
+        end.join(" OR ")
       end
     end
   end

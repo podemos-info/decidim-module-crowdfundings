@@ -29,26 +29,26 @@ module Decidim
       # depending on the response response received through the
       # result attribute
       def validate
-        accept_user_collaboration if params[:result] == 'ok'
-        reject_user_collaboration if params[:result] == 'ko'
+        accept_user_collaboration if params[:result] == "ok"
+        reject_user_collaboration if params[:result] == "ko"
 
         redirect_to EngineRouter.main_proxy(current_feature)
-                    .collaboration_path(user_collaboration.collaboration)
+                                .collaboration_path(user_collaboration.collaboration)
       end
 
       def accept_user_collaboration
-        user_collaboration.update_attributes(state: 'accepted')
+        user_collaboration.update_attributes(state: "accepted")
         flash[:notice] = I18n.t(
-          'user_collaborations.validate.success',
-          scope: 'decidim.collaborations'
+          "user_collaborations.validate.success",
+          scope: "decidim.collaborations"
         )
       end
 
       def reject_user_collaboration
-        user_collaboration.update_attributes(state: 'rejected')
+        user_collaboration.update_attributes(state: "rejected")
         flash[:alert] = I18n.t(
-          'user_collaborations.validate.invalid',
-          scope: 'decidim.collaborations'
+          "user_collaborations.validate.invalid",
+          scope: "decidim.collaborations"
         )
       end
 
@@ -61,7 +61,7 @@ module Decidim
                   .from_params(params, collaboration: collaboration)
           @form.correct_payment_method
         else
-          render '/decidim/collaborations/collaborations/show'
+          render "/decidim/collaborations/collaborations/show"
         end
       end
 
@@ -69,16 +69,16 @@ module Decidim
 
       def invalid_creation
         flash.now[:alert] = I18n.t(
-          'user_collaborations.create.invalid',
-          scope: 'decidim.collaborations'
+          "user_collaborations.create.invalid",
+          scope: "decidim.collaborations"
         )
-        render action: 'confirm'
+        render action: "confirm"
       end
 
       def successful_creation
         flash[:notice] = I18n.t(
-          'user_collaborations.create.success',
-          scope: 'decidim.collaborations'
+          "user_collaborations.create.success",
+          scope: "decidim.collaborations"
         )
 
         redirect_to EngineRouter.main_proxy(current_feature)
@@ -87,7 +87,7 @@ module Decidim
 
       def credit_card_creation(form_data)
         @census = form_data
-        render '/decidim/collaborations/user_collaborations/census_credit_card'
+        render "/decidim/collaborations/user_collaborations/census_credit_card"
       end
 
       def user_collaboration

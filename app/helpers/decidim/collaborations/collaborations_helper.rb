@@ -9,7 +9,7 @@ module Decidim
       def decidim_number_to_currency(number)
         number_to_currency(number.nil? ? 0 : number,
                            unit: Decidim.currency_unit,
-                           format: '%n %u')
+                           format: "%n %u")
       end
 
       # PUBLIC returns a list of frequency options that can be used
@@ -24,14 +24,14 @@ module Decidim
       def frequency_label(frequency)
         I18n.t(
           frequency.to_sym,
-          scope: 'decidim.collaborations.labels.frequencies'
+          scope: "decidim.collaborations.labels.frequencies"
         )
       end
 
       def state_label(user_collaboration_state)
         I18n.t(
           user_collaboration_state.to_sym,
-          scope: 'decidim.collaborations.labels.user_collaboration.states'
+          scope: "decidim.collaborations.labels.user_collaboration.states"
         )
       end
 
@@ -48,7 +48,7 @@ module Decidim
       def payment_method_label(type)
         I18n.t(
           type.to_sym,
-          scope: 'decidim.collaborations.labels.payment_method_types'
+          scope: "decidim.collaborations.labels.payment_method_types"
         )
       end
     end

@@ -15,7 +15,7 @@ module CensusTestHelpers
     stub_request(:get, %r{/api/v1/payments/orders/total})
       .to_return(
         status: 422,
-        body: { error: 422, errorMessage: 'Error message' }.to_json,
+        body: { error: 422, errorMessage: "Error message" }.to_json,
         headers: {}
       )
   end
@@ -38,21 +38,21 @@ module CensusTestHelpers
     stub_request(:get, %r{/api/v1/payments/payment_methods})
       .to_return(
         status: 422,
-        body: 'Error message',
+        body: "Error message",
         headers: {}
       )
   end
 
   def stub_payment_methods_service_down
     allow(::Census::API::PaymentMethod).to receive(:get)
-                                           .with('/api/v1/payments/payment_methods', anything)
-                                           .and_raise(service_unavailable_exception)
+      .with("/api/v1/payments/payment_methods", anything)
+      .and_raise(service_unavailable_exception)
   end
 
   def stub_payment_method_service_down
     allow(::Census::API::PaymentMethod).to receive(:get)
-                                             .with('/api/v1/payments/payment_method', anything)
-                                             .and_raise(service_unavailable_exception)
+      .with("/api/v1/payments/payment_method", anything)
+      .and_raise(service_unavailable_exception)
   end
 
   def stub_payment_method(payment_method)
@@ -75,13 +75,13 @@ module CensusTestHelpers
 
   def stub_orders_service_down
     allow(::Census::API::Order).to receive(:post)
-                                     .with('/api/v1/payments/orders', anything)
-                                     .and_raise(service_unavailable_exception)
+      .with("/api/v1/payments/orders", anything)
+      .and_raise(service_unavailable_exception)
   end
 
   def service_unavailable_exception
-    response = Net::HTTPServiceUnavailable.new('1.1', 503, 'Service Unavailable')
-    Net::HTTPFatalError.new('503 Service Unavailable', response)
+    response = Net::HTTPServiceUnavailable.new("1.1", 503, "Service Unavailable")
+    Net::HTTPFatalError.new("503 Service Unavailable", response)
   end
 end
 

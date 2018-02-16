@@ -35,9 +35,9 @@ module Decidim
         errors.add(
           :amount,
           I18n.t(
-            'amount.minimum_valid_amount',
+            "amount.minimum_valid_amount",
             amount: context.collaboration.minimum_custom_amount,
-            scope: 'activemodel.errors.models.user_collaboration.attributes'
+            scope: "activemodel.errors.models.user_collaboration.attributes"
           )
         )
       end
@@ -51,9 +51,9 @@ module Decidim
         errors.add(
           :amount,
           I18n.t(
-            'amount.annual_limit_exceeded',
+            "amount.annual_limit_exceeded",
             amount: context.collaboration.minimum_custom_amount,
-            scope: 'activemodel.errors.models.user_collaboration.attributes'
+            scope: "activemodel.errors.models.user_collaboration.attributes"
           )
         )
       end

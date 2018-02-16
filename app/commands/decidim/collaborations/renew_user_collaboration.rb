@@ -43,7 +43,7 @@ module Decidim
         result = register_on_census
         if result[:http_response_code] == 201
           user_collaboration.update_attributes(
-            last_order_request_date: Date.today.beginning_of_month
+            last_order_request_date: Time.zone.today.beginning_of_month
           )
         end
 
@@ -60,7 +60,7 @@ module Decidim
           description: collaboration_description,
           amount: user_collaboration.amount * 100,
           campaign_code: user_collaboration.collaboration.id,
-          payment_method_type: 'existing_payment_method',
+          payment_method_type: "existing_payment_method",
           payment_method_id: user_collaboration.payment_method_id
         }
       end

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Collaborations
     module Admin
       describe CollaborationForm do
+        subject { described_class.from_params(attributes).with_context(context) }
+
         let(:organization) { create(:organization) }
         let(:participatory_process) do
           create :participatory_process, organization: organization
@@ -30,8 +32,8 @@ module Decidim
         let(:default_amount) { ::Faker::Number.number(2) }
         let(:minimum_custom_amount) { ::Faker::Number.number(3) }
         let(:target_amount) { ::Faker::Number.number(5) }
-        let(:amounts) { Decidim::Collaborations.selectable_amounts.join(', ') }
-        let(:active_until) { step.end_date.strftime('%Y-%m-%d') }
+        let(:amounts) { Decidim::Collaborations.selectable_amounts.join(", ") }
+        let(:active_until) { step.end_date.strftime("%Y-%m-%d") }
 
         let(:attributes) do
           {
@@ -46,86 +48,98 @@ module Decidim
           }
         end
 
-        subject { described_class.from_params(attributes).with_context(context) }
-
         it { is_expected.to be_valid }
 
-        describe 'when title is missing' do
+        describe "when title is missing" do
           let(:title) { { en: nil } }
+
           it { is_expected.not_to be_valid }
         end
 
-        describe 'when description is missing' do
+        describe "when description is missing" do
           let(:description) { { en: nil } }
+
           it { is_expected.not_to be_valid }
         end
 
-        describe 'when terms and conditions is missing' do
+        describe "when terms and conditions is missing" do
           let(:terms_and_conditions) { { en: nil } }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'default_amount' do
-          context 'is missing' do
+        describe "default_amount" do
+          context "when missing" do
             let(:default_amount) { nil }
+
             it { is_expected.not_to be_valid }
           end
 
-          context 'is less or equal 0' do
+          context "when less or equal than 0" do
             let(:default_amount) { 0 }
+
             it { is_expected.not_to be_valid }
           end
         end
 
-        context 'minimum_custom_amount' do
-          context 'is missing' do
+        describe "minimum_custom_amount" do
+          context "when is missing" do
             let(:minimum_custom_amount) { nil }
+
             it { is_expected.not_to be_valid }
           end
 
-          context 'is less or equal 0' do
+          context "when less or equal than 0" do
             let(:minimum_custom_amount) { 0 }
+
             it { is_expected.not_to be_valid }
           end
         end
 
-        context 'target_amount' do
-          context 'is missing' do
+        describe "target_amount" do
+          context "when missing" do
             let(:target_amount) { nil }
+
             it { is_expected.to be_valid }
           end
 
-          context 'is less or equal 0' do
+          context "with less or equal than 0" do
             let(:target_amount) { 0 }
+
             it { is_expected.not_to be_valid }
           end
         end
 
-        context 'amounts' do
-          context 'is missing' do
+        describe "amounts" do
+          context "when missing" do
             let(:amounts) { nil }
+
             it { is_expected.not_to be_valid }
           end
 
-          context 'invalid format' do
-            let(:amounts) { 'weird input' }
+          context "with invalid format" do
+            let(:amounts) { "weird input" }
+
             it { is_expected.not_to be_valid }
           end
         end
 
-        context 'active_until' do
-          context "is valid when it's blank" do
-            let(:active_until) { '' }
+        describe "active_until" do
+          context "when blank" do
+            let(:active_until) { "" }
+
             it { is_expected.to be_valid }
           end
 
-          context 'is valid when it is inside step bounds' do
-            let(:active_until) { (step.end_date - 1.day).strftime('%Y-%m-%d') }
+          context "when inside step bounds" do
+            let(:active_until) { (step.end_date - 1.day).strftime("%Y-%m-%d") }
+
             it { is_expected.to be_valid }
           end
 
-          context 'is invalid when it is outside step bounds' do
-            let(:active_until) { (step.end_date + 1.day).strftime('%Y-%m-%d') }
+          context "when outside step bounds" do
+            let(:active_until) { (step.end_date + 1.day).strftime("%Y-%m-%d") }
+
             it { is_expected.not_to be_valid }
           end
         end

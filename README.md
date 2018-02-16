@@ -1,6 +1,7 @@
 # Decidim::Collaborations
-This rails engine implements a Decidim feature that allows to the administrators to
-configure crowfunding campaigns for a participatory space.
+
+This rails engine implements a Decidim feature that allows to the administrators
+to configure crowfunding campaigns for a participatory space.
 
 ## Usage
 
@@ -8,13 +9,14 @@ This plugin provides:
 
 * A CRUD engine to manage crowfunding campaigns.
 
-* Public views for for crowfunding campaigns via a menu inside each participatory space.
+* Public views for crowfunding campaigns via a menu inside each participatory space.
 
 * An interface with Census API.
 
 * Rake tasks necessary to automatize recurrent payments.
 
 ## Installation
+
 Add the following lines to your application's Gemfile:
 
 ```ruby
@@ -22,10 +24,11 @@ gem 'decidim-collaborations'
 ```
 
 And then execute:
+
 ```bash
-$ bundle
-$ bundle exec rails decidim_collaborations:install:migrations
-$ bundle exec rails db:migrate
+bundle
+bundle exec rails decidim_collaborations:install:migrations
+bundle exec rails db:migrate
 ```
 
 ## Tests
@@ -33,13 +36,14 @@ $ bundle exec rails db:migrate
 In order to execute the tests data from iban_bic gem must be populated as well:
 
 ```bash
-$ bundle exec rails db:migrate RAILS_ENV=test
+bundle exec rails db:migrate RAILS_ENV=test
 ```
 
 ## Docker & Docker compose
 
-This engine is supplied with Docker compose files. If you want to use them you need to
-check the *spec/decidim_dummy_app/database.yml* and adjust the database settings:
+This engine is supplied with Docker compose files. If you want to use them you
+need to check the *spec/decidim_dummy_app/database.yml* and adjust the database
+settings:
 
 ```yaml
 default: &default
@@ -51,40 +55,41 @@ default: &default
   host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
   username: <%= ENV.fetch("DATABASE_USERNAME") { "admin" } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "admin" } %>
-``` 
- 
-If you desire to use different settingsyou need to check the 
-Docker compose settings and adjust the setup of the PostgreSQL
-image.
+```
 
-Finally remember that the Docker file do not includes any command relative to the 
-database setup. Due to this limitation, the first time that you execute
-the app you must execute the following commands:
+If you desire to use different settingsyou need to check the Docker compose
+settings and adjust the setup of the PostgreSQL image.
+
+Finally remember that the Docker file do not includes any command relative to
+the database setup. Due to this limitation, the first time that you execute the
+app you must execute the following commands:
 
 ```bash
-$ docker-compose run web bash
-$ cd spec/decidim_dummy_app
-$ bundle exec rails db:create
-$ bundle exec rails db:migrate
-$ bundle exec rails db:seed
+docker-compose run web bash
+cd spec/decidim_dummy_app
+bundle exec rails db:create
+bundle exec rails db:migrate
+bundle exec rails db:seed
 ```
 
 ## Rake tasks
 
 This engine provides the following rake tasks:
 
-### decidim_collaborations:recurrent_collaborations 
+### decidim_collaborations:recurrent_collaborations
 
-This task collects all recurrent collaborations that need to be renewed. Ideally it
-should be automatically executed at least once per month.
+This task collects all recurrent collaborations that need to be renewed. Ideally
+it should be automatically executed at least once per month.
 
 ### decidim_collaborations:update_status
 
 This task collects all user collaborations in pending status. Then proceeds querying
-Census about the payment method status. According to Census response the collaboration will
-be accepted or rejected. This process should be executed several times per month, ideally on 
-periods of low load. It should be executed at least once before the *decidim_collaborations:recurrent_collaborations*
-is executed.
+Census about the payment method status. According to Census response the
+collaboration will be accepted or rejected. This process should be executed
+several times per month, ideally on periods of low load. It should be executed
+at least once before the *decidim_collaborations:recurrent_collaborations* is
+executed.
 
 ## License
+
 This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.

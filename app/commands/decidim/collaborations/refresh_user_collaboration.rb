@@ -33,15 +33,11 @@ module Decidim
       end
 
       def refresh_collaboration_status(census_result)
-        return if census_result[:status] == 'pending'
+        return if census_result[:status] == "pending"
 
-        if census_result[:status] == 'active'
-          user_collaboration.update(state: 'accepted')
-        end
+        user_collaboration.update(state: "accepted") if census_result[:status] == "active"
 
-        if census_result[:status] == 'inactive'
-          user_collaboration.update(state: 'rejected')
-        end
+        user_collaboration.update(state: "rejected") if census_result[:status] == "inactive"
       end
     end
   end

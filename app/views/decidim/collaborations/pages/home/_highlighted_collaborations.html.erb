@@ -3,7 +3,7 @@
   <div class="row collapse">
     <div class="row small-up-1 smallmedium-up-<%= [highlighted_collaborations_count, 2].min %> mediumlarge-up-<%= [highlighted_collaborations_count, 3].min %>
       large-up-<%= [2, [highlighted_collaborations_count, 4].min].max %> card-grid">
-      <% highlighted_collaborations.each do |collaboration| 
+      <% highlighted_collaborations.each do |collaboration|
         resource_locator = ::Decidim::ResourceLocatorPresenter.new(collaboration) %>
         <div class="column">
           <article class="card card--assembly card--mini">

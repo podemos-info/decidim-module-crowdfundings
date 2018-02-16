@@ -32,15 +32,11 @@ module Decidim
 
         # Public: Returns the reason why collaboration is not allowed.
         def support_status_message
-          if maximum_per_year_reached?
-            return I18n.t 'decidim.collaborations.labels.support_status.maximum_annual_exceeded'
-          end
+          return I18n.t "decidim.collaborations.labels.support_status.maximum_annual_exceeded" if maximum_per_year_reached?
 
-          if out_of_collaboration_period?
-            return I18n.t 'decidim.collaborations.labels.support_status.support_period_finished'
-          end
+          return I18n.t "decidim.collaborations.labels.support_status.support_period_finished" if out_of_collaboration_period?
 
-          I18n.t 'decidim.collaborations.labels.support_status.collaboration_not_allowed'
+          I18n.t "decidim.collaborations.labels.support_status.collaboration_not_allowed"
         end
 
         private
@@ -51,7 +47,7 @@ module Decidim
         end
 
         def out_of_collaboration_period?
-          collaboration.active_until && collaboration.active_until < Date.today
+          collaboration.active_until && collaboration.active_until < Time.zone.today
         end
 
         def detect_collaboration

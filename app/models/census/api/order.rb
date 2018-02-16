@@ -5,7 +5,7 @@ module Census
     # This class represents an Order in Census API
     class Order < CensusAPI
       def self.create(params)
-        response = post('/api/v1/payments/orders', body: params)
+        response = post("/api/v1/payments/orders", body: params)
 
         json_response = JSON.parse(response.body, symbolize_names: true)
         json_response[:http_response_code] = response.code.to_i

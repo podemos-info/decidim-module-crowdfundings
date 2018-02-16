@@ -4,7 +4,7 @@ module Decidim
   module Collaborations
     module UserProfile
       # Provides methods for the user to manage his recurrent collaborations.
-      class UserCollaborationsController  < Decidim::Collaborations::UserProfile::ApplicationController
+      class UserCollaborationsController < Decidim::Collaborations::UserProfile::ApplicationController
         helper_method :collaborations, :user_collaboration, :collaboration,
                       :user_collaboration_form
 
@@ -19,11 +19,11 @@ module Decidim
           UpdateUserCollaboration.call(form_from_params) do
             on(:ok) do
               redirect_to user_collaborations_path,
-                          notice: I18n.t('decidim.collaborations.user_profile.user_collaborations.update.success')
+                          notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.update.success")
             end
 
             on(:invalid) do
-              flash.now.alert = I18n.t('decidim.collaborations.user_profile.user_collaborations.update.fail')
+              flash.now.alert = I18n.t("decidim.collaborations.user_profile.user_collaborations.update.fail")
               render :edit
             end
           end
@@ -32,13 +32,13 @@ module Decidim
         def pause
           authorize! :update, user_collaboration
 
-          UpdateUserCollaborationState.call(user_collaboration, 'paused') do
+          UpdateUserCollaborationState.call(user_collaboration, "paused") do
             on(:ok) do
-              redirect_to user_collaborations_path, notice: I18n.t('decidim.collaborations.user_profile.user_collaborations.pause.success')
+              redirect_to user_collaborations_path, notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.pause.success")
             end
 
             on(:ko) do
-              redirect_to user_collaborations_path, alert: I18n.t('decidim.collaborations.user_profile.user_collaborations.pause.fail')
+              redirect_to user_collaborations_path, alert: I18n.t("decidim.collaborations.user_profile.user_collaborations.pause.fail")
             end
           end
         end
@@ -46,13 +46,13 @@ module Decidim
         def resume
           authorize! :resume, user_collaboration
 
-          UpdateUserCollaborationState.call(user_collaboration, 'accepted') do
+          UpdateUserCollaborationState.call(user_collaboration, "accepted") do
             on(:ok) do
-              redirect_to user_collaborations_path, notice: I18n.t('decidim.collaborations.user_profile.user_collaborations.resume.success')
+              redirect_to user_collaborations_path, notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.resume.success")
             end
 
             on(:ko) do
-              redirect_to user_collaborations_path, alert: I18n.t('decidim.collaborations.user_profile.user_collaborations.resume.fail')
+              redirect_to user_collaborations_path, alert: I18n.t("decidim.collaborations.user_profile.user_collaborations.resume.fail")
             end
           end
         end

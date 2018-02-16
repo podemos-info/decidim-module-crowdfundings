@@ -15,7 +15,7 @@ module Decidim
         protected
 
         def amounts
-          form.amounts.split(',').map(&:to_i).uniq.sort { |a, b| a - b}
+          form.amounts.split(",").map(&:to_i).uniq.sort { |a, b| a - b }
         end
       end
     end

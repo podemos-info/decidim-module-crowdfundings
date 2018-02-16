@@ -1,16 +1,19 @@
-#### :tophat: What? Why?
+# :tophat: What? Why?
 
+## :pushpin: Related Issues
 
-#### :pushpin: Related Issues
 - Related to #?
 - Fixes #?
 
-#### :clipboard: Subtasks
+## :clipboard: Subtasks
+
 - [x] Subtask 1
 - [ ] Subtask 2
 
-### :camera: Screenshots (optional)
+## :camera: Screenshots (optional)
+
 ![Description](URL)
 
-#### :ghost: GIF
+## :ghost: GIF
+
 ![]()

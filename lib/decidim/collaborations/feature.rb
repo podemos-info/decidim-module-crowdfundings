@@ -1,26 +1,24 @@
 # frozen_string_literal: true
 
-require 'decidim/features/namer'
+require "decidim/features/namer"
 
 Decidim.register_feature(:collaborations) do |feature|
   feature.engine = Decidim::Collaborations::Engine
   feature.admin_engine = Decidim::Collaborations::AdminEngine
-  feature.icon = 'decidim/collaborations/icon.svg'
-  feature.stylesheet = 'decidim/collaborations/collaborations'
+  feature.icon = "decidim/collaborations/icon.svg"
+  feature.stylesheet = "decidim/collaborations/collaborations"
 
   feature.on(:before_destroy) do |instance|
-    if Decidim::Collaboration.where(feature: instance).any?
-      raise StandardError, "Can't remove this feature"
-    end
+    raise StandardError, "Can't remove this feature" if Decidim::Collaboration.where(feature: instance).any?
   end
 
   feature.register_resource do |resource|
-    resource.model_class_name = 'Decidim::Collaborations::Collaboration'
-    resource.template = 'decidim/collaborations/collaborations/linked_collaborations'
+    resource.model_class_name = "Decidim::Collaborations::Collaboration"
+    resource.template = "decidim/collaborations/collaborations/linked_collaborations"
   end
 
   # These actions permissions can be configured in the admin panel
-  feature.actions = %w[]
+  feature.actions = %w()
 
   feature.settings(:global) do |_settings|
   end
@@ -49,10 +47,10 @@ Decidim.register_feature(:collaborations) do |feature|
     collaboration = Decidim::Collaborations::Collaboration.create!(
       feature: feature,
       title: Decidim::Faker::Localized.sentence(2),
-      description: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
+      description: Decidim::Faker::Localized.wrapped("<p>", "</p>") do
         Decidim::Faker::Localized.paragraph(3)
       end,
-      terms_and_conditions: Decidim::Faker::Localized.wrapped('<p>', '</p>') do
+      terms_and_conditions: Decidim::Faker::Localized.wrapped("<p>", "</p>") do
         Decidim::Faker::Localized.paragraph(5)
       end,
       minimum_custom_amount: 1_000,
@@ -68,8 +66,8 @@ Decidim.register_feature(:collaborations) do |feature|
         user: author,
         collaboration: collaboration,
         amount: 50,
-        state: 'accepted',
-        last_order_request_date: Date.today.beginning_of_month
+        state: "accepted",
+        last_order_request_date: Time.zone.today.beginning_of_month
       )
     end
   end

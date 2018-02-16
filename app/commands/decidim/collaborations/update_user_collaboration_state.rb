@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Decidim
   module Collaborations
     # Rectify command that updates the user collaboration state

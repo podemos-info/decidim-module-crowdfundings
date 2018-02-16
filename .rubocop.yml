@@ -1054,50 +1054,8 @@ Style/WordArray:
 
 ##################### Metrics ##################################
 
-Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be an Integer or
-  # a Float.
-  Max: 15
+Metrics:
   Enabled: false
-
-Metrics/BlockNesting:
-  Max: 3
-
-Metrics/ClassLength:
-  CountComments: false  # count full line comments?
-  Max: 100
-  Enabled: false
-
-Metrics/ModuleLength:
-  CountComments: false  # count full line comments?
-  Max: 100
-  Enabled: false
-
-# Avoid complex methods.
-Metrics/CyclomaticComplexity:
-  Max: 9
-
-Metrics/LineLength:
-  Max: 180
-  # To make it possible to copy or click on URIs in the code, we allow lines
-  # containing a URI to be longer than Max.
-  AllowHeredoc: true
-  AllowURI: true
-  URISchemes:
-    - http
-    - https
-
-Metrics/MethodLength:
-  CountComments: false  # count full line comments?
-  Max: 15
-  Enabled: false
-
-Metrics/ParameterLists:
-  Max: 5
-  CountKeywordArgs: true
-
-Metrics/PerceivedComplexity:
-  Max: 10
 
 ##################### Lint ##################################
 

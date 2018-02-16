@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Collaborations
     describe UpdateUserCollaboration do
+      subject { described_class.new(form) }
+
       let(:organization) { create(:organization) }
       let(:participatory_process) { create :participatory_process, organization: organization }
       let(:current_feature) { create :collaboration_feature, participatory_space: participatory_process }
@@ -29,7 +31,7 @@ module Decidim
       end
 
       let(:amount) { ::Faker::Number.number(4).to_i }
-      let(:frequency) { 'punctual' }
+      let(:frequency) { "punctual" }
 
       let(:form) do
         Decidim::Collaborations::UserProfile::UserCollaborationForm
@@ -39,46 +41,44 @@ module Decidim
           ).with_context(context)
       end
 
-      subject { described_class.new(form) }
-
       before do
         stub_totals_request(0)
       end
 
-      context 'when the form is not valid' do
+      context "when the form is not valid" do
         before do
           allow(form).to receive(:invalid?).and_return(true)
         end
 
-        it 'is not valid' do
+        it "is not valid" do
           expect { subject.call }.to broadcast(:invalid)
         end
       end
 
-      context 'Census service is down' do
+      context "when census service is down" do
         before do
           stub_totals_service_down
         end
 
-        it 'is not valid' do
+        it "is not valid" do
           expect { subject.call }.to broadcast(:invalid)
         end
       end
 
-      context 'invalid frequency' do
-        let(:frequency) { 'invalid value' }
+      context "with invalid frequency" do
+        let(:frequency) { "invalid value" }
 
-        it 'is not valid' do
+        it "is not valid" do
           expect { subject.call }.to broadcast(:invalid)
         end
       end
 
-      context 'when everything is ok' do
+      context "when everything is ok" do
         before do
           stub_totals_request(0)
         end
 
-        it 'broadcasts ok' do
+        it "broadcasts ok" do
           expect { subject.call }.to broadcast(:ok)
         end
       end

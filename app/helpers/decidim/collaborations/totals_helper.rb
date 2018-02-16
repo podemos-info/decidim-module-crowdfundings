@@ -6,7 +6,7 @@ module Decidim
     module TotalsHelper
       # PUBLIC: Generates the ID for the totals block.
       def totals_block_id(user)
-        return 'overall-totals-block' if user.nil?
+        return "overall-totals-block" if user.nil?
         "overall-totals-user-#{user.id}"
       end
 
@@ -14,19 +14,17 @@ module Decidim
       # on the totals scope: global or user.
       def totals_title(user)
         if user.nil?
-          return I18n.t('overall_totals',
-                        scope: 'decidim.collaborations.collaborations.totals')
+          return I18n.t("overall_totals",
+                        scope: "decidim.collaborations.collaborations.totals")
         end
 
-        I18n.t('user_totals', scope: 'decidim.collaborations.collaborations.totals')
+        I18n.t("user_totals", scope: "decidim.collaborations.collaborations.totals")
       end
 
       # PUBLIC: Retrieves total collected depending on the context for totals
       # block
       def total_collected(collaboration, user)
-        if user.nil?
-          return total_collected_to_currency collaboration.total_collected
-        end
+        return total_collected_to_currency collaboration.total_collected if user.nil?
 
         total_collected_to_currency collaboration.user_total_collected(user)
       end
@@ -35,9 +33,7 @@ module Decidim
       # decimal places.
       def percentage(collaboration, user)
         value = percentage_value(collaboration, user)
-        if value.nil?
-          return I18n.t('decidim.collaborations.labels.not_available')
-        end
+        return I18n.t("decidim.collaborations.labels.not_available") if value.nil?
 
         number_to_percentage value, precision: 0
       end
@@ -59,13 +55,13 @@ module Decidim
         content_tag(:div,
                     class: "extra__percentage percentage #{css_class}".strip) do
           5.times do
-            concat(content_tag(:span, class: 'percentage__item') {})
+            concat(content_tag(:span, class: "percentage__item") {})
           end
 
-          concat(content_tag(:span, class: 'percentage__desc') do
+          concat(content_tag(:span, class: "percentage__desc") do
             decidim_number_to_currency(collaboration.target_amount)
             I18n.t(
-              'decidim.collaborations.collaborations.totals.target_amount',
+              "decidim.collaborations.collaborations.totals.target_amount",
               amount: decidim_number_to_currency(collaboration.target_amount)
             )
           end)
@@ -75,21 +71,24 @@ module Decidim
       # PUBLIC returns the percentage CSS class to apply for a given
       # percentage value.
       def percentage_class(percentage)
-        return '' if percentage.blank?
-        return 'percentage--level1' if percentage >= 0 && percentage < 40
-        return 'percentage--level2' if percentage >= 40 && percentage < 60
-        return 'percentage--level3' if percentage >= 60 && percentage < 80
-        return 'percentage--level4' if percentage >= 80 && percentage < 100
-        return 'percentage--level5' if percentage >= 100
+        return "" if percentage.blank?
 
-        ''
+        if percentage >= 0 && percentage < 40
+          "percentage--level1"
+        elsif percentage >= 40 && percentage < 60
+          "percentage--level2"
+        elsif percentage >= 60 && percentage < 80
+          "percentage--level3"
+        elsif percentage >= 80 && percentage < 100
+          "percentage--level4"
+        elsif percentage >= 100
+          "percentage--level5"
+        end
       end
 
       # PUBLIC converts the amount collected into a currency string.
       def total_collected_to_currency(total_collected)
-        if total_collected.nil?
-          return I18n.t('decidim.collaborations.labels.not_available')
-        end
+        return I18n.t("decidim.collaborations.labels.not_available") if total_collected.nil?
         decidim_number_to_currency(total_collected)
       end
     end

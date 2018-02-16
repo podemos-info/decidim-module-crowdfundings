@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Collaborations view', type: :system do
-  include_context 'with a feature'
-  let(:manifest_name) { 'collaborations' }
+describe "Collaborations view", type: :system do
+  include_context "with a feature"
+  let(:manifest_name) { "collaborations" }
   let(:active_until) { nil }
   let!(:collaboration) do
     create(:collaboration, feature: feature, active_until: active_until)
@@ -15,44 +15,44 @@ describe 'Collaborations view', type: :system do
     login_as(user, scope: :user)
   end
 
-  context 'Census API is down' do
+  context "when API is down" do
     before do
       stub_totals_service_down
       visit_feature
     end
 
-    it 'Gives feedback about status' do
-      expect(page).to have_content('Collaboration is not allowed at this moment.')
+    it "Gives feedback about status" do
+      expect(page).to have_content("Collaboration is not allowed at this moment.")
     end
   end
 
-  context 'User has reached his maximum per year' do
+  context "when user has reached his maximum per year" do
     before do
       allow(Census::API::Totals).to receive(:campaign_totals).with(collaboration.id).and_return(0)
       allow(Census::API::Totals).to receive(:user_totals)
-                                .with(user.id)
-                                .and_return(Decidim::Collaborations.maximum_annual_collaboration)
+        .with(user.id)
+        .and_return(Decidim::Collaborations.maximum_annual_collaboration)
       allow(Census::API::Totals).to receive(:user_campaign_totals)
-                                      .with(user.id, collaboration.id)
-                                      .and_return(0)
+        .with(user.id, collaboration.id)
+        .and_return(0)
       visit_feature
     end
 
-    it 'Gives feedback about status' do
-      expect(page).to have_content('You can not create more collaborations. You have reached the maximum yearly allowed.')
+    it "Gives feedback about status" do
+      expect(page).to have_content("You can not create more collaborations. You have reached the maximum yearly allowed.")
     end
   end
 
-  context 'Out of collaboration period' do
-    let(:active_until) { Date.today - 1.day }
+  context "when out of collaboration period" do
+    let(:active_until) { Time.zone.today - 1.day }
 
     before do
       stub_totals_request(0)
       visit_feature
     end
 
-    it 'Gives feedback about status' do
-      expect(page).to have_content('The period for accepting collaborations has expired.')
+    it "Gives feedback about status" do
+      expect(page).to have_content("The period for accepting collaborations has expired.")
     end
   end
 end

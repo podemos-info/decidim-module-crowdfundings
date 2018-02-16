@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module Collaborations
     describe UserCollaborationForm do
+      subject { described_class.from_params(attributes).with_context(context) }
+
       let(:collaboration) { create(:collaboration) }
 
       let(:current_user) { create(:user, organization: collaboration.organization) }
       let(:amount) { ::Faker::Number.number(4) }
-      let(:frequency) { 'punctual' }
-      let(:payment_method_type) { 'existing_payment_method' }
+      let(:frequency) { "punctual" }
+      let(:payment_method_type) { "existing_payment_method" }
       let(:user_annual_accumulated) { 0 }
       let(:over_18) { true }
       let(:accept_terms_and_conditions) { true }
@@ -33,63 +35,71 @@ module Decidim
         }
       end
 
-      subject { described_class.from_params(attributes).with_context(context) }
-
       before do
         stub_totals_request(user_annual_accumulated)
       end
 
       it { is_expected.to be_valid }
 
-      context 'amount' do
-        context 'is missing' do
+      describe "amount" do
+        context "when missing" do
           let(:amount) { nil }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'is zero' do
+        context "when zero" do
           let(:amount) { 0 }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'is a negative number' do
+        context "when a negative number" do
           let(:amount) { -1 }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'is not an integer' do
+        context "when not an integer" do
           let(:amount) { 1.01 }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'it is bellow the minimum valid' do
+        context "when bellow the minimum valid" do
           let(:amount) { collaboration.minimum_custom_amount - 1 }
+
           it { is_expected.not_to be_valid }
         end
 
-        context 'it puts the accumulated annual after the limit' do
+        context "when over the maximum" do
           let(:user_annual_accumulated) { Decidim::Collaborations.maximum_annual_collaboration }
+
           it { is_expected.not_to be_valid }
         end
       end
 
-      context 'when frequency is missing' do
+      context "when frequency is missing" do
         let(:frequency) { nil }
+
         it { is_expected.not_to be_valid }
       end
 
-      context 'when payment method is missing' do
+      context "when payment method is missing" do
         let(:payment_method_type) { nil }
+
         it { is_expected.not_to be_valid }
       end
 
-      context 'over 18 is missing' do
+      context "when over 18 is missing" do
         let(:over_18) { nil }
+
         it { is_expected.not_to be_valid }
       end
 
-      context 'accept_terms_and_conditions is missing' do
+      context "when accept_terms_and_conditions is missing" do
         let(:accept_terms_and_conditions) { nil }
+
         it { is_expected.not_to be_valid }
       end
     end

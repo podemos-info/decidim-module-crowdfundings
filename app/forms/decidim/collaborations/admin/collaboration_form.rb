@@ -43,21 +43,21 @@ module Decidim
                  unless: proc { |form| form.active_until.blank? }
 
         def map_model(collaboration)
-          self.amounts = collaboration.amounts&.join(', ')
+          self.amounts = collaboration.amounts&.join(", ")
         end
 
         private
 
         def amounts_consistency
-          unless value_list?(amounts)
-            errors.add(
-              :amounts,
-              I18n.t(
-                'amounts.invalid_format',
-                scope: 'activemodel.errors.models.collaboration.attributes'
-              )
+          return if value_list?(amounts)
+
+          errors.add(
+            :amounts,
+            I18n.t(
+              "amounts.invalid_format",
+              scope: "activemodel.errors.models.collaboration.attributes"
             )
-          end
+          )
         end
 
         def value_list?(value)
@@ -72,8 +72,8 @@ module Decidim
           errors.add(
             :active_until,
             I18n.t(
-              'active_until.outside_process_range',
-              scope: 'activemodel.errors.models.collaboration.attributes'
+              "active_until.outside_process_range",
+              scope: "activemodel.errors.models.collaboration.attributes"
             )
           )
         end
