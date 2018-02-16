@@ -65,14 +65,6 @@ module Decidim
         end
       end
 
-      context "with invalid frequency" do
-        let(:frequency) { "invalid value" }
-
-        it "is not valid" do
-          expect { subject.call }.to broadcast(:invalid)
-        end
-      end
-
       context "when everything is ok" do
         before do
           stub_totals_request(0)

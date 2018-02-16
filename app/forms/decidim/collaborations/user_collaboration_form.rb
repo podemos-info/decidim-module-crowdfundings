@@ -16,7 +16,7 @@ module Decidim
                 presence: true,
                 numericality: { only_integer: true, greater_than: 0 }
 
-      validates :frequency, presence: true
+      validates :frequency, presence: true, inclusion: { in: UserCollaboration.frequencies }
       validates :payment_method_type, presence: true
       validates :over_18, presence: true
       validates :accept_terms_and_conditions, presence: true
