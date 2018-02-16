@@ -22,9 +22,9 @@ module Decidim
                           notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.update.success")
             end
 
-            on(:invalid) do
+            on(:invalid) do |form|
               flash.now.alert = I18n.t("decidim.collaborations.user_profile.user_collaborations.update.fail")
-              render :edit
+              render action: :edit, locals: { user_collaboration_form: form }
             end
           end
         end

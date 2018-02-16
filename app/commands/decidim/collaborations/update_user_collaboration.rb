@@ -14,7 +14,7 @@ module Decidim
       #
       # Broadcasts :ok if successful, :invalid otherwise.
       def call
-        return broadcast(:invalid) if form.invalid?
+        return broadcast(:invalid, form) if form.invalid?
 
         if form.context.user_collaboration.update(form.attributes)
           broadcast(:ok)
