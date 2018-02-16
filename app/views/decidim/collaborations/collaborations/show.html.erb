@@ -25,7 +25,7 @@
 
     <% if user_signed_in? %>
       <% if recurrent_user_collaboration %>
-        <div>
+        <div id="collaboration-info">
           <p>
             <%= t(".current_recurrent_support",
                   amount: decidim_number_to_currency(recurrent_user_collaboration.amount),

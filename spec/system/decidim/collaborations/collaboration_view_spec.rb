@@ -13,7 +13,7 @@ describe "Collaborations view", type: :system do
     ]
   end
 
-  let(:amount) { collaboration.target_amount / 2 }
+  let(:amount) { 500 }
 
   before do
     stub_payment_methods(payment_methods)
@@ -87,13 +87,19 @@ describe "Collaborations view", type: :system do
         visit_feature
       end
 
-      it "contains user collaboration details" do
+      it "allows the user to change the recurrent collaboration" do
         expect(page).to have_content("You are currently giving 500.00 € with monthly periodicity")
-      end
 
-      it "allows the user to change the recurrent collaboration frequency" do
-        expect(page).to have_content("You can change your current donation here")
-        expect(page).to have_link("here")
+        expect(page).to have_content("You can change your current collaboration here")
+
+        within find("#collaboration-info") do
+          click_link "here"
+        end
+
+        find("label[for=user_collaboration_frequency_quarterly]").click
+        click_button "Update"
+
+        expect(page).to have_content("You are currently giving 500.00 € with quarterly periodicity")
       end
     end
 

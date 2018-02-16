@@ -11,6 +11,8 @@ module Decidim
         def index; end
 
         def edit
+          session[return_back_session_key] = request.referer
+
           authorize! :update, user_collaboration
         end
 
@@ -18,8 +20,10 @@ module Decidim
           authorize! :update, user_collaboration
           UpdateUserCollaboration.call(form_from_params) do
             on(:ok) do
-              redirect_to user_collaborations_path,
-                          notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.update.success")
+              redirect_to(
+                session.delete(return_back_session_key) || user_collaborations_path,
+                notice: I18n.t("decidim.collaborations.user_profile.user_collaborations.update.success")
+              )
             end
 
             on(:invalid) do |form|
@@ -83,6 +87,10 @@ module Decidim
             .from_params(params,
                          collaboration: collaboration,
                          user_collaboration: user_collaboration)
+        end
+
+        def return_back_session_key
+          session[:"#{params[:controller]}_return_after_update"]
         end
       end
     end
