@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 6647a17f473542f7c3320a8fd33e4986ecfe1c61
+  revision: 2d579735d2c4a16a3b2c443b68377143d5d03fe4
   branch: master
   specs:
     decidim (0.10.0.pre)
@@ -69,7 +69,7 @@ GIT
       omniauth-google-oauth2 (~> 0.5.0)
       omniauth-twitter (~> 1.4)
       paper_trail (~> 8.0)
-      pg (~> 0.18)
+      pg (>= 0.18, < 2)
       premailer-rails (~> 1.9)
       rails (~> 5.1, < 5.2)
       rails-i18n (~> 5.0)
@@ -416,7 +416,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.0.0)
       ast (~> 2.4.0)
-    pg (0.21.0)
+    pg (1.0.0)
     polyamorous (1.3.3)
       activerecord (>= 3.0)
     powerpack (0.1.1)
