@@ -27,13 +27,13 @@
       <% if recurrent_user_collaboration %>
         <div id="collaboration-info">
           <p>
-            <%= t(".current_recurrent_support",
+            <%= t(".current_#{recurrent_user_collaboration.state}_recurrent_support",
                   amount: decidim_number_to_currency(recurrent_user_collaboration.amount),
                   periodicity: recurrent_user_collaboration.frequency) %>
           </p>
 
           <p>
-            <%= t(".change_collaboration_html",
+            <%= t(".change_#{recurrent_user_collaboration.state}_collaboration_html",
                   here: link_to(t(".here"), decidim_collaborations_user_profile.edit_user_collaboration_path(recurrent_user_collaboration))) %>
           </p>
         </div>

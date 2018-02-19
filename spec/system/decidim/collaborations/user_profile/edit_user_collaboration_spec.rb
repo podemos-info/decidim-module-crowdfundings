@@ -21,10 +21,6 @@ describe "Explore collaborations", type: :system do
     visit decidim_collaborations_user_profile.user_collaborations_path
   end
 
-  it "Link that edit the user collaboration exists" do
-    expect(page).to have_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
-  end
-
   context "when edit link visited" do
     before do
       link = find_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
@@ -35,6 +31,10 @@ describe "Explore collaborations", type: :system do
       expect(page).to have_content("SELECT THE AMOUNT")
       expect(page).to have_content("SELECT THE FREQUENCY")
       expect(page).to have_content("UPDATE")
+    end
+
+    it "does not allow changing the collaboration to punctual" do
+      expect(page).to have_no_content("Puntual")
     end
   end
 

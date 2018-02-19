@@ -15,9 +15,13 @@ module Decidim
       # PUBLIC returns a list of frequency options that can be used
       # in a select input tag.
       def frequency_options
-        UserCollaboration.frequencies.map do |frequency|
-          [frequency_label(frequency[0]), frequency[0]]
-        end
+        frequency_selector(UserCollaboration.frequencies)
+      end
+
+      # PUBLIC returns a list of recurrent frequency options that can be used
+      # in a select input tag.
+      def recurrent_frequency_options
+        frequency_selector(UserCollaboration.recurrent_frequencies)
       end
 
       # PUBLIC Human readable frequency value
@@ -50,6 +54,14 @@ module Decidim
           type.to_sym,
           scope: "decidim.collaborations.labels.payment_method_types"
         )
+      end
+
+      private
+
+      def frequency_selector(frequencies)
+        frequencies.map do |frequency|
+          [frequency_label(frequency[0]), frequency[0]]
+        end
       end
     end
   end
