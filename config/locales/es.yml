@@ -151,6 +151,16 @@ es:
           user_totals: Usuario
           target_amount: "Objetivo: %{amount}"
           overall_percentage: Porcentaje total
+        show:
+          current_accepted_recurrent_support: Actualmente aportas %{amount} con periodicidad %{periodicity}.
+          current_paused_recurrent_support: Actualmente aportas %{amount} con periodicidad %{periodicity}, pero tu aportación está detenida.
+          current_pending_recurrent_support: Iniciaste una colaboración de %{amount} con periodicidad %{periodicity}. Tu solicitud está siendo revisada.
+          current_rejected_recurrent_support: Intentaste aportar  %{amount} con periodicidad %{periodicity}, pero la colaboración fue rechazada.
+          change_accepted_collaboration_html: Puedes cambiar tu aportación %{here}.
+          change_paused_collaboration_html: Puedes reactivar tu aportación  %{here}.
+          change_pending_collaboration_html: Puedes cambiar tu aportación %{here} %{here}.
+          change_rejected_collaboration_html: Puedes cambiar la información de pago para arreglar tu solicitud %{here}.
+          here: aquí
         support_form:
           select_amount: Seleccciona la cantidad
           select_frequency: Seleccciona la frecuencia
