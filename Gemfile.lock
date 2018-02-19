@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 2d579735d2c4a16a3b2c443b68377143d5d03fe4
+  revision: 4e0e4f1c66db0a7f7f6b462a51b589e528133022
   branch: master
   specs:
     decidim (0.10.0.pre)
@@ -265,8 +265,8 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.5.1)
-      devise (>= 3.4)
+    devise-i18n (1.6.0)
+      devise (>= 4.4)
     devise_invitable (1.7.3)
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
