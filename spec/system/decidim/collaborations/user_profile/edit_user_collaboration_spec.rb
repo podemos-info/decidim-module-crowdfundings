@@ -21,10 +21,6 @@ describe "Explore collaborations", type: :system do
     visit decidim_collaborations_user_profile.user_collaborations_path
   end
 
-  it "Link that edit the user collaboration exists" do
-    expect(page).to have_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
-  end
-
   context "when edit link visited" do
     before do
       link = find_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
