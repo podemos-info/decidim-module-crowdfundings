@@ -152,8 +152,14 @@ en:
           target_amount: "Target amount: %{amount}"
           overall_percentage: Overall percentage
         show:
-          current_recurrent_support: You are currently giving %{amount} with %{periodicity} periodicity.
-          change_collaboration_html: You can change your current collaboration %{here}.
+          current_accepted_recurrent_support: You are currently giving %{amount} with %{periodicity} periodicity.
+          current_paused_recurrent_support: You were giving %{amount} with %{periodicity} periodicity, but you paused the support.
+          current_pending_recurrent_support: You applied to give %{amount} with %{periodicity} periodicity to this campaign, your collaboration is being reviewed.
+          current_rejected_recurrent_support: You tried to give %{amount} with %{periodicity} periodicity, but the collaboration was rejected.
+          change_accepted_collaboration_html: You can change your current collaboration %{here}.
+          change_paused_collaboration_html: You can resume your current collaboration %{here}.
+          change_pending_collaboration_html: You can change your current collaboration %{here}.
+          change_rejected_collaboration_html: You can try fix your rejected collaboration information %{here}.
           here: here
         support_form:
           select_amount: Select the amount
