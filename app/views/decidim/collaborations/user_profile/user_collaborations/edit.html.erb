@@ -11,7 +11,7 @@
 
   <h2 class=section-heading><%=t '.select_frequency' %></h2>
   <div class="radio-selector">
-    <% frequency_options.each do |option| %>
+    <% recurrent_frequency_options.each do |option| %>
       <%= f.label :frequency, '', value: option[1] do %>
         <%= f.radio_button :frequency, option[1], label: false %>
         <div><%= option[0] %></div>

@@ -16,6 +16,16 @@ module Decidim
             ]
           )
         end
+
+        it "returns all the available recurrent frequency options" do
+          expect(helper.recurrent_frequency_options).to eq(
+            [
+              %w(Monthly monthly),
+              %w(Quarterly quarterly),
+              %w(Annual annual)
+            ]
+          )
+        end
       end
 
       describe "decidim_number_to_currency" do

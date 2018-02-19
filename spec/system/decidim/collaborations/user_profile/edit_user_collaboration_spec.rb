@@ -32,6 +32,10 @@ describe "Explore collaborations", type: :system do
       expect(page).to have_content("SELECT THE FREQUENCY")
       expect(page).to have_content("UPDATE")
     end
+
+    it "does not allow changing the collaboration to punctual" do
+      expect(page).to have_no_content("Puntual")
+    end
   end
 
   context "when updating user collaboration" do

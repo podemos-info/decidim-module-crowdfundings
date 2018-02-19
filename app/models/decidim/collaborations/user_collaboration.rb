@@ -50,6 +50,12 @@ module Decidim
             Time.zone.today.beginning_of_month - 11.months
           )
       }
+
+      def self.recurrent_frequencies
+        frequencies.reject do |frequency|
+          frequency == "punctual"
+        end
+      end
     end
   end
 end
