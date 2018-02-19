@@ -85,6 +85,12 @@ module Decidim
         it { is_expected.not_to be_valid }
       end
 
+      context "with frequency is invalid" do
+        let(:frequency) { "invalid value" }
+
+        it { is_expected.not_to be_valid }
+      end
+
       context "when payment method is missing" do
         let(:payment_method_type) { nil }
 

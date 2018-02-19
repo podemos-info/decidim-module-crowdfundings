@@ -151,6 +151,10 @@ en:
           user_totals: User totals
           target_amount: "Target amount: %{amount}"
           overall_percentage: Overall percentage
+        show:
+          current_recurrent_support: You are currently giving %{amount} with %{periodicity} periodicity.
+          change_collaboration_html: You can change your current collaboration %{here}.
+          here: here
         support_form:
           select_amount: Select the amount
           select_frequency: Select the frequency

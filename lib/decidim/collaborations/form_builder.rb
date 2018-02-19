@@ -9,22 +9,20 @@ module Decidim
       include ::ActionView::Helpers::FormTagHelper
       include ::ActionView::Helpers::NumberHelper
 
-      def support_tag(name, amounts, minimum)
-        amount_selector_tag(name, amounts, minimum)
+      def amount_selection(name, amounts, minimum)
+        output = "".html_safe
+
+        amounts.each do |amount|
+          output.concat(input_amount_for(name, amount))
+        end
+
+        output.concat(input_other_amounts(name, amounts))
+        output.concat(amount_input_tag(name, minimum))
+
+        output
       end
 
       private
-
-      def amount_selector_tag(name, amounts, minimum)
-        content_tag :div, class: "amount-selector" do
-          amounts.each do |amount|
-            concat(input_amount_for(name, amount))
-          end
-
-          concat(input_other_amounts(name, amounts))
-          concat(amount_input_tag(name, minimum))
-        end
-      end
 
       def input_other_amounts(name, amounts)
         amount = object.send(name)

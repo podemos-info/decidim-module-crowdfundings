@@ -4,7 +4,9 @@
 
 
   <h2 class=section-heading><%=t '.select_amount' %></h2>
-  <%= f.support_tag :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
+  <div class="amount-selector">
+    <%= f.amount_selection :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
+  </div>
 
   <% if can? :support_recurrently, collaboration %>
     <h2 class=section-heading><%=t '.select_frequency' %></h2>

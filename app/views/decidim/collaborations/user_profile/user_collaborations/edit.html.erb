@@ -5,9 +5,10 @@
 
 
   <h2 class=section-heading><%=t '.select_amount' %></h2>
-  <%= f.support_tag :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
+  <div class="amount-selector">
+    <%= f.amount_selection :amount, collaboration.amounts, collaboration.minimum_custom_amount %>
+  </div>
 
-  <br>
   <h2 class=section-heading><%=t '.select_frequency' %></h2>
   <div class="radio-selector">
     <% frequency_options.each do |option| %>

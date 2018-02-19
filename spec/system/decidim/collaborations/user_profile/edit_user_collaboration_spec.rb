@@ -39,16 +39,55 @@ describe "Explore collaborations", type: :system do
   end
 
   context "when updating user collaboration" do
-    before do
-      stub_totals_request(0)
-      link = find_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
-      link.click
-
-      find_button("Update").click
+    let(:edit_profile_link) do
+      find_link("", href: decidim_collaborations_user_profile.edit_user_collaboration_path(user_collaboration))
     end
 
-    it "shows a success message" do
-      expect(page).to have_content("Your collaboration has been successfully updated.")
+    before do
+      stub_totals_request(0)
+    end
+
+    context "without changes" do
+      before do
+        edit_profile_link.click
+        find_button("Update").click
+      end
+
+      it "shows a success message" do
+        expect(page).to have_content("Your collaboration has been successfully updated.")
+      end
+    end
+
+    context "when changing custom amount" do
+      before do
+        collaboration.update!(minimum_custom_amount: 50)
+        edit_profile_link.click
+        find("label[for=amount_selector_other]").click
+      end
+
+      context "with a valid value" do
+        before do
+          fill_in :user_collaboration_amount, with: 50
+          find_button("Update").click
+        end
+
+        it "shows a success message" do
+          expect(page).to have_content("Your collaboration has been successfully updated.")
+        end
+      end
+
+      context "with an invalid value" do
+        before do
+          fill_in :user_collaboration_amount, with: 49
+          find_button("Update").click
+        end
+
+        it "shows proper error messages" do
+          expect(page)
+            .to have_content("Couldn't update the collaboration")
+            .and have_content("Minimum valid amount is 50")
+        end
+      end
     end
   end
 end

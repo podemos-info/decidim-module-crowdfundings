@@ -14,12 +14,12 @@ module Decidim
       #
       # Broadcasts :ok if successful, :invalid otherwise.
       def call
-        return broadcast(:invalid) if form.invalid?
-        begin
-          form.context.user_collaboration.update!(form.attributes)
+        return broadcast(:invalid, form) if form.invalid?
+
+        if form.context.user_collaboration.update(form.attributes)
           broadcast(:ok)
-        rescue StandardError => e
-          broadcast(:invalid, e)
+        else
+          broadcast(:invalid)
         end
       end
     end
