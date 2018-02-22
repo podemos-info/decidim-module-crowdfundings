@@ -5,38 +5,34 @@ require "spec_helper"
 module Decidim
   module Collaborations
     describe UnconfirmedCollaborations do
-      let(:subject) { described_class.new }
-      let!(:pending_collaborations) do
-        create_list(
+      let(:subject) { described_class.new.query }
+
+      let!(:pending_collaboration) do
+        create(
           :user_collaboration,
-          10,
           :punctual,
           :pending
         )
       end
 
-      let!(:accepted_collaborations) do
-        create_list(
+      let!(:accepted_collaboration) do
+        create(
           :user_collaboration,
-          10,
           :punctual,
           :accepted
         )
       end
 
-      let!(:rejected_collaborations) do
-        create_list(
+      let!(:rejected_collaboration) do
+        create(
           :user_collaboration,
-          10,
           :rejected,
           :punctual
         )
       end
 
-      it "contains pending collaborations" do
-        expect(subject).to include(*pending_collaborations)
-        expect(subject).not_to include(*accepted_collaborations)
-        expect(subject).not_to include(*rejected_collaborations)
+      it "contains only pending collaborations" do
+        expect(subject).to eq([pending_collaboration])
       end
     end
   end

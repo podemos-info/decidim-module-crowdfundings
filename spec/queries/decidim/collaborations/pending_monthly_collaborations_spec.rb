@@ -5,99 +5,66 @@ require "spec_helper"
 module Decidim
   module Collaborations
     describe PendingMonthlyCollaborations do
-      let(:subject) { described_class.new }
+      let(:beginning_of_month) { Time.zone.today.beginning_of_month }
 
-      describe "Annual collaborations" do
-        let(:date_limit) { Time.zone.today.beginning_of_month - 11.months }
+      let(:subject) { described_class.new.query }
 
-        let!(:annual_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :annual,
-            :accepted,
-            last_order_request_date: date_limit - 1.day
-          )
-        end
-
-        it "Do not Contains annual collaborations" do
-          expect(subject).not_to include(*annual_collaborations)
-        end
+      let!(:annual_collaborations) do
+        create(
+          :user_collaboration,
+          :annual,
+          :accepted,
+          last_order_request_date: beginning_of_month - 11.months - 1.day
+        )
       end
 
-      describe "Quarterly collaborations" do
-        let!(:date_limit) { Time.zone.today.beginning_of_month - 2.months }
-
-        let!(:quarterly_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :quarterly,
-            :accepted,
-            last_order_request_date: date_limit - 1.day
-          )
-        end
-
-        it "Do not contains quarterly collaborations" do
-          expect(subject).not_to include(*quarterly_collaborations)
-        end
+      let!(:quarterly_collaboration) do
+        create(
+          :user_collaboration,
+          :quarterly,
+          :accepted,
+          last_order_request_date: beginning_of_month - 2.months - 1.day
+        )
       end
 
-      describe "Monthly collaborations" do
-        let!(:date_limit) { Time.zone.today.beginning_of_month }
+      let!(:old_collaboration) do
+        create(
+          :user_collaboration,
+          :monthly,
+          :accepted,
+          last_order_request_date: beginning_of_month - 1.day
+        )
+      end
 
-        let!(:old_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :monthly,
-            :accepted,
-            last_order_request_date: date_limit - 1.day
-          )
-        end
+      let!(:recent_collaboration) do
+        create(
+          :user_collaboration,
+          :monthly,
+          :accepted,
+          last_order_request_date: beginning_of_month
+        )
+      end
 
-        let!(:recent_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :monthly,
-            :accepted,
-            last_order_request_date: date_limit
-          )
-        end
+      let!(:pending_collaboration) do
+        create(
+          :user_collaboration,
+          :monthly,
+          :pending,
+          last_order_request_date: beginning_of_month - 1.day
+        )
+      end
 
-        let!(:pending_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :monthly,
-            :pending,
-            last_order_request_date: date_limit - 1.day
-          )
-        end
+      let!(:rejected_collaborations) do
+        create(
+          :user_collaboration,
+          :monthly,
+          :rejected,
+          last_order_request_date: beginning_of_month - 1.day
+        )
+      end
 
-        let!(:rejected_collaborations) do
-          create_list(
-            :user_collaboration,
-            10,
-            :monthly,
-            :rejected,
-            last_order_request_date: date_limit - 1.day
-          )
-        end
-
-        it "Contains collaborations that need to be renewed" do
-          expect(subject).to include(*old_collaborations)
-        end
-
-        it "Do not contains collaborations that do not need to be renewed" do
-          expect(subject).not_to include(*recent_collaborations)
-        end
-
-        it "Do not contains inactive collaborations" do
-          expect(subject).not_to include(*pending_collaborations)
-          expect(subject).not_to include(*rejected_collaborations)
-        end
+      it "Contains only collaborations that need to be renewed" do
+        expect(subject).to eq([old_collaboration])
       end
     end
   end

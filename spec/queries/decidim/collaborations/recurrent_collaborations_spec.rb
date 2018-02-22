@@ -11,69 +11,88 @@ module Decidim
       let(:subject) { described_class.for_user(user) }
 
       describe "Recurrent collaborations for the user" do
-        let(:collaborations) do
-          create_list(:user_collaboration, 10,
-                      frequency,
-                      :accepted,
-                      user: user,
-                      collaboration: collaboration)
+        let!(:monthly_collaboration) do
+          create(
+            :user_collaboration,
+            :monthly,
+            :accepted,
+            user: user,
+            collaboration: collaboration
+          )
         end
 
-        describe "monthly collaborations" do
-          let(:frequency) { :monthly }
-
-          it "are included" do
-            expect(subject).to include(*collaborations)
-          end
+        let!(:quarterly_collaboration) do
+          create(
+            :user_collaboration,
+            :quarterly,
+            :accepted,
+            user: user,
+            collaboration: collaboration
+          )
         end
 
-        describe "quarterly collaborations" do
-          let(:frequency) { :quarterly }
-
-          it "are included" do
-            expect(subject).to include(*collaborations)
-          end
+        let!(:annual_collaboration) do
+          create(
+            :user_collaboration,
+            :annual,
+            :accepted,
+            user: user,
+            collaboration: collaboration
+          )
         end
 
-        describe "annual collaborations" do
-          let(:frequency) { :annual }
-
-          it "are included" do
-            expect(subject).to include(*collaborations)
-          end
+        let!(:punctual_collaboration) do
+          create(
+            :user_collaboration,
+            :punctual,
+            :accepted,
+            user: user,
+            collaboration: collaboration
+          )
         end
 
-        describe "punctual collaborations" do
-          let(:frequency) { :punctual }
-
-          it "are not included" do
-            expect(subject).not_to include(*collaborations)
-          end
-        end
-      end
-
-      describe "Other users collaborations" do
-        let(:monthly_collaborations) do
-          create_list(:user_collaboration, 10, :monthly, :accepted, collaboration: collaboration)
+        let!(:others_monthly_collaboration) do
+          create(
+            :user_collaboration,
+            :monthly,
+            :accepted,
+            collaboration: collaboration
+          )
         end
 
-        let(:quarterly_collaborations) do
-          create_list(:user_collaboration, 10, :quarterly, :accepted, collaboration: collaboration)
+        let!(:others_quarterly_collaboration) do
+          create(
+            :user_collaboration,
+            :quarterly,
+            :accepted,
+            collaboration: collaboration
+          )
         end
 
-        let(:annual_collaborations) do
-          create_list(:user_collaboration, 10, :annual, :accepted, collaboration: collaboration)
+        let!(:others_annual_collaboration) do
+          create(
+            :user_collaboration,
+            :annual,
+            :accepted,
+            collaboration: collaboration
+          )
         end
 
-        let(:punctual_collaborations) do
-          create_list(:user_collaboration, 10, :punctual, :accepted, collaboration: collaboration)
+        let!(:others_punctual_collaboration) do
+          create(
+            :user_collaboration,
+            :punctual,
+            :accepted,
+            collaboration: collaboration
+          )
         end
 
-        it "are not included" do
-          expect(subject).not_to include(*monthly_collaborations)
-          expect(subject).not_to include(*quarterly_collaborations)
-          expect(subject).not_to include(*annual_collaborations)
-          expect(subject).not_to include(*punctual_collaborations)
+        it "includes only collaborations by the user passed as parameter" do
+          expect(subject).to contain_exactly(
+            monthly_collaboration,
+            quarterly_collaboration,
+            annual_collaboration
+          )
         end
       end
     end
