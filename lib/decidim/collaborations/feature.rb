@@ -20,6 +20,21 @@ Decidim.register_feature(:collaborations) do |feature|
   # These actions permissions can be configured in the admin panel
   feature.actions = %w(support)
 
+  # Default authorization workflow for all feature instances
+  feature.on(:create) do |instance|
+    instance.update!(
+      permissions: {
+        "support" => {
+          "authorization_handler_name" => "census",
+          "options" => {
+            "minimum_age" => 18,
+            "allowed_document_types" => %w(dni nie)
+          }
+        }
+      }
+    )
+  end
+
   feature.settings(:global) do |_settings|
   end
 
