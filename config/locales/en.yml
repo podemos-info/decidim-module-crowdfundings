@@ -50,6 +50,8 @@ en:
         other: Other
     features:
       collaborations:
+        actions:
+          support: Support
         name: Collaborations
         settings:
           global:

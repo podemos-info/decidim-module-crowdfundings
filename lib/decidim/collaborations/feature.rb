@@ -18,7 +18,7 @@ Decidim.register_feature(:collaborations) do |feature|
   end
 
   # These actions permissions can be configured in the admin panel
-  feature.actions = %w()
+  feature.actions = %w(support)
 
   feature.settings(:global) do |_settings|
   end

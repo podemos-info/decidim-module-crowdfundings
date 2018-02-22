@@ -51,6 +51,8 @@ es:
     features:
       collaborations:
         name: Aportaciones
+        actions:
+          support: Colaborar
         settings:
           global:
             maximum_annual_collaboration: Monto máximo anual por persona
