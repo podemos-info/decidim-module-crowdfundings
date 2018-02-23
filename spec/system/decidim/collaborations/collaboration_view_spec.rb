@@ -90,10 +90,10 @@ describe "Collaborations view", type: :system do
       it "allows the user to change the recurrent collaboration" do
         expect(page).to have_content("You are currently giving 500.00 € with monthly periodicity")
 
-        expect(page).to have_content("You can change your current collaboration here")
+        expect(page).to have_content("CHANGE COLLABORATION")
 
         within find("#collaboration-info") do
-          click_link "here"
+          click_link "change collaboration"
         end
 
         find("label[for=user_collaboration_frequency_quarterly]").click
