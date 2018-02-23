@@ -77,6 +77,18 @@ Decidim.register_feature(:collaborations) do |feature|
       participatory_space: participatory_space
     )
 
+    feature.update!(
+      permissions: {
+        "support" => {
+          "authorization_handler_name" => "census",
+          "options" => {
+            "minimum_age" => 18,
+            "allowed_document_types" => %w(dni nie)
+          }
+        }
+      }
+    )
+
     collaboration = Decidim::Collaborations::Collaboration.create!(
       feature: feature,
       title: Decidim::Faker::Localized.sentence(2),
