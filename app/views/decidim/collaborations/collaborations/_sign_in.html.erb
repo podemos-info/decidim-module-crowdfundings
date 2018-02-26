@@ -1,8 +1,0 @@
-<% if can? :support, collaboration %>
-  <div class="definition-data__item sign-in-block">
-    <%= action_authorized_link_to :support, collaboration_path(collaboration),
-                                  class: "card__button button expanded button--sc" do %>
-      <%= t('.support') %>
-    <% end %>
-  </div>
-<% end %>

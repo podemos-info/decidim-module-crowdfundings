@@ -151,12 +151,12 @@ ca:
           user_totals: Usuari
           target_amount: "Objetiu: %{amount}"
           overall_percentage: Percentatge total
+        show:
+          support: Donar suport
         support_form:
           select_amount: Sel·lecciona la quantitat
           select_frequency: Sel·lecciona la frequència
           select_payment_method: Sel·lecciona la forma de pagament
-          support: Donar suport
-        sign_in:
           support: Donar suport
       user_collaborations:
         create:

@@ -18,7 +18,40 @@ Decidim.register_feature(:collaborations) do |feature|
   end
 
   # These actions permissions can be configured in the admin panel
-  feature.actions = %w()
+  feature.actions = %w(support)
+
+  # Default authorization workflow for all feature instances
+  feature.on(:create) do |instance|
+    instance.update!(
+      permissions: {
+        "support" => {
+          "authorization_handler_name" => "census",
+          "options" => {
+            "minimum_age" => 18,
+            "allowed_document_types" => %w(dni nie)
+          }
+        }
+      }
+    )
+  end
+
+  # Ensure any authorization follow general rules
+  feature.on(:permission_update) do |instance|
+    permissions = instance.permissions["support"]
+
+    handler_name = permissions["authorization_handler_name"]
+    raise "The handler for this action must be census" if handler_name != "census"
+
+    options = permissions["options"]
+
+    minimum_age = options["minimum_age"]
+    raise "You need to define a minimum_age key" unless minimum_age
+    raise "The minimum age must be at least 18" if minimum_age.to_i < 18
+
+    allowed_document_types = options["allowed_document_types"]
+    raise "You need to define an allowed_document_types key" unless allowed_document_types
+    raise "Allowed documents need to include DNI and NIE" unless allowed_document_types.include?("dni") && allowed_document_types.include?("nie")
+  end
 
   feature.settings(:global) do |_settings|
   end
@@ -42,6 +75,18 @@ Decidim.register_feature(:collaborations) do |feature|
       manifest_name: :collaborations,
       published_at: Time.current,
       participatory_space: participatory_space
+    )
+
+    feature.update!(
+      permissions: {
+        "support" => {
+          "authorization_handler_name" => "census",
+          "options" => {
+            "minimum_age" => 18,
+            "allowed_document_types" => %w(dni nie)
+          }
+        }
+      }
     )
 
     collaboration = Decidim::Collaborations::Collaboration.create!(

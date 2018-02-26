@@ -7,10 +7,14 @@
   <% if collaboration.target_amount.present? %>
     <div id="collaboration" class="columns section view-side mediumlarge-4 mediumlarge-push-8 large-3 large-push-9">
       <%= render 'decidim/collaborations/collaborations/totals', user: nil %>
+
       <% if user_signed_in? %>
         <%= render 'decidim/collaborations/collaborations/totals', user: current_user %>
-      <% else %>
-        <%= render 'decidim/collaborations/collaborations/sign_in', collaboration: collaboration %>
+      <% elsif can?(:support, collaboration) %>
+        <%= action_authorized_link_to :support, collaboration_path(collaboration),
+                                      class: "card__button button expanded button--sc" do %>
+          <%= t('.support') %>
+        <% end %>
       <% end %>
     </div>
   <% end %>
@@ -33,13 +37,21 @@
           </p>
 
           <p>
-            <%= t(".change_#{recurrent_user_collaboration.state}_collaboration_html",
-                  here: link_to(t(".here"), decidim_collaborations_user_profile.edit_user_collaboration_path(recurrent_user_collaboration))) %>
+            <%= action_authorized_link_to(:support, decidim_collaborations_user_profile.edit_user_collaboration_path(recurrent_user_collaboration), class: "card__button button button--sc") do %>
+              <%= t(".change_#{recurrent_user_collaboration.state}_collaboration") %>
+            <% end %>
           </p>
         </div>
       <% elsif can?(:support, collaboration) %>
         <div class="section">
-          <%= render 'decidim/collaborations/collaborations/support_form' %>
+          <% if current_user_authorized?(:support) %>
+            <%= render 'decidim/collaborations/collaborations/support_form' %>
+          <% else %>
+            <%= action_authorized_link_to :support, collaboration_path(collaboration),
+                                          class: "card__button button button--sc" do %>
+              <%= t('.support') %>
+            <% end %>
+          <% end %>
         </div>
       <% else %>
         <div class="callout alert">
