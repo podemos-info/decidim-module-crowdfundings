@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/decidim/decidim
-  revision: 9cb68bbd300bd3296f76ccf73fc28aae257e4133
-  branch: feature/add_hooks_on_feature_permission_update
+  revision: e16cbaa92e80a04908852572737c22d64fe7c783
+  branch: master
   specs:
     decidim (0.10.0.pre)
       decidim-accountability (= 0.10.0.pre)
@@ -287,7 +287,7 @@ GEM
       i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.22)
+    ffi (1.9.23)
     file_validators (2.1.0)
       activemodel (>= 3.0)
       mime-types (>= 1.0)
@@ -454,7 +454,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails-i18n (5.1.0)
+    rails-i18n (5.1.1)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
     railties (5.1.5)
