@@ -14,10 +14,10 @@ module Decidim
       include NeedsCollaboration
 
       def index
-        return unless feature_collaborations.count == 1
+        return unless component_collaborations.count == 1
 
-        redirect_to EngineRouter.main_proxy(current_feature)
-                                .collaboration_path(feature_collaborations.first)
+        redirect_to EngineRouter.main_proxy(current_component)
+                                .collaboration_path(component_collaborations.first)
       end
 
       def show
@@ -43,8 +43,8 @@ module Decidim
                             .per(Decidim::Collaborations.collaborations_shown_per_page)
       end
 
-      def feature_collaborations
-        Collaboration.for_feature(current_feature)
+      def component_collaborations
+        Collaboration.for_component(current_component)
       end
 
       def random_seed
@@ -63,7 +63,7 @@ module Decidim
       end
 
       def context_params
-        { feature: current_feature, organization: current_organization }
+        { component: current_component, organization: current_organization }
       end
 
       def user_collaboration_form

@@ -70,6 +70,7 @@ module Decidim
 
       # PUBLIC returns the percentage CSS class to apply for a given
       # percentage value.
+      # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
       def percentage_class(percentage)
         return "" if percentage.blank?
 
@@ -85,6 +86,7 @@ module Decidim
           "percentage--level5"
         end
       end
+      # rubocop:enable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
 
       # PUBLIC converts the amount collected into a currency string.
       def total_collected_to_currency(total_collected)

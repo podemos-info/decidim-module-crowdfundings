@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "Confirm collaboration", type: :system do
-  include_context "with a feature"
+  include_context "with a component"
   let(:manifest_name) { "collaborations" }
-  let!(:collaboration) { create(:collaboration, feature: feature) }
+  let!(:collaboration) { create(:collaboration, component: component) }
   let(:user) { create(:user, :confirmed, organization: organization) }
   let(:amount) { ::Faker::Number.number(4) }
 
@@ -21,7 +21,7 @@ describe "Confirm collaboration", type: :system do
 
     login_as(user, scope: :user)
 
-    visit_feature
+    visit_component
 
     within ".new_user_collaboration" do
       find("label[for=amount_selector_other]").click

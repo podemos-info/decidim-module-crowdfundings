@@ -32,12 +32,12 @@ module Decidim
         accept_user_collaboration if params[:result] == "ok"
         reject_user_collaboration if params[:result] == "ko"
 
-        redirect_to EngineRouter.main_proxy(current_feature)
+        redirect_to EngineRouter.main_proxy(current_component)
                                 .collaboration_path(user_collaboration.collaboration)
       end
 
       def accept_user_collaboration
-        user_collaboration.update_attributes(state: "accepted")
+        user_collaboration.update(state: "accepted")
         flash[:notice] = I18n.t(
           "user_collaborations.validate.success",
           scope: "decidim.collaborations"
@@ -45,7 +45,7 @@ module Decidim
       end
 
       def reject_user_collaboration
-        user_collaboration.update_attributes(state: "rejected")
+        user_collaboration.update(state: "rejected")
         flash[:alert] = I18n.t(
           "user_collaborations.validate.invalid",
           scope: "decidim.collaborations"
@@ -81,7 +81,7 @@ module Decidim
           scope: "decidim.collaborations"
         )
 
-        redirect_to EngineRouter.main_proxy(current_feature)
+        redirect_to EngineRouter.main_proxy(current_component)
                                 .collaboration_path(collaboration)
       end
 

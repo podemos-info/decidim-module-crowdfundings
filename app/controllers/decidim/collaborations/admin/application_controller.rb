@@ -6,21 +6,21 @@ module Decidim
       # This controller is the abstract class from which all other controllers of
       # this engine inherit.
       #
-      # Note that it inherits from `Decidim::Features::BaseController`, which
+      # Note that it inherits from `Decidim::Components::BaseController`, which
       # override its layout and provide all kinds of useful methods.
-      class ApplicationController < Decidim::Admin::Features::BaseController
+      class ApplicationController < Decidim::Admin::Components::BaseController
         helper_method :collaborations, :collaboration
         helper Decidim::Collaborations::CollaborationsHelper
 
         def collaborations
           @collaborations ||= Collaboration
-                              .for_feature(current_feature)
+                              .for_component(current_component)
                               .page(params[:page])
                               .per(Decidim::Collaborations.collaborations_shown_per_page)
         end
 
         def collaboration
-          @collaborations ||= collaborations.find(params[:id])
+          @collaboration ||= collaborations.find(params[:id])
         end
       end
     end

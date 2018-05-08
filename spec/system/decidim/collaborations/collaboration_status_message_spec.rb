@@ -3,11 +3,11 @@
 require "spec_helper"
 
 describe "Collaborations view", type: :system do
-  include_context "with a feature"
+  include_context "with a component"
   let(:manifest_name) { "collaborations" }
   let(:active_until) { nil }
   let!(:collaboration) do
-    create(:collaboration, feature: feature, active_until: active_until)
+    create(:collaboration, component: component, active_until: active_until)
   end
   let(:user) { create(:user, :confirmed, organization: organization) }
 
@@ -18,7 +18,7 @@ describe "Collaborations view", type: :system do
   context "when API is down" do
     before do
       stub_totals_service_down
-      visit_feature
+      visit_component
     end
 
     it "Gives feedback about status" do
@@ -35,7 +35,7 @@ describe "Collaborations view", type: :system do
       allow(Census::API::Totals).to receive(:user_campaign_totals)
         .with(user.id, collaboration.id)
         .and_return(0)
-      visit_feature
+      visit_component
     end
 
     it "Gives feedback about status" do
@@ -48,7 +48,7 @@ describe "Collaborations view", type: :system do
 
     before do
       stub_totals_request(0)
-      visit_feature
+      visit_component
     end
 
     it "Gives feedback about status" do

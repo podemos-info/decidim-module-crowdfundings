@@ -8,8 +8,8 @@ module Decidim
       end
 
       def query
-        Decidim::Collaborations::Collaboration.joins(:feature).merge(
-          Decidim::Feature.published.where(
+        Decidim::Collaborations::Collaboration.joins(:component).merge(
+          Decidim::Component.published.where(
             manifest_name: "collaborations",
             participatory_space: @person_participatory_spaces
           )

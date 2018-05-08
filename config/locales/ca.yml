@@ -48,7 +48,7 @@ ca:
     form_builder:
       support_tag:
         other: Altres
-    features:
+    components:
       collaborations:
         name: Aportacions
         settings:

@@ -10,12 +10,12 @@ module Decidim
 
         let(:organization) { create(:organization) }
         let(:participatory_process) { create :participatory_process, organization: organization }
-        let(:current_feature) { create :collaboration_feature, participatory_space: participatory_process }
+        let(:current_component) { create :collaboration_component, participatory_space: participatory_process }
 
         let(:context) do
           {
             current_organization: organization,
-            current_feature: current_feature
+            current_component: current_component
           }
         end
 
@@ -37,7 +37,7 @@ module Decidim
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: active_until,
-            current_feature: current_feature,
+            current_component: current_component,
             amounts: amounts
           )
         end
@@ -58,9 +58,9 @@ module Decidim
             expect { subject.call }.to change { Decidim::Collaborations::Collaboration.count }.by(1)
           end
 
-          it "sets the feature" do
+          it "sets the component" do
             subject.call
-            expect(project.feature).to eq current_feature
+            expect(project.component).to eq current_component
           end
 
           it "sets all attributes received from the form" do

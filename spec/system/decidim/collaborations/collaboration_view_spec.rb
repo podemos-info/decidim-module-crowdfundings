@@ -21,8 +21,8 @@ describe "Collaborations view", type: :system do
   end
 
   context "with a participatory process" do
-    include_context "with a feature"
-    let!(:collaboration) { create(:collaboration, feature: feature) }
+    include_context "with a component"
+    let!(:collaboration) { create(:collaboration, component: component) }
     let!(:user_collaboration) do
       create(:user_collaboration,
              :accepted,
@@ -34,7 +34,7 @@ describe "Collaborations view", type: :system do
 
     before do
       login_as(confirmed_user, scope: :user)
-      visit_feature
+      visit_component
     end
 
     it "Contains collaboration details" do
@@ -63,10 +63,10 @@ describe "Collaborations view", type: :system do
   end
 
   context "with an assembly" do
-    include_context "with assembly feature"
+    include_context "with assembly component"
 
     let!(:collaboration) do
-      create(:collaboration, feature: feature, target_amount: 10_000)
+      create(:collaboration, component: component, target_amount: 10_000)
     end
 
     before do
@@ -84,7 +84,7 @@ describe "Collaborations view", type: :system do
       end
 
       before do
-        visit_feature
+        visit_component
       end
 
       it "allows the user to change the recurrent collaboration" do
@@ -105,7 +105,7 @@ describe "Collaborations view", type: :system do
 
     context "when the user does not have a recurrent collaboration" do
       before do
-        visit_feature
+        visit_component
       end
 
       it "Frequency is monthly by default" do

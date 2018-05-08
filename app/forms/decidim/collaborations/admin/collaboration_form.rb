@@ -87,11 +87,11 @@ module Decidim
         end
 
         def steps?
-          context.current_feature.participatory_space.respond_to? :steps
+          context.current_component.participatory_space.respond_to? :steps
         end
 
         def steps
-          context.current_feature.participatory_space.steps
+          context.current_component.participatory_space.steps
         end
       end
     end

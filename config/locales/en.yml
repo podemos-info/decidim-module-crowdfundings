@@ -48,7 +48,7 @@ en:
     form_builder:
       support_tag:
         other: Other
-    features:
+    components:
       collaborations:
         actions:
           support: Support

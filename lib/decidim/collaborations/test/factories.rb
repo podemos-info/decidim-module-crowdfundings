@@ -4,9 +4,9 @@ require "decidim/faker/localized"
 require "decidim/dev"
 
 FactoryBot.define do
-  factory :collaboration_feature, parent: :feature do
+  factory :collaboration_component, parent: :component do
     name do
-      Decidim::Features::Namer.new(
+      Decidim::Components::Namer.new(
         participatory_space.organization.available_locales,
         :collaborations
       ).i18n_name
@@ -40,17 +40,17 @@ FactoryBot.define do
     minimum_custom_amount 500
     target_amount 10_000
     amounts { Decidim::Collaborations.selectable_amounts }
-    feature { create(:collaboration_feature, :participatory_process) }
+    component { create(:collaboration_component, :participatory_process) }
 
     trait :assembly do
-      feature { create(:collaboration_feature, :assembly) }
+      component { create(:collaboration_component, :assembly) }
     end
   end
 
   factory :user_collaboration,
           class: Decidim::Collaborations::UserCollaboration do
     collaboration { create(:collaboration) }
-    user { create(:user, organization: collaboration.feature.organization) }
+    user { create(:user, organization: collaboration.component.organization) }
     amount 50
     last_order_request_date { Time.zone.today.beginning_of_month }
 

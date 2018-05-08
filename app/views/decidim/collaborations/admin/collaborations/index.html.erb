@@ -3,7 +3,7 @@
     <h2 class="card-title">
       <%= t('.title') %>
       <%= link_to t('actions.new', scope: 'decidim.budgets', name: t('models.collaboration.name', scope: 'decidim.collaborations.admin')),
-                  new_collaboration_path, class: 'button tiny button--title' if can? :manage, current_feature %>
+                  new_collaboration_path, class: 'button tiny button--title' if can? :manage, current_component %>
     </h2>
   </div>
 
@@ -49,14 +49,14 @@
                                  target: :blank,
                                  class: 'action-icon--preview' %>
 
-                <% if can? :update, current_feature %>
+                <% if can? :update, current_component %>
                     <%= icon_link_to 'pencil',
                                      edit_collaboration_path(collaboration),
                                      t('actions.edit', scope: 'decidim.collaborations'),
                                      class: 'action-icon--edit' %>
                 <% end %>
 
-                <% if can? :destroy, current_feature %>
+                <% if can? :destroy, current_component %>
                     <%= icon_link_to 'circle-x',
                                      collaboration_path(collaboration),
                                      t('actions.destroy', scope: 'decidim.collaborations'),

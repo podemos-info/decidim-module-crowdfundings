@@ -6,10 +6,10 @@ module Decidim
     # participatory space.
     class Collaboration < Decidim::Collaborations::ApplicationRecord
       include Decidim::Resourceable
-      include Decidim::HasFeature
+      include Decidim::HasComponent
       include Decidim::Followable
 
-      feature_manifest_name "collaborations"
+      component_manifest_name "collaborations"
 
       has_many :user_collaborations,
                class_name: "Decidim::Collaborations::UserCollaboration",
@@ -17,7 +17,7 @@ module Decidim
                dependent: :restrict_with_error,
                inverse_of: :collaboration
 
-      scope :for_feature, ->(feature) { where(feature: feature) }
+      scope :for_component, ->(component) { where(component: component) }
 
       # PUBLIC: Returns the amount collected by the campaign
       def total_collected
@@ -26,7 +26,7 @@ module Decidim
 
       # PUBLIC Returns true if the collaboration campaign accepts supports.
       def accepts_supports?
-        feature.participatory_space.published? &&
+        component.participatory_space.published? &&
           (active_until.nil? || active_until >= Time.zone.now)
       end
 
@@ -59,7 +59,7 @@ module Decidim
 
       # PUBLIC returns whether recurrent supports are allowed or not.
       def recurrent_support_allowed?
-        feature&.participatory_space_type == "Decidim::Assembly"
+        component&.participatory_space_type == "Decidim::Assembly"
       end
     end
   end

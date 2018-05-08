@@ -9,8 +9,8 @@ module Decidim
 
       let(:organization) { create(:organization) }
       let(:participatory_process) { create :participatory_process, organization: organization }
-      let(:current_feature) { create :collaboration_feature, participatory_space: participatory_process }
-      let(:collaboration) { create(:collaboration, feature: current_feature) }
+      let(:current_component) { create :collaboration_component, participatory_space: participatory_process }
+      let(:collaboration) { create(:collaboration, component: current_component) }
       let(:user) { create(:user, organization: organization) }
       let(:user_collaboration) do
         create(:user_collaboration,
@@ -23,7 +23,7 @@ module Decidim
       let(:context) do
         {
           current_organization: organization,
-          current_feature: current_feature,
+          current_component: current_component,
           collaboration: collaboration,
           user_collaboration: user_collaboration,
           current_user: user

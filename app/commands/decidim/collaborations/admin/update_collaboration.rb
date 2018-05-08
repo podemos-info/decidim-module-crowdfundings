@@ -30,7 +30,7 @@ module Decidim
         attr_reader :collaboration
 
         def update_collaboration
-          collaboration.update_attributes!(
+          collaboration.update!(
             title: form.title,
             description: form.description,
             terms_and_conditions: form.terms_and_conditions,

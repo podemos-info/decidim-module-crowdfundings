@@ -15,14 +15,14 @@ module Decidim
         let(:step) do
           create(:participatory_process_step, participatory_process: participatory_process)
         end
-        let(:current_feature) do
-          create :collaboration_feature, participatory_space: participatory_process
+        let(:current_component) do
+          create :collaboration_component, participatory_space: participatory_process
         end
 
         let(:context) do
           {
             current_organization: organization,
-            current_feature: current_feature
+            current_component: current_component
           }
         end
 
