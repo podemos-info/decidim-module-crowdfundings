@@ -37,7 +37,7 @@ module Decidim
       end
 
       def accept_user_collaboration
-        user_collaboration.update_attributes(state: "accepted")
+        user_collaboration.update(state: "accepted")
         flash[:notice] = I18n.t(
           "user_collaborations.validate.success",
           scope: "decidim.collaborations"
@@ -45,7 +45,7 @@ module Decidim
       end
 
       def reject_user_collaboration
-        user_collaboration.update_attributes(state: "rejected")
+        user_collaboration.update(state: "rejected")
         flash[:alert] = I18n.t(
           "user_collaborations.validate.invalid",
           scope: "decidim.collaborations"

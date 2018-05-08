@@ -40,7 +40,7 @@ module Decidim
 
           it "shows the index page" do
             get :index, params: params
-            expect(response).to have_http_status(200)
+            expect(response).to have_http_status(:ok)
           end
         end
       end

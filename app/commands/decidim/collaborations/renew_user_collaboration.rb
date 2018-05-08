@@ -42,7 +42,7 @@ module Decidim
       def renew_user_collaboration
         result = register_on_census
         if result[:http_response_code] == 201
-          user_collaboration.update_attributes(
+          user_collaboration.update(
             last_order_request_date: Time.zone.today.beginning_of_month
           )
         end

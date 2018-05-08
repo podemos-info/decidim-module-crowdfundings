@@ -20,7 +20,7 @@ module Decidim
         end
 
         def collaboration
-          @collaborations ||= collaborations.find(params[:id])
+          @collaboration ||= collaborations.find(params[:id])
         end
       end
     end

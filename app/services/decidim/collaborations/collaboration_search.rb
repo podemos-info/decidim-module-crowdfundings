@@ -22,7 +22,7 @@ module Decidim
 
       # Returns the random collaborations for the current page.
       def results
-        @collaborations ||= Collaboration.transaction do
+        @results ||= Collaboration.transaction do
           Collaboration.connection.execute("SELECT setseed(#{Collaboration.connection.quote(random_seed)})")
           super.reorder("RANDOM()").load
         end
