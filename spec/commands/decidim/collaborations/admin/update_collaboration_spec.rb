@@ -12,19 +12,19 @@ module Decidim
         let(:participatory_process) do
           create :participatory_process, organization: organization
         end
-        let(:current_feature) do
-          create :collaboration_feature,
+        let(:current_component) do
+          create :collaboration_component,
                  participatory_space: participatory_process
         end
 
         let(:context) do
           {
             current_organization: organization,
-            current_feature: current_feature
+            current_component: current_component
           }
         end
 
-        let(:collaboration) { create(:collaboration, feature: current_feature) }
+        let(:collaboration) { create(:collaboration, component: current_component) }
 
         let(:title) { Decidim::Faker::Localized.sentence(3) }
         let(:description) { Decidim::Faker::Localized.sentence(3) }
@@ -44,7 +44,7 @@ module Decidim
             minimum_custom_amount: minimum_custom_amount,
             target_amount: target_amount,
             active_until: active_until,
-            current_feature: current_feature,
+            current_component: current_component,
             amounts: amounts
           )
         end

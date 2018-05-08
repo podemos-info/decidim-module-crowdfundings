@@ -5,14 +5,14 @@ require "spec_helper"
 module Decidim
   module Collaborations
     describe CollaborationSearch do
-      let(:feature) { create :collaboration_feature, :participatory_process }
+      let(:component) { create :collaboration_component, :participatory_process }
 
       describe "results" do
         subject do
           described_class.new(
             search_text: search_text,
-            feature: feature,
-            organization: feature.organization
+            component: component,
+            organization: component.organization
           ).results
         end
 
@@ -22,9 +22,9 @@ module Decidim
           let(:search_text) { "dog" }
 
           it "returns the initiatives containing the search in the title or the description" do
-            create_list(:collaboration, 3, feature: feature)
-            create(:collaboration, title: { 'en': "A dog" }, feature: feature)
-            create(:collaboration, description: { 'en': "There is a dog in the office" }, feature: feature)
+            create_list(:collaboration, 3, component: component)
+            create(:collaboration, title: { 'en': "A dog" }, component: component)
+            create(:collaboration, description: { 'en': "There is a dog in the office" }, component: component)
 
             expect(subject.size).to eq(2)
           end

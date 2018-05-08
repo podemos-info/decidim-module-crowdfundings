@@ -3,6 +3,6 @@
 module Decidim
   # This holds the decidim-collaborations version.
   module Collaborations
-    VERSION = "0.10.1"
+    VERSION = "0.11.0.pre1"
   end
 end

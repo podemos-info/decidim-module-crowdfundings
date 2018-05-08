@@ -8,24 +8,24 @@ module Decidim
       routes { Decidim::Collaborations::Engine.routes }
 
       before do
-        request.env["decidim.current_organization"] = feature.organization
-        request.env["decidim.current_participatory_space"] = feature.participatory_space
-        request.env["decidim.current_feature"] = feature
+        request.env["decidim.current_organization"] = component.organization
+        request.env["decidim.current_participatory_space"] = component.participatory_space
+        request.env["decidim.current_component"] = component
       end
 
-      let(:feature) { create :collaboration_feature, :participatory_process }
+      let(:component) { create :collaboration_component, :participatory_process }
       let(:params) do
         {
-          feature_id: feature.id
+          component_id: component.id
         }
       end
 
       describe "index" do
         context "with one collaboration" do
-          let!(:collaboration) { create(:collaboration, feature: feature) }
+          let!(:collaboration) { create(:collaboration, component: component) }
           let(:path) do
             EngineRouter
-              .main_proxy(feature)
+              .main_proxy(component)
               .collaboration_path(collaboration)
           end
 
@@ -36,7 +36,7 @@ module Decidim
         end
 
         context "with several collaborations" do
-          let!(:collaborations) { create_list(:collaboration, 2, feature: feature) }
+          let!(:collaborations) { create_list(:collaboration, 2, component: component) }
 
           it "shows the index page" do
             get :index, params: params

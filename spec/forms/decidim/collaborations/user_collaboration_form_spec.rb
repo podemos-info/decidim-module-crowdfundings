@@ -29,7 +29,7 @@ module Decidim
       let(:context) do
         {
           current_organization: collaboration.organization,
-          current_feature: collaboration.feature,
+          current_component: collaboration.component,
           current_user: current_user,
           collaboration: collaboration
         }

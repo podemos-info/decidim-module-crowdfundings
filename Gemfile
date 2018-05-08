@@ -4,8 +4,8 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", "0.10.1"
-gem "decidim-census_connector", git: "https://github.com/podemos-info/decidim-module-census_connector", branch: "master"
+gem "decidim", "0.11.0.pre1"
+gem "decidim-census_connector", git: "https://github.com/podemos-info/decidim-module-census_connector", branch: "upgrade_decidim_to_0.11.0.pre1"
 gem "decidim-collaborations", path: "."
 
 gem "puma", "~> 3.0"
@@ -14,7 +14,7 @@ gem "uglifier", "~> 4.1"
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
 
-  gem "decidim-dev", "0.10.1"
+  gem "decidim-dev", "0.11.0.pre1"
 end
 
 group :development do

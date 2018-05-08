@@ -32,7 +32,7 @@ module Decidim
         accept_user_collaboration if params[:result] == "ok"
         reject_user_collaboration if params[:result] == "ko"
 
-        redirect_to EngineRouter.main_proxy(current_feature)
+        redirect_to EngineRouter.main_proxy(current_component)
                                 .collaboration_path(user_collaboration.collaboration)
       end
 
@@ -81,7 +81,7 @@ module Decidim
           scope: "decidim.collaborations"
         )
 
-        redirect_to EngineRouter.main_proxy(current_feature)
+        redirect_to EngineRouter.main_proxy(current_component)
                                 .collaboration_path(collaboration)
       end
 

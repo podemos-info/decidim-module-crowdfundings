@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe "Confirm user collaboration", type: :system do
-  include_context "with a feature"
+  include_context "with a component"
   let(:manifest_name) { "collaborations" }
-  let(:collaboration) { create(:collaboration, feature: feature) }
+  let(:collaboration) { create(:collaboration, component: component) }
 
   let(:user) do
     create(:user, :confirmed, organization: collaboration.organization)
@@ -21,7 +21,7 @@ describe "Confirm user collaboration", type: :system do
   end
 
   let!(:url) do
-    ::Decidim::EngineRouter.main_proxy(user_collaboration.collaboration.feature)
+    ::Decidim::EngineRouter.main_proxy(user_collaboration.collaboration.component)
                            .validate_user_collaboration_url(user_collaboration, result: result)
   end
 

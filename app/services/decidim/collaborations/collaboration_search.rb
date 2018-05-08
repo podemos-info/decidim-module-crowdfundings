@@ -3,11 +3,11 @@
 module Decidim
   module Collaborations
     # This class handles search and filtering of collaborations. Needs a
-    # `current_feature` param with a `Decidim::Feature` in order to
+    # `current_component` param with a `Decidim::Component` in order to
     # find the collaborations.
     class CollaborationSearch < ResourceSearch
       # Public: Initializes the service.
-      # feature     - A Decidim::Feature to get the collaborations from.
+      # component     - A Decidim::Component to get the collaborations from.
       def initialize(options = {})
         super(Collaboration.all, options)
         @random_seed = options[:random_seed].to_f

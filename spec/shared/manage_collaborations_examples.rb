@@ -2,7 +2,7 @@
 
 shared_examples "manage collaborations" do
   let(:valid_until) do
-    current_feature.participatory_space.steps.first.end_date.strftime("%Y-%m-%d")
+    current_component.participatory_space.steps.first.end_date.strftime("%Y-%m-%d")
   end
 
   describe "creating a new collaboration" do
@@ -131,7 +131,7 @@ shared_examples "manage collaborations" do
   end
 
   describe "deleting a collaboration" do
-    let!(:collaboration2) { create(:collaboration, feature: current_feature) }
+    let!(:collaboration2) { create(:collaboration, component: current_component) }
 
     before do
       visit current_path

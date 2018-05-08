@@ -3,12 +3,12 @@
 require "spec_helper"
 
 describe "Explore collaborations", type: :system do
-  include_context "with a feature"
+  include_context "with a component"
   let(:manifest_name) { "collaborations" }
 
   let(:collaborations_count) { 5 }
   let!(:collaborations) do
-    create_list(:collaboration, collaborations_count, feature: feature)
+    create_list(:collaboration, collaborations_count, component: component)
   end
 
   before do
@@ -17,7 +17,7 @@ describe "Explore collaborations", type: :system do
 
   describe "index" do
     it "shows all collaborations for the given process" do
-      visit_feature
+      visit_component
 
       collaborations.each do |collaboration|
         expect(page).to have_selector("#collaboration-#{collaboration.id}-item")
@@ -28,7 +28,7 @@ describe "Explore collaborations", type: :system do
 
   describe "filtering" do
     it "allows searching by text" do
-      visit_feature
+      visit_component
 
       within ".filters" do
         fill_in :filter_search_text, with: translated(collaborations.first.title)

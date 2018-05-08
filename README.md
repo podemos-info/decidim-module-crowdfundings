@@ -1,6 +1,6 @@
 # Decidim::Collaborations
 
-This rails engine implements a Decidim feature that allows to the administrators
+This rails engine implements a Decidim component that allows to the administrators
 to configure crowfunding campaigns for a participatory space.
 
 ## Usage

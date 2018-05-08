@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-shared_context "with assembly feature" do
-  let(:manifest) { Decidim.find_feature_manifest(manifest_name) }
+shared_context "with assembly component" do
+  let(:manifest) { Decidim.find_component_manifest(manifest_name) }
 
   let(:user) { create :user, :confirmed, organization: organization }
   let!(:organization) { create(:organization) }
@@ -12,8 +12,8 @@ shared_context "with assembly feature" do
 
   let(:participatory_space) { assembly }
 
-  let!(:feature) do
-    create(:feature,
+  let!(:component) do
+    create(:component,
            manifest: manifest,
            participatory_space: assembly)
   end
@@ -22,7 +22,7 @@ shared_context "with assembly feature" do
     switch_to_host(organization.host)
   end
 
-  def visit_feature
-    page.visit main_feature_path(feature)
+  def visit_component
+    page.visit main_component_path(component)
   end
 end

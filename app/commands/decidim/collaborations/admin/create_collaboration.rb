@@ -19,7 +19,7 @@ module Decidim
 
         def create_collaboration
           Collaboration.create(
-            feature: form.current_feature,
+            component: form.current_component,
             title: form.title,
             description: form.description,
             terms_and_conditions: form.terms_and_conditions,

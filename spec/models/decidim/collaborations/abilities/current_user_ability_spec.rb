@@ -10,7 +10,7 @@ describe Decidim::Collaborations::Abilities::CurrentUserAbility do
   let(:user_annual_accumulated) { 0 }
   let(:collaborations_allowed) { true }
   let(:collaboration) { create(:collaboration) }
-  let(:user) { create(:user, organization: collaboration.feature.organization) }
+  let(:user) { create(:user, organization: collaboration.component.organization) }
 
   before do
     stub_totals_request(user_annual_accumulated)

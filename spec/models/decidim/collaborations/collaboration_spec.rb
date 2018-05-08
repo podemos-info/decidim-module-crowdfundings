@@ -11,8 +11,8 @@ module Decidim
 
       it { is_expected.to be_valid }
 
-      context "without a feature" do
-        let(:collaboration) { build :collaboration, feature: nil }
+      context "without a component" do
+        let(:collaboration) { build :collaboration, component: nil }
 
         it { is_expected.not_to be_valid }
       end
