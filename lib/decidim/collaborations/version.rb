@@ -3,6 +3,8 @@
 module Decidim
   # This holds the decidim-collaborations version.
   module Collaborations
-    VERSION = "0.11.1"
+    def self.version
+      "0.11.1"
+    end
   end
 end
