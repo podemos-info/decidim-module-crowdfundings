@@ -12,9 +12,9 @@ PATH
   remote: .
   specs:
     decidim-collaborations (0.11.1)
-      decidim-admin (= 0.11.1)
-      decidim-census_connector
-      decidim-core (= 0.11.1)
+      decidim-admin (~> 0.11.a)
+      decidim-census_connector (~> 0.11.a)
+      decidim-core (~> 0.11.a)
       httparty
       iban_bic
 
