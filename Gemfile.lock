@@ -13,7 +13,7 @@ PATH
   specs:
     decidim-collaborations (0.11.1)
       decidim-admin (= 0.11.1)
-      decidim-census_connector
+      decidim-census_connector (= 0.11.1)
       decidim-core (= 0.11.1)
       httparty
       iban_bic

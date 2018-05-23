@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.add_dependency "decidim-admin", Decidim::Collaborations.version
-  s.add_dependency "decidim-census_connector"
+  s.add_dependency "decidim-census_connector", Decidim::Collaborations.version
   s.add_dependency "decidim-core", Decidim::Collaborations.version
   s.add_dependency "httparty"
   s.add_dependency "iban_bic"
