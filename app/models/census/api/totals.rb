@@ -3,7 +3,9 @@
 module Census
   module API
     # This class represents an totals retrieval request in Census API
-    class Totals < CensusAPI
+    class Totals
+      include CensusAPI
+
       URL_PATH = "/api/v1/payments/orders/total"
 
       # PUBLIC User totals within the current year.

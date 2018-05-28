@@ -3,7 +3,9 @@
 module Census
   module API
     # This class represents an Order in Census API
-    class Order < CensusAPI
+    class Order
+      include CensusAPI
+
       def self.create(params)
         response = post_order("/api/v1/payments/orders", body: params)
 

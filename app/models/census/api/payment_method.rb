@@ -3,7 +3,9 @@
 module Census
   module API
     # This class represents a payment method in Census
-    class PaymentMethod < CensusAPI
+    class PaymentMethod
+      include CensusAPI
+
       PAYMENT_METHOD_TYPES = [:existing_payment_method, :direct_debit, :credit_card_external].freeze
 
       # PUBLIC retrieve the available payment methods for the given user.
